@@ -1,18 +1,16 @@
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const { InMemoryLRUCache } = require('apollo-server-caching');
-
 const path = require('path');
 
 const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
-
 const { authMiddleware } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+const db = require('./config/connection');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
