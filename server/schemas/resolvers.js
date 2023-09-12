@@ -1,4 +1,4 @@
-const { User, Riddle, UserInteraction } = require('../models');
+const { AccessCode, User, Riddle, UserInteraction } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError, ApolloError } = require('apollo-server-express');
 
@@ -27,7 +27,6 @@ module.exports = {
         getRiddles: async () => {
             try {
                 const riddles = await Riddle.find();
-                console.log('riddles', riddles);
                 return riddles;
             } catch (err) {
                 console.error(err);
@@ -37,11 +36,28 @@ module.exports = {
         getRiddle: async (parent, { _id }) => {
             try {
                 const riddle = await Riddle.findOne({ _id: _id });
-                console.log('riddle', riddle);
                 return riddle;
             } catch (err) {
                 console.error(err);
                 throw new ApolloError('Something went wrong with finding a riddle by id!');
+            }
+        },
+        accessCode: async (parent, { _id }) => {
+            try {
+                const accessCode = await AccessCode.findOne({ _id: _id });
+                return accessCode;
+            } catch (err) {
+                console.error(err);
+                throw new ApolloError('Something went wrong with finding an access code by id!');
+            }
+        },
+        accessCodes: async () => {
+            try {
+                const accessCodes = await AccessCode.find();
+                return accessCodes;
+            } catch (err) {
+                console.error(err);
+                throw new ApolloError('Something went wrong with finding access codes!');
             }
         },
     },
@@ -59,15 +75,63 @@ module.exports = {
             const token = signToken(user);
             return { token, user };
         },
-        createUser: async (parent, args) => {
-
-            const user = await User.create(args);
-            if (!user) {
-                throw new Error("Something is wrong!");
+        createUser: async (parent, { accesscode, username, email, password }) => {
+    
+            // Validate the access code
+            const validAccessCode = await AccessCode.findOne({ accesscode: accesscode });
+            
+            if (!validAccessCode) {
+                throw new Error("Invalid access code");
             }
+        
+            if (validAccessCode.isUsed) {
+                throw new Error("This access code has already been used");
+            }
+        
+
+        
+            // Create the user with the access code
+            const user = await User.create({
+                accesscode: validAccessCode._id,
+                username,
+                email,
+                password
+            });
+        
+            if (!user) {
+                throw new Error("Something went wrong while creating the user!");
+            }
+            // If valid, mark the access code as used
+            validAccessCode.isUsed = true;
+            validAccessCode.userId = user._id;
+            await validAccessCode.save();
+
             const token = signToken(user);
             return { token, user };
         },
-    }
+        useAccessCode: async (parent, { _id }) => {
+            const accessCode = await AccessCode.findOne({ _id: _id });
+            if (!accessCode) {
+                throw new Error("Can't find this access code");
+            }
+            if (accessCode.isUsed) {
+                throw new Error("This access code has already been used");
+            }
+            accessCode.isUsed = true;
+            await accessCode.save();
+            return accessCode;
+        },
+        assignAccessCode: async (parent, { userId, accessCodeId }) => {
+            const user = await User.findOneAndUpdate(
+                { _id: userId },
+                { $set: { accesscode: accessCodeId } },
+                { new: true }
+            );
+            if (!user) {
+                throw new Error("Can't find this user");
+            }
+            return user;
+        },
+    },
 };
 

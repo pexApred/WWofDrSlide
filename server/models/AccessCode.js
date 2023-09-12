@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const AccessCodeSchema = new Schema({
-    code: {
+    accesscode: {
         type: String,
         required: [true, "Access Code is required"],
         unique: true,

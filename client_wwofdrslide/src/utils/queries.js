@@ -10,6 +10,20 @@ export const QUERY_ME = gql`
     }
 `;
 
+export const QUERY_ACCESSCODE = gql`
+    query accessCode($_id: ID!) {
+        accessCode(_id: $_id) {
+            _id
+            accesscode
+            isUsed
+            userId {
+                username
+                email
+            }
+        }
+    }
+`;
+
 export const QUERY_RIDDLES = gql`
     query getRiddles {
         getRiddles {

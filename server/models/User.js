@@ -3,10 +3,10 @@ const UserInteraction = require('./UserInteraction');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
-    accessCode: {
-        type: String,
-        required: [true, "Access Code is required"],
-        unique: true,
+    accesscode: {
+        type: Schema.Types.ObjectId,
+        ref: 'AccessCode',
+        required: true,
     },
     username: {
         type: String,

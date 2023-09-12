@@ -9,6 +9,7 @@ import Context from '../../utils/Context';
 const SignUpForm = ({setShowModal}) => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({
+    accesscode: '',
     username: '',
     email: '',
     password: ''
@@ -54,6 +55,7 @@ const SignUpForm = ({setShowModal}) => {
     }
 
     setUserFormData({
+      accesscode: '',
       username: '',
       email: '',
       password: '',
@@ -68,6 +70,19 @@ const SignUpForm = ({setShowModal}) => {
           {error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
             Something went wrong with your signup!
           </Alert>}
+
+          <Form.Group className='mb-3'>
+            <Form.Label htmlFor='accesscode'>AccessCode</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='ex. ABC123'
+              name='accesscode'
+              onChange={handleInputChange}
+              value={userFormData.accesscode}
+              required
+            />
+            <Form.Control.Feedback type='invalid'>AccessCode is required!</Form.Control.Feedback>
+          </Form.Group>
 
           <Form.Group className='mb-3'>
             <Form.Label htmlFor='username'>Username</Form.Label>
