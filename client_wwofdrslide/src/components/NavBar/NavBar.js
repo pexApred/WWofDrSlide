@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, Dropdown } from 'react-bootstrap';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import LoginForm from '../LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../utils/auth';
 import Context from '../../utils/Context';
+import { QUERY_RIDDLES } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -13,6 +15,9 @@ const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn } = useContext(Context);
+  const { loading, error, data } = useQuery(QUERY_RIDDLES);
+
+  const riddles = loading || error ? [] : data.getRiddles;
 
   const handleLogout = () => {
     console.log("Logout clicked")
@@ -32,15 +37,33 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/riddles'>
-                Riddles
-              </Nav.Link>
+              <Dropdown onSelect={(selectedId) => navigate(`/riddles/${selectedId}`)}>
+                <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                  Riddles
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {riddles.map((riddle) => (
+                    <Dropdown.Item key={riddle._id} eventKey={riddle._id}>
+                      {riddle.id}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
               {/* if user is logged in show Riddles and logout */}
               {loggedIn ? (
                 <>
-                  <Nav.Link as={Link} to='/riddles'>
-                    Riddles
-                  </Nav.Link>
+              <Dropdown onSelect={(selectedId) => navigate(`/riddles/${selectedId}`)}>
+                <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                  Riddles
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {riddles.map((riddle) => (
+                    <Dropdown.Item key={riddle._id} eventKey={riddle._id}>
+                      {riddle.id}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 </>
               ) : (

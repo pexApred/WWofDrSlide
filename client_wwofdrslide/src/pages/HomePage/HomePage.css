@@ -1,15 +1,18 @@
 .col {
+    width: 100vw;
     display: flex;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
     align-items: center;
-    align-content: center;
+    /* align-content: center; */
 }
 
 p {
-    margin-left: 2rem;
-    width: 75%;
+    width: 100%;
     text-align: center;
     font-size: 1rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
 }
 
 .row h1 {

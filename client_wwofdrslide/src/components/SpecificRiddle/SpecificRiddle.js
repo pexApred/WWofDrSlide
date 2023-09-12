@@ -4,9 +4,9 @@ import { useQuery } from '@apollo/client';
 import { QUERY_RIDDLE } from '../../utils/queries';
 import './SpecificRiddle.css';
 
-const SpecificRiddle = ({ riddleId }) => {
+const SpecificRiddle = ({ _id }) => {
     const { loading, error, data } = useQuery(QUERY_RIDDLE, {
-        variables: { id: riddleId }
+        variables: { _id: _id }
     });
 
     if (loading) return <p>'Loading...'</p>;
@@ -21,7 +21,7 @@ const SpecificRiddle = ({ riddleId }) => {
             </Row>
             <Row className="specific-riddle-row">
                 <Col className="specific-riddle-col">
-                    <h1 className="specific-riddle-text">{data.getRiddle.riddleText}</h1>
+                    <h1 className="specific-riddle-text">{data.getRiddle.riddle}</h1>
                 </Col>
             </Row>
             <Row className="specific-riddle-row">
@@ -31,7 +31,7 @@ const SpecificRiddle = ({ riddleId }) => {
                             SHOW HINT
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">{data.getRiddle.riddleHint}</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">{data.getRiddle.hint}</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>

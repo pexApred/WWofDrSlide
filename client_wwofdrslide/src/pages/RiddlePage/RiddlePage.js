@@ -8,6 +8,7 @@ import RiddleList from "../../components/RiddleList/RiddleList";
 import SpecificRiddle from "../../components/SpecificRiddle/SpecificRiddle";
 
 const RiddlePage = () => {
+    const { _id } = useParams();
 
     return (
         <div>
@@ -15,8 +16,7 @@ const RiddlePage = () => {
         <Container>
             <Row>
             <Col>
-                {<RiddleList/>}
-                {/* <RiddleForm /> */}
+                { _id ? <SpecificRiddle _id={_id} /> : <RiddleList/>}
             </Col>
             </Row>
         </Container>

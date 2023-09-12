@@ -1,6 +1,6 @@
 const { User, Riddle, UserInteraction } = require('../models');
 const { signToken } = require('../utils/auth');
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, ApolloError } = require('apollo-server-express');
 
 module.exports = {
     Query: {
@@ -27,19 +27,21 @@ module.exports = {
         getRiddles: async () => {
             try {
                 const riddles = await Riddle.find();
+                console.log('riddles', riddles);
                 return riddles;
             } catch (err) {
                 console.error(err);
-                throw new AuthenticationError('Something went wrong with finding riddles!');
-            }
+                throw new ApolloError('Something went wrong with finding riddles!');
+            }   
         },
-        getRiddle: async (parent, { id }) => {
+        getRiddle: async (parent, { _id }) => {
             try {
-                const getRiddleById = await Riddle.findById(id);
-                return getRiddleById;
+                const riddle = await Riddle.findOne({ _id: _id });
+                console.log('riddle', riddle);
+                return riddle;
             } catch (err) {
                 console.error(err);
-                throw new AuthenticationError('Something went wrong with finding a riddle by id!');
+                throw new ApolloError('Something went wrong with finding a riddle by id!');
             }
         },
     },

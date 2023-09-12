@@ -19,14 +19,14 @@ export const QUERY_RIDDLES = gql`
 `;
 
 export const QUERY_RIDDLE = gql`
-    query getRiddle($id: ID!) {
-        getRiddle(id: $id) {
-            _id
-            riddleText
-            riddleHint
-            riddleSolutions
+    query getRiddle($_id: ID!) {
+        getRiddle(_id: $_id) {
+            id
+            riddle
+            hint
+            solutions
             background_image
-            riddleInteractions {
+            interactions {
                 user_id
                 riddle_id
                 solved

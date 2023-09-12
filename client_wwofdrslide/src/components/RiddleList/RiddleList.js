@@ -9,15 +9,15 @@ const RiddleList = () => {
     const { loading, error, data } = useQuery(QUERY_RIDDLES);
 
     if (loading) return <p>'Loading...'</p>;
-    if (error) return <p>`Error! {error.message}`</p>;
+    if (error) return <p>Error! {error.message}</p>;
 
     return (
         <div>
             <h1>Select a Riddle</h1>
-            <ul>
+            <ul className="riddle-list">
                 {data.getRiddles.map((riddle) => (
-                    <li key={riddle._id}>
-                        <Link to={`/riddles/${riddle._id}`}></Link>
+                    <li key={riddle._id} className="riddle-items">
+                        <Link to={`/riddles/${riddle._id}`}>{riddle.id || "View Riddle"}</Link>
                     </li>
                 ))}
             </ul>

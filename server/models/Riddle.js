@@ -1,31 +1,26 @@
 const { Schema, model } = require('mongoose');
-const UserInteractionSchema = require('./UserInteraction')
 
 const RiddleSchema = new Schema({
-    _id: {
+    id: {
         type: Number,
         required: [true, "Riddle ID is required"],
     },
-    riddleText: {
+    riddle: {
         type: String,
         required: [false],
     },
-    riddleHint: {
+    hint: {
         type: String,
         required: [true, "Riddle hints are required"],
     },
-    riddleSolutions: [{
+    solutions: [{
         type: String,
         required: [true, "Riddle solutions are required"],
     }],
     background_image: {
         type: String,
         required: [false],
-    },
-    riddleInteractions: [{
-        type: Schema.Types.ObjectId,
-        ref: 'UserInteraction',
-    }],
+    }
 });
 
 const Riddle = model('Riddle', RiddleSchema);

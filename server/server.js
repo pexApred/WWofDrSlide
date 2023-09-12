@@ -3,6 +3,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const { InMemoryLRUCache } = require('apollo-server-caching');
 const path = require('path');
+const cors = require('cors');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -25,6 +26,7 @@ const server = new ApolloServer({
   },
 });
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -37,9 +39,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
-});
+// catch all route
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
+// });
 
 // app.use(routes);
 // Create a new instance of an Apollo server with the GraphQL schema

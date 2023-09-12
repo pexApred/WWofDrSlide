@@ -1,12 +1,16 @@
 const { Schema, model } = require('mongoose');
+const { User } = require('./User');
+const { Riddle } = require('./Riddle');
 
 const UserInteractionSchema = new Schema({
     user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: [true, "User ID is required"],
     },
     riddle_id: {
-        type: Number,
+        type: Schema.Types.ObjectId,
+        ref: 'Riddle',
         required: [true, "Riddle ID is required"],
     },
     solved: {

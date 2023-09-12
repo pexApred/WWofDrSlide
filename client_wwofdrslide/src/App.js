@@ -16,7 +16,7 @@ import RiddlePage from './pages/RiddlePage/RiddlePage';
 import RiddleRankingsPage from './pages/RiddleRankingsPage/RiddleRankingsPage';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -55,7 +55,7 @@ function App() {
                   element={<RiddlePage />}
                 />
                 <Route
-                  path='/riddles/:id'
+                  path='/riddles/:_id'
                   element={<RiddlePage />}
                 />
                 {/* <Route

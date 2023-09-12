@@ -3,9 +3,9 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
     type Query {
         me: User
-        user(id: ID!): User
+        user(_id: ID!): User
         getRiddles: [Riddle]
-        getRiddle(id: ID!): Riddle
+        getRiddle(_id: ID!): Riddle
     }
 
     type Mutation {
@@ -21,11 +21,17 @@ const typeDefs = gql`
 
     type Riddle {
         _id: ID
-        riddleText: String
-        riddleHint: String!
-        riddleSolutions: [String]!
+        id: ID
+        riddle: String
+        hint: String
+        solutions: [String]!
         background_image: String
-        riddleInteractions: [UserInteraction]
+        interactions: [UserInteraction]
+    }
+
+    type Riddles {
+        count: Int!
+        riddles: [Riddle]!
     }
 
     type UserInteraction {
