@@ -1,5 +1,4 @@
 import React from 'react';
-require('dotenv').config();
 import {
   ApolloClient,
   InMemoryCache,
@@ -16,9 +15,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RiddlePage from './pages/RiddlePage/RiddlePage';
 import RiddleRankingsPage from './pages/RiddleRankingsPage/RiddleRankingsPage';
 
-const graphqlEndpoint = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_GRAPHQL_ENDPOINT_PROD
-  : process.env.REACT_APP_GRAPHQL_ENDPOINT_LOCAL;
+const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
 
 const httpLink = createHttpLink({
   uri: graphqlEndpoint,
