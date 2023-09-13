@@ -12,17 +12,33 @@ const RiddleList = () => {
     if (error) return <p>Error! {error.message}</p>;
 
     return (
-        <div>
+        <Container>
             <h1>Select a Riddle</h1>
-            <ul className="riddle-list">
+            <Row>
                 {data.getRiddles.map((riddle) => (
-                    <li key={riddle._id} className="riddle-items">
-                        <Link to={`/riddles/${riddle._id}`}>{riddle.id || "View Riddle"}</Link>
-                    </li>
+                    <Col xs={12} sm={6} md={4} lg={3} key={riddle._id}>
+                        <Link to={`/riddles/${riddle._id}`} className="riddle-image-link">
+                            <Image src={riddle.background_image} alt="Riddle" fluid />
+                            <span className="riddle-id-overlay">{riddle.id || "ID"}</span>
+                        </Link>
+                    </Col>
                 ))}
-            </ul>
-        </div>
+            </Row>
+        </Container>
     );
+
+    // return (
+    //     <div>
+    //         <h1>Select a Riddle</h1>
+    //         <ul className="riddle-list">
+    //             {data.getRiddles.map((riddle) => (
+    //                 <li key={riddle._id} className="riddle-items">
+    //                     <Link to={`/riddles/${riddle._id}`}>{riddle.id || "View Riddle"}</Link>
+    //                 </li>
+    //             ))}
+    //         </ul>
+    //     </div>
+    // );
 };
 
 export default RiddleList;

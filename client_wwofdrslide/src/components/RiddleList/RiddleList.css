@@ -8,3 +8,21 @@
     background-color: black;
     list-style: none;
 }
+
+.riddle-image-link {
+    position: relative;
+    display: block;
+    margin-bottom: 20px; /* spacing between images */
+}
+
+.riddle-id-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff; /* Text color */
+    font-size: 1.5rem; /* Text size */
+    background-color: rgba(0, 0, 0, 0.5); /* Background with opacity for visibility */
+    padding: 5px 10px;
+    border-radius: 5px; /* Rounded corners */
+}

@@ -28,6 +28,8 @@ export const QUERY_RIDDLES = gql`
     query getRiddles {
         getRiddles {
             _id
+            id
+            background_image
         }
     }
 `;
