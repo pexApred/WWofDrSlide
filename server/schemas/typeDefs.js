@@ -12,6 +12,7 @@ const typeDefs = gql`
 
     type Mutation {
         login(email: String!, password: String!): Auth
+        logout: Boolean
         createUser(accesscode: String!, username: String!, email: String!, password: String!): Auth
         useAccessCode(_id: ID!): AccessCode
         assignAccessCode(userId: ID!, accessCodeId: ID!): User
@@ -29,7 +30,6 @@ const typeDefs = gql`
         accesscode: AccessCode!
         username: String!
         email: String!
-        password: String!
         userAnalytics: [UserInteraction]
     }
 

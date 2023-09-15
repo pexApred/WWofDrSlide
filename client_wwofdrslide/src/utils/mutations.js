@@ -26,6 +26,12 @@ export const CREATE_USER = gql`
     }
 `;
 
+export const LOGOUT_USER = gql`
+    mutation logout {
+        logout
+    }
+`;
+
 export const USE_ACCESSCODE = gql`
     mutation useAccessCode($_id: ID!) {
         useAccessCode(_id: $_id) {

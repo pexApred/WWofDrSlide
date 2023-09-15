@@ -6,6 +6,8 @@ import { LOGIN_USER } from '../../utils/mutations'
 import AuthService from '../../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import Context from '../../utils/Context';
+import { QUERY_ME } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 
 const LoginForm = ({ setShowModal }) => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -14,6 +16,7 @@ const LoginForm = ({ setShowModal }) => {
   const [loginUser, { error }] = useMutation(LOGIN_USER);
   const navigate = useNavigate()
   const { setLoggedIn } = useContext(Context);
+  const { loading, error: userError, data: userData } = useQuery(QUERY_ME);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,28 +25,33 @@ const LoginForm = ({ setShowModal }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-    try {
-      const { data } = await loginUser({
-        variables: { ...userFormData },
-      });
-      AuthService.login(data.login.token); 
-      setLoggedIn(true);
-      setShowModal(false);   
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      try {
+        const { data } = await loginUser({
+          variables: { ...userFormData },
+        });
+        if (data.login.token) {
+          AuthService.login(data.login.token);
+          setLoggedIn(true);
+          setShowModal(false);
+          if (userData && userData.me) {
+            console.log('user data: ', userData.me);
+          } else {
+            console.log('no user data yet');
+          }
+          navigate('/');
+        }
+      } catch (err) {
+        console.error(err);
+        setShowAlert(true);
+      }
     }
-  }
-  setValidated(true);
+    setValidated(true);
     setUserFormData({
-      // username: '',
       email: '',
       password: '',
     });
@@ -67,7 +75,6 @@ const LoginForm = ({ setShowModal }) => {
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
-
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control

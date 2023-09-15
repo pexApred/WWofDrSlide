@@ -19,17 +19,18 @@ const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
 
 const httpLink = createHttpLink({
   uri: graphqlEndpoint,
+  credentials: 'include'
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  // const token = localStorage.getItem('id_token');
 
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      // authorization: token ? `Bearer ${token}` : '',
     },
-  }
+  };
 });
 
 const client = new ApolloClient({

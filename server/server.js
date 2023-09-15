@@ -4,6 +4,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { InMemoryLRUCache } = require('apollo-server-caching');
 const path = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -18,15 +19,40 @@ const server = new ApolloServer({
   persistedQueries: {
     cache: new InMemoryLRUCache({ maxSize: 1000 })
   },
-  context: ({ req }) => {
+  context: ({ req, res }) => {
     // add the user to the context
     const userReq = authMiddleware({ req });
-    return { user: userReq.user };
+    return { user: userReq.user, res };
     // return {};
   },
 });
 
-app.use(cors());
+// Adding multipe domains to CORS below
+// const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true
+// };
+
+// app.use(cors(corsOptions));
+
+
+// Add Specific Frontend Domain to CORS, credentials true allows cookies to be passed
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true
+};
+app.use(cors(corsOptions));
+
+// app.use(cors());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -48,7 +74,7 @@ app.get('/', (req, res) => {
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   db.once('open', () => {
     app.listen(PORT, () => {

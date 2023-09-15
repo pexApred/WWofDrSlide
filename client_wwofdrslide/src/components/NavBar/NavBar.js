@@ -8,6 +8,8 @@ import AuthService from '../../utils/auth';
 import Context from '../../utils/Context';
 import { QUERY_RIDDLES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { LOGOUT_USER } from '../../utils/mutations';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -16,6 +18,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn } = useContext(Context);
   const { loading, error, data } = useQuery(QUERY_RIDDLES);
+  const [logoutUser] = useMutation(LOGOUT_USER);
 
   const riddles = loading || error ? [] : data.getRiddles;
 
@@ -29,18 +32,23 @@ const NavBar = () => {
 
   const handleRiddlesClick = () => {
     if (loggedIn) {
-      navigate('/riddles');  
+      navigate('/riddles');
     } else {
       setShowModal(true);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log("Logout clicked")
-    AuthService.logout();
-    navigate('/');
-    setLoggedIn(false);
-    setShowModal(false);
+    try {
+      await logoutUser();
+      AuthService.logout();
+      navigate('/');
+      setLoggedIn(false);
+      setShowModal(false);
+    } catch (err) {
+      console.error("Error logging out", err);
+    }
   };
 
   return (
