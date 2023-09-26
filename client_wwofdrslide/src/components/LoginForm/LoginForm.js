@@ -38,11 +38,11 @@ const LoginForm = ({ setShowModal }) => {
           AuthService.login(data.login.token);
           setLoggedIn(true);
           setShowModal(false);
-          if (userData && userData.me) {
-            console.log('user data: ', userData.me);
-          } else {
-            console.log('no user data yet');
-          }
+          // if (userData && userData.me) {
+          //   console.log('user data: ', userData.me);
+          // } else {
+          //   console.log('no user data yet');
+          // }
           navigate('/');
         }
       } catch (err) {

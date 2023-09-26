@@ -39,7 +39,6 @@ const NavBar = () => {
   };
 
   const handleLogout = async () => {
-    console.log("Logout clicked")
     try {
       await logoutUser();
       AuthService.logout();

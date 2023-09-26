@@ -9,7 +9,6 @@ module.exports = {
                 throw new AuthenticationError('Not logged in!');
             }
             const userId = context.user.id;
-            console.log('contextFetching me for user', userId);
             try {
                 const user = await User.findById(userId);
                 return user;
@@ -47,8 +46,8 @@ module.exports = {
         },
         accessCode: async (parent, { _id }) => {
             try {
-                const accessCode = await AccessCode.findOne({ _id: _id });
-                return accessCode;
+                const code = await AccessCode.findOne({ _id: _id });
+                return code;
             } catch (err) {
                 console.error(err);
                 throw new ApolloError('Something went wrong with finding an access code by id!');
@@ -75,23 +74,30 @@ module.exports = {
             if (!correctPw) {
                 throw new AuthenticationError("Wrong password!");
             }
-            const token = signToken(user);
+            const { accessToken, refreshToken } = signToken(user);
 
-            context.res.cookie('auth_token', token, {
+            context.res.cookie('auth_token', accessToken, {
                 httpOnly: true,
                 secure: true,
-                maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+                maxAge: 1000 * 60 * 60 * 24 // 1 day cookie
             });
 
-            return { token, user };
+            context.res.cookie('refresh_token', refreshToken, {
+                httpOnly: true,
+                secure: true,
+                maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days cookie
+            });
+
+            return { token: accessToken, user };
         },
 
         logout: async (parent, args, context) => {
             context.res.clearCookie('auth_token');
+            context.res.clearCookie('refresh_token');
             return true;
         },
 
-        createUser: async (parent, { accesscode, username, email, password }, context) => {
+        createUser: async (parent, { accesscode, email, password }, context) => {
 
             // Validate the access code
             const validAccessCode = await AccessCode.findOne({ accesscode: accesscode });
@@ -106,7 +112,6 @@ module.exports = {
             // Create the user with the access code
             const user = await User.create({
                 accesscode: validAccessCode._id,
-                username,
                 email,
                 password
             });
@@ -114,20 +119,31 @@ module.exports = {
             if (!user) {
                 throw new Error("Something went wrong while creating the user!");
             }
+
+            if (!validAccessCode._id) {
+                throw new Error("Unable to retrieve the ID of the accesscode!");
+            }
+
             // If valid, mark the access code as used
             validAccessCode.isUsed = true;
             validAccessCode.userId = user._id;
             await validAccessCode.save();
 
-            const token = signToken(user);
+            const { accessToken, refreshToken } = signToken(user);
 
-            context.res.cookie('auth_token', token, {
+            context.res.cookie('auth_token', accessToken, {
                 httpOnly: true,
                 secure: true,
-                maxAge: 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+                maxAge: 1000 * 60 * 60 * 24 // 1 day cookie
             });
 
-            return { token, user };
+            context.res.cookie('refresh_token', refreshToken, {
+                httpOnly: true,
+                secure: true,
+                maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days cookie
+            });
+
+            return { token: accessToken, user };
         },
         useAccessCode: async (parent, { _id }) => {
             const accessCode = await AccessCode.findOne({ _id: _id });
@@ -154,4 +170,3 @@ module.exports = {
         },
     },
 };
-

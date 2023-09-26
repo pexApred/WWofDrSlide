@@ -5,10 +5,11 @@ const { AuthenticationError } = require('apollo-server-express');
 dotenv.config();
 const secret = process.env.JWT_SECRET;
 const expiration = '24h';
+const refreshTokenExpiration = '7d';
 
 module.exports = {
   // function for our authenticated routes
-  authMiddleware: function ({req}) {
+  authMiddleware: function ({ req }) {
     // allows token to be sent via  req.query or headers
     // let token = req.headers.authorization;
     let token = req.cookies.auth_token;
@@ -26,16 +27,34 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret);
       req.user = data;
-    } catch (err){
+    } catch (err) {
       console.log('Invalid token', err);
-      throw new AuthenticationError('invalid token!');
+      const refreshToken = req.cookies.refresh_token;
+      if (refreshToken) {
+        try {
+          const { data } = jwt.verify(refreshToken, secret);
+          req.user = data;
+
+          const newAccessToken = jwt.sign({ data }, secret, { expiresIn: expiration });
+          res.cookie('auth_token', newAccessToken, { httpOnly: true });
+        } catch { refreshErr } {
+          console.log('Invalid refresh token', refreshErr);
+          throw new AuthenticationError('invalid token!');
+        }
+      } else {
+        console.log('Invalid Token', err);
+        throw new AuthenticationError('invalid token!');
+      }
     }
     // send to next endpoint
     return req;
   },
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signToken: function ({ email, _id }) {
+    const payload = { email, _id };
 
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    const accessToken = jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    const refreshToken = jwt.sign({ data: payload }, secret, { expiresIn: refreshTokenExpiration });
+
+    return { accessToken, refreshToken };
   },
 };

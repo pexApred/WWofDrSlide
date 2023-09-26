@@ -28,27 +28,24 @@ const server = new ApolloServer({
 });
 
 // Adding multipe domains to CORS below
-// const allowedOrigins = ['http://localhost:3000', 'https://your-production-url.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://wwofdrslide-0072af6d23f0.herokuapp.com/'];
 
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true
-// };
-
-// app.use(cors(corsOptions));
-
-
-// Add Specific Frontend Domain to CORS, credentials true allows cookies to be passed
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 };
+
+// Add Specific Frontend Domain to CORS, credentials true allows cookies to be passed
+// const corsOptions = {
+//   origin: 'http://localhost:3000',
+//   credentials: true
+// };
 app.use(cors(corsOptions));
 
 // app.use(cors());

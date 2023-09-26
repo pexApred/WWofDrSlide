@@ -46,7 +46,6 @@ const SignUpForm = ({ setShowModal }) => {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      console.log(data);
       AuthService.login(data.createUser.token);
       navigate('/');
       setLoggedIn(true);
