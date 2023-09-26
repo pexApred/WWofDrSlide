@@ -20,7 +20,6 @@ const RiddlePage = () => {
             </Col>
             </Row>
         </Container>
-        {/* <Footer /> */}
         </div>
     );
     }

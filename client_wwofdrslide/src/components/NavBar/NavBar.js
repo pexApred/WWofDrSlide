@@ -30,6 +30,14 @@ const NavBar = () => {
     }
   };
 
+  const handleProfileClick = () => {
+    if (loggedIn) {
+      navigate('/profile');
+    } else {
+      setShowModal(true);
+    }
+  };
+
   const handleRiddlesClick = () => {
     if (loggedIn) {
       navigate('/riddles');
@@ -53,16 +61,17 @@ const NavBar = () => {
   return (
     <>
       <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Wonderful World of Dr. Slide
-          </Navbar.Brand>
+        <Container fluid>            
+        <Navbar.Brand as={Link} to='/'>
+              Wonderful World of Dr. Slide
+            </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
-            <Nav className='ml-auto d-flex'>
+          <Navbar.Collapse id='navbar'>
+            <Nav className='mr-auto'>
+              <Nav.Link className='profile' onClick={handleProfileClick}>Profile</Nav.Link>
               <Dropdown as={Nav.Item}>
                 <Dropdown as={ButtonGroup}>
-                  <Button variant="success" onClick={handleRiddlesClick}>Riddles</Button>
+                  <Button className='btn' variant="success" onClick={handleRiddlesClick}>Riddles</Button>
                   <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
                   <Dropdown.Menu>
                     {riddles.map((riddle) => (
@@ -73,10 +82,13 @@ const NavBar = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Dropdown>
+            {/* </Nav>
+
+            <Nav className='ml-auto'> */}
               {loggedIn ? (
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)}>Login/SignUp</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>

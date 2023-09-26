@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RiddlePage from './pages/RiddlePage/RiddlePage';
 import RiddleRankingsPage from './pages/RiddleRankingsPage/RiddleRankingsPage';
+import Footer from './components/Footer/Footer';
 
 const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
 
@@ -69,8 +70,8 @@ function App() {
                 path="*" 
                 element={<h1 className='display-2'>Wrong page!</h1>} 
                 />
-
               </Routes>
+              <Footer />
           </Router>
         </div>
       </ContextProvider>

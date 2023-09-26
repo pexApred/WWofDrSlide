@@ -1,4 +1,4 @@
-.riddle-list {
+/* .riddle-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,12 +7,23 @@
     color: black;
     background-color: black;
     list-style: none;
-}
+} */
 
 .riddle-image-link {
     position: relative;
     display: block;
-    margin-bottom: 20px; /* spacing between images */
+    padding: 0;
+    margin-bottom: 10px; /* spacing between images */
+    transform: scale(0.8); /* scale down images */
+    transition: transform 0.3s ease-in-out; /* transition effect */
+    box-shadow: 1px 1px 5px 1px gray; /* shadow effect */
+}
+
+.riddle-image-link:hover {
+    transform: scale(1.2); /* scale up images */
+    border: black solid 1px; /* border around images */
+    /* border-radius: 10px; */
+    box-shadow: 2px 2px 10px 2px black; /* shadow effect */
 }
 
 .riddle-id-overlay {
@@ -21,8 +32,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff; /* Text color */
-    font-size: 1.5rem; /* Text size */
+    font-size: 1.2rem; /* Text size */
     background-color: rgba(0, 0, 0, 0.5); /* Background with opacity for visibility */
     padding: 5px 10px;
     border-radius: 5px; /* Rounded corners */
+}
+
+.riddle-image-link:hover .riddle-id-overlay {
+    font-size: 1.5rem; /* Text size on hover */
 }

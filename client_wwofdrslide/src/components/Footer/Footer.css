@@ -1,9 +1,15 @@
 .footer {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     background-color: rgb(0, 0, 0);
     color: white;
+    z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    .footer {
+      /* position: relative; */
+      bottom: 0;
+    }
   }
   
   .footer-link {
@@ -18,4 +24,8 @@
   
   .logo {
     filter: invert(1) grayscale(1) brightness(2);
+  }
+
+  .footer-text {
+    padding: 0.5rem;
   }
