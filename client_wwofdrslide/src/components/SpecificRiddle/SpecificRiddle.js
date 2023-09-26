@@ -19,11 +19,11 @@ const SpecificRiddle = ({ _id }) => {
                     <Image className="specific-riddle-image" src={data.getRiddle.background_image} fluid />
                 </Col>
             </Row>
-            <Row className="specific-riddle-row">
+            {/* <Row className="specific-riddle-row">
                 <Col className="specific-riddle-col">
                     <h1 className="specific-riddle-text">{data.getRiddle.riddle}</h1>
                 </Col>
-            </Row>
+            </Row> */}
             <Row className="specific-riddle-row">
                 <Col className="specific-riddle-col">
                     <Dropdown className="specific-riddle-dropdown">

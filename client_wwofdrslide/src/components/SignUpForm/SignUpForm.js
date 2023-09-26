@@ -10,7 +10,6 @@ const SignUpForm = ({ setShowModal }) => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({
     accesscode: '',
-    username: '',
     email: '',
     password: ''
   });
@@ -55,7 +54,6 @@ const SignUpForm = ({ setShowModal }) => {
 
       // setUserFormData({
       //   accesscode: '',
-      //   username: '',
       //   email: '',
       //   password: '',
       // });
@@ -88,19 +86,6 @@ const SignUpForm = ({ setShowModal }) => {
         </Form.Group>
 
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='email'
@@ -126,7 +111,7 @@ const SignUpForm = ({ setShowModal }) => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.accesscode && userFormData.username && userFormData.email && userFormData.password)}
+          disabled={!(userFormData.accesscode && userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
           Submit

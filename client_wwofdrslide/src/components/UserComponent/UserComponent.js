@@ -3,7 +3,6 @@ import { Container, Row, Col, Card, Button, Dropdown } from 'react-bootstrap';
 import jwtDecode from 'jwt-decode';
 
 const UserComponent = () => {
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
     useEffect(() => {
@@ -11,7 +10,6 @@ const UserComponent = () => {
         if (token) {
             const decodedToken = jwtDecode(token);
             setEmail(decodedToken.data.email);
-            setUsername(decodedToken.data.username);
         }
     }, []);
 
@@ -19,7 +17,6 @@ const UserComponent = () => {
         <Row className='user-component-container'>
             <Col sm={10}>
                 <div>
-                    <h2>Username: {username}</h2>
                     <h4>Email: {email}</h4>
                 </div>
             </Col>

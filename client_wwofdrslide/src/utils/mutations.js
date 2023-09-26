@@ -6,7 +6,6 @@ export const LOGIN_USER = gql`
             token
             user {
                 _id
-                username
                 email
             }
         }
@@ -14,12 +13,11 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_USER = gql`
-    mutation createUser($accesscode: String!, $username: String!, $email: String!, $password: String!) {
-        createUser(accesscode: $accesscode, username: $username, email: $email, password: $password) {
+    mutation createUser($accesscode: String!, $email: String!, $password: String!) {
+        createUser(accesscode: $accesscode, email: $email, password: $password) {
             token
             user {
                 _id
-                username
                 email
             }
         }
@@ -45,7 +43,7 @@ export const ASSIGN_ACCESSCODE = gql`
     mutation assignAccessCode($userId: ID!, $accessCodeId: ID!) {
         assignAccessCode(userId: $userId, accessCodeId: $accessCodeId) {
             _id
-            username
+            email 
             accesscode {
                 _id
                 accesscode
