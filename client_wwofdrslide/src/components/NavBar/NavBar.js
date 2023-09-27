@@ -77,7 +77,7 @@ const NavBar = () => {
                   <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
                   <Dropdown.Menu>
                     {riddles.map((riddle) => (
-                      <Dropdown.Item key={riddle._id} onClick={() => handleRiddleSelect(riddle._id)}>
+                      <Dropdown.Item key={riddle.id} onClick={() => handleRiddleSelect(riddle.id)}>
                         {riddle.id}
                       </Dropdown.Item>
                     ))}

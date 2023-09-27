@@ -16,8 +16,8 @@ const RiddleList = () => {
             <h1>Select a Riddle</h1>
             <Row>
                 {data.getRiddles.map((riddle) => (
-                    <Col xs={4} sm={3} md={3} lg={2} key={riddle._id}>
-                        <Link to={`/riddles/${riddle._id}`} className="riddle-image-link">
+                    <Col xs={4} sm={3} md={3} lg={2} key={riddle.id}>
+                        <Link to={`/riddles/${riddle.id}`} className="riddle-image-link">
                             <Image src={riddle.background_image} alt="Riddle" fluid />
                             <span className="riddle-id-overlay">{riddle.id || "ID"}</span>
                         </Link>

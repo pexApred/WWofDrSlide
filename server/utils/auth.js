@@ -34,7 +34,7 @@ module.exports = {
         try {
           const { data } = jwt.verify(refreshToken, secret);
           req.user = data;
-
+          console.log('req.user', req.user); 
           const newAccessToken = jwt.sign({ data }, secret, { expiresIn: expiration });
           res.cookie('auth_token', newAccessToken, { httpOnly: true });
         } catch { refreshErr } {

@@ -28,13 +28,36 @@ export const QUERY_RIDDLES = gql`
             _id
             id
             background_image
+            interactions {
+                user_id
+                riddle_id
+                isSolved
+                attempts
+                usedHint
+                timestamp
+                startTime
+                solveTime
+                incorrectAnswers
+                hintsUsed
+                hintUsageTime
+                userFeedback {
+                    difficultyRating
+                    enjoymentRating
+                }
+                userEngagement {
+                    visits
+                    riddlesAttempted
+                    timeSpent
+                }   
+            }
         }
     }
 `;
 
 export const QUERY_RIDDLE = gql`
-    query getRiddle($_id: ID!) {
-        getRiddle(_id: $_id) {
+    query getRiddle($id: String!) {
+        getRiddle(id: $id) {
+            _id
             id
             riddle
             hint
@@ -43,7 +66,7 @@ export const QUERY_RIDDLE = gql`
             interactions {
                 user_id
                 riddle_id
-                solved
+                isSolved
                 attempts
                 usedHint
                 timestamp

@@ -7,7 +7,7 @@ const typeDefs = gql`
         accessCodes: [AccessCode]
         user(_id: ID!): User
         getRiddles: [Riddle]
-        getRiddle(_id: ID!): Riddle
+        getRiddle(id: String!): Riddle
     }
 
     type Mutation {
@@ -16,6 +16,9 @@ const typeDefs = gql`
         createUser(accesscode: String!, email: String!, password: String!): Auth
         useAccessCode(_id: ID!): AccessCode
         assignAccessCode(userId: ID!, accessCodeId: ID!): User
+        startRiddle(userId: ID!, riddleId: String!): UserInteraction
+        attemptRiddle(userId: ID!, riddleId: String!, isSolved: Boolean!, incorrectAnswers: [String]): UserInteraction
+        useHint(userId: ID!, riddleId: String!, hintNumber: Int!): UserInteraction
     }
 
     type AccessCode {
@@ -34,7 +37,7 @@ const typeDefs = gql`
 
     type Riddle {
         _id: ID
-        id: ID
+        id: String
         riddle: String
         hint: String
         solutions: [String]!
@@ -50,7 +53,7 @@ const typeDefs = gql`
     type UserInteraction {
         user_id: ID
         riddle_id: ID
-        solved: Boolean
+        isSolved: Boolean
         attempts: Int
         usedHint: Boolean
         timestamp: String

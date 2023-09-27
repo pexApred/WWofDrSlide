@@ -1,8 +1,8 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const RiddleSchema = new Schema({
     id: {
-        type: Number,
+        type: String,
         required: [true, "Riddle ID is required"],
     },
     riddle: {
@@ -20,7 +20,11 @@ const RiddleSchema = new Schema({
     background_image: {
         type: String,
         required: [false],
-    }
+    },
+    interactions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'UserInteraction'
+    }]
 });
 
 const Riddle = model('Riddle', RiddleSchema);

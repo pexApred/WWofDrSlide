@@ -1,23 +1,23 @@
 import React from "react";
-import { Container, Row, Col, Card, Button, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_RIDDLES } from "../../utils/queries";
+import { Container, Row, Col } from "react-bootstrap";
 import NavBar from "../../components/NavBar/NavBar";
 import UserComponent from "../../components/UserComponent/UserComponent";
-import Footer from "../../components/Footer/Footer";
 
 const ProfilePage = () => {
     return (
         <div>
-        <NavBar />
-        <Container>
-            <Row>
-            <Col>
-                <UserComponent />
-            </Col>
-            </Row>
-        </Container>
+            <NavBar />
+            <Container>
+                <Row className="justify-content-center">
+                    <Col md={8}>
+                        <UserComponent />
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
-    }
+};
 
 export default ProfilePage;

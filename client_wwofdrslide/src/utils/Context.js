@@ -9,10 +9,10 @@ const Context = React.createContext({
 export const ContextProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
-    // useEffect(() => {
-    //     const checkLoggedIn = AuthService.loggedIn();
-    //         setLoggedIn(checkLoggedIn);
-    // }, []);
+    useEffect(() => {
+        const checkLoggedIn = AuthService.loggedIn();
+            setLoggedIn(checkLoggedIn);
+    }, []);
 
     return (
         <Context.Provider value={{ loggedIn, setLoggedIn }}>

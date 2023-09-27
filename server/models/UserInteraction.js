@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
-const { User } = require('./User');
-const { Riddle } = require('./Riddle');
+const User = require('./User');
+const Riddle = require('./Riddle');
 
 const UserInteractionSchema = new Schema({
     user_id: {
@@ -9,12 +9,13 @@ const UserInteractionSchema = new Schema({
         required: [true, "User ID is required"],
     },
     riddle_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'Riddle',
         required: [true, "Riddle ID is required"],
     },
-    solved: {
+    isSolved: {
         type: Boolean,
+        default: false,
         required: [true, "Solved is required"],
     },
     attempts: {
@@ -23,6 +24,7 @@ const UserInteractionSchema = new Schema({
     },
     usedHint: {
         type: Boolean,
+        default: false,
         required: [true, "UsedHint is required"],
     },
     timestamp: {
@@ -56,7 +58,7 @@ const UserInteractionSchema = new Schema({
     userEngagement: {
         visits: { type: Number },
         riddlesAttempted: { type: Number },
-        timeSpent: { type: Number },  // In seconds or minutes, depending on what's appropriate for your application.
+        timeSpent: { type: Number }, 
     },
 });
 

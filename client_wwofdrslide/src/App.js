@@ -59,7 +59,7 @@ function App() {
                   element={<RiddlePage />}
                 />
                 <Route
-                  path='/riddles/:_id'
+                  path='/riddles/:id'
                   element={<RiddlePage />}
                 />
                 {/* <Route
