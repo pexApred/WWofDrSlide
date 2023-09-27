@@ -68,7 +68,9 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='mr-auto'>
+              {loggedIn && (
               <Nav.Link className='profile' onClick={handleProfileClick}>Profile</Nav.Link>
+              )}
               <Dropdown as={Nav.Item}>
                 <Dropdown as={ButtonGroup}>
                   <Button className='btn' variant="success" onClick={handleRiddlesClick}>Riddles</Button>
