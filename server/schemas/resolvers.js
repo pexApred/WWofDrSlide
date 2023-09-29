@@ -65,8 +65,13 @@ module.exports = {
         },
     },
     Mutation: {
-        login: async (parent, { email, password }, context) => {
-            const user = await User.findOne({ email });
+        login: async (parent, { username, email, password }, context) => {
+            let user;
+            if (email) {
+                user = await User.findOne({ email });
+            } else if (username) {
+                user = await User.findOne({ username });
+            }
             if (!user) {
                 throw new Error("Can't find this user");
             }
@@ -98,7 +103,7 @@ module.exports = {
             return true;
         },
 
-        createUser: async (parent, { accesscode, email, password }, context) => {
+        createUser: async (parent, { accesscode, username, email, password }, context) => {
 
             // Validate the access code
             const validAccessCode = await AccessCode.findOne({ accesscode: accesscode });
@@ -113,6 +118,7 @@ module.exports = {
             // Create the user with the access code
             const user = await User.create({
                 accesscode: validAccessCode._id,
+                username,
                 email,
                 password
             });

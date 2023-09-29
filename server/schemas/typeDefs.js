@@ -11,9 +11,9 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
+        login(username: String, email: String, password: String!): Auth
         logout: Boolean
-        createUser(accesscode: String!, email: String!, password: String!): Auth
+        createUser(accesscode: String!, username: String, email: String!, password: String!): Auth
         useAccessCode(_id: ID!): AccessCode
         assignAccessCode(userId: ID!, accessCodeId: ID!): User
         startRiddle(userId: ID!, riddleId: String!): UserInteraction
@@ -31,6 +31,7 @@ const typeDefs = gql`
     type User {
         _id: ID
         accesscode: AccessCode!
+        username: String
         email: String!
         userAnalytics: [UserInteraction]
     }
@@ -43,6 +44,7 @@ const typeDefs = gql`
         solutions: [String]!
         background_image: String
         interactions: [UserInteraction]
+        difficulty: Int
     }
 
     type Riddles {

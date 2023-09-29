@@ -133,44 +133,47 @@ const SpecificRiddle = ({ id }) => {
     ));
 
     return (
-        <Container className="specific-riddle-container">
-            <Row>
-                <Col xs={12} md={6}>
-                    <Image className="specific-riddle-image" src={data.getRiddle.background_image} fluid />
-                </Col>
-                <Col xs={12} md={6}>
-                    <h1 className="specific-riddle-text">{formattedRiddle}</h1>
-                    <Form className="specific-riddle-form" onSubmit={checkAnswer}>
-                        <Form.Group controlId="formBasicEmail" className='answer-input-group'>
-                            <Form.Control type="text" placeholder="Enter answer" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} autoComplete='off' />
-                            {notification && (
-                                <div className="notification-container">
-                                    <Notification message={notification} onClose={() => setNotification(null)} />
+        <>
+            <h6 className='specific-riddle-difficulty'>Difficulty: {data.getRiddle.difficulty}</h6>
+            <Container className="specific-riddle-container">
+                <Row>
+                    <Col xs={12} md={6}>
+                        <Image className="specific-riddle-image" src={data.getRiddle.background_image} fluid />
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <h1 className="specific-riddle-text">{formattedRiddle}</h1>
+                        <Form className="specific-riddle-form" onSubmit={checkAnswer}>
+                            <Form.Group controlId="formBasicEmail" className='answer-input-group'>
+                                <Form.Control type="text" placeholder="Enter answer" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} autoComplete='off' />
+                                {notification && (
+                                    <div className="notification-container">
+                                        <Notification message={notification} onClose={() => setNotification(null)} />
+                                    </div>
+                                )}
+                                {!hintShown && (
+                                    <Button className='hint-btn' variant="success" onClick={handleShowHintClick}>
+                                        SHOW HINT
+                                    </Button>
+                                )}
+                            </Form.Group>
+                            {showHintConfirmation && (
+                                <div className="hint-confirmation">
+                                    Are you sure? Revealing may affect your score.
+                                    <Button size="sm" variant="outline-primary" onClick={displayHint}>
+                                        Yes
+                                    </Button>
+                                    <Button size="sm" variant="outline-secondary" onClick={() => setShowHintConfirmation(false)}>
+                                        No
+                                    </Button>
                                 </div>
                             )}
-                            {!hintShown && (
-                                <Button variant="success" onClick={handleShowHintClick}>
-                                    SHOW HINT
-                                </Button>
-                            )}
-                        </Form.Group>
-                        {showHintConfirmation && (
-                            <div className="hint-confirmation">
-                                Are you sure? Revealing may affect your score.
-                                <Button size="sm" variant="outline-primary" onClick={displayHint}>
-                                    Yes
-                                </Button>
-                                <Button size="sm" variant="outline-secondary" onClick={() => setShowHintConfirmation(false)}>
-                                    No
-                                </Button>
-                            </div>
-                        )}
-                        <Button variant="primary" type="submit">
-                            SUBMIT
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
+                            <Button variant="primary" type="submit">
+                                SUBMIT
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
             <Row className='navigation-buttons'>
                 <Col xs={12} md={6} className='text-left'>
                     <Button variant="secondary" onClick={goToPreviousRiddle}>
@@ -183,7 +186,7 @@ const SpecificRiddle = ({ id }) => {
                     </Button>
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 };
 

@@ -24,7 +24,11 @@ const RiddleSchema = new Schema({
     interactions: [{
         type: Schema.Types.ObjectId,
         ref: 'UserInteraction'
-    }]
+    }],
+    difficulty: {
+        type: Number,
+        required: [false],
+    },
 });
 
 const Riddle = model('Riddle', RiddleSchema);

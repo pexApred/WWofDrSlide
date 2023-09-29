@@ -13,7 +13,7 @@ import './App.css';
 import HomePage from './pages/HomePage/HomePage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RiddlePage from './pages/RiddlePage/RiddlePage';
-import RiddleRankingsPage from './pages/RiddleRankingsPage/RiddleRankingsPage';
+import StatsPage from './pages/StatsPage/StatsPage';
 import Footer from './components/Footer/Footer';
 
 const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
@@ -62,10 +62,10 @@ function App() {
                   path='/riddles/:id'
                   element={<RiddlePage />}
                 />
-                {/* <Route
-                  path='/ratings'
-                  element={<RiddleRankingsPage />}
-                /> */}
+                <Route
+                  path='/statistics'
+                  element={<StatsPage />}
+                />
                 <Route 
                 path="*" 
                 element={<h1 className='display-2'>Wrong page!</h1>} 

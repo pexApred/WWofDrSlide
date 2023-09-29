@@ -84,9 +84,7 @@ const NavBar = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Dropdown>
-            {/* </Nav>
-
-            <Nav className='ml-auto'> */}
+              <Nav.Link as={Link} to='/statistics'>Statistics</Nav.Link>
               {loggedIn ? (
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               ) : (

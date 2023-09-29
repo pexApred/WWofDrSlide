@@ -13,7 +13,7 @@ const RiddleList = () => {
 
     return (
         <Container>
-            <h1>Select a Riddle</h1>
+            <h1>Start your Journey {} Select a Riddle</h1>
             <Row>
                 {data.getRiddles.map((riddle) => (
                     <Col xs={4} sm={3} md={3} lg={2} key={riddle.id}>
@@ -26,19 +26,6 @@ const RiddleList = () => {
             </Row>
         </Container>
     );
-
-    // return (
-    //     <div>
-    //         <h1>Select a Riddle</h1>
-    //         <ul className="riddle-list">
-    //             {data.getRiddles.map((riddle) => (
-    //                 <li key={riddle._id} className="riddle-items">
-    //                     <Link to={`/riddles/${riddle._id}`}>{riddle.id || "View Riddle"}</Link>
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     </div>
-    // );
 };
 
 export default RiddleList;

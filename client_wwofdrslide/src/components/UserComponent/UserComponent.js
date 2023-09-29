@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './UserComponent.css'
 
 const UserComponent = () => {
-    const { loading: riddlesLoading, error: riddlesError, data } = useQuery(QUERY_RIDDLES);
+    const { loading: riddlesLoading, error: riddlesError, data, refetch } = useQuery(QUERY_RIDDLES);
     const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME);
 
     if (riddlesLoading || userLoading) return <p>'Loading...'</p>;
@@ -28,16 +28,12 @@ const UserComponent = () => {
     ).length;
 
     const totalHintsUsed = riddles.reduce((acc, riddle) => {
-        const userInteraction = riddle.interactions && riddle.interactions.some(interaction => interaction.user_id === loggedInUser);
-        return acc + (userInteraction && userInteraction.hintsUsed ? 1 : 0);
+        const userInteraction = riddle.interactions && riddle.interactions.find(interaction => interaction.user_id === loggedInUser);
+        return acc + (userInteraction && userInteraction.hintsUsed ? userInteraction.hintsUsed.length : 0);
     }, 0);
 
     // useEffect(() => {
-    //     const token = localStorage.getItem('id_token');
-    //     if (token) {
-    //         const decodedToken = jwtDecode(token);
-    //         setEmail(decodedToken.data.email);
-    //     }
+
     // }, []);
 
     return (

@@ -85,6 +85,7 @@ export const QUERY_RIDDLE = gql`
                     timeSpent
                 }   
             }
+            difficulty
         }
     }
 `;
