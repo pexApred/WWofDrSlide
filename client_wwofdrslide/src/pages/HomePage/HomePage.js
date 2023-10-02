@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-import Footer from '../../components/Footer/Footer';
+import { useQuery } from '@apollo/client';
+import { QUERY_RIDDLES } from '../../utils/queries';
+import FlipBook from '../../components/FlipBook/FlipBook';
 import './HomePage.css';
 
 const HomePage = () => {
+    const { loading, error, data } = useQuery(QUERY_RIDDLES);
+
+    if (loading) return <p>'Loading...'</p>;
+    if (error) return <p>Error! {error.message}</p>;
+
+    const images = data.getRiddles.map(riddle => riddle.background_image);
+
     return (
         <div>
             <NavBar />
+            <div>
+            <FlipBook images={images} />
+        </div>
             <div className="container">
                 <div className="row">
-                    {/* <h1>Wonderful World of Dr. Slide</h1> */}
                     <div className="col">
-                        <img src="../WWofDrSlide.gif" className='gif' alt="Dr. Slide" />
                         <div>
                             <p>
                                 I say to you, Welcome, <br />Come one and come all!<br />
@@ -35,6 +45,7 @@ const HomePage = () => {
             </div>
         </div>
     );
-};
+}
+
 
 export default HomePage;

@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/client";
 import { QUERY_RIDDLES } from "../../utils/queries";
 import { Container, Row, Col } from "react-bootstrap";
 import NavBar from "../../components/NavBar/NavBar";
-import UserComponent from "../../components/UserComponent/UserComponent";
-import RiddleStats from "../../components/RiddleStats/RiddleStats";
+import UserStatsComponent from "../../components/UserStatsComponent/UserStatsComponent";
+import EditProfile from "../../components/EditProfile/EditProfile";
 
 const ProfilePage = () => {
     return (
@@ -13,8 +13,8 @@ const ProfilePage = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col md={8}>
-                        <UserComponent />
-                        {/* <RiddleStats /> */}
+                        <EditProfile />
+                        <UserStatsComponent />
                     </Col>
                 </Row>
             </Container>

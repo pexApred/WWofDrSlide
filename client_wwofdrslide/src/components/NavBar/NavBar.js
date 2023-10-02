@@ -8,7 +8,7 @@ import AuthService from '../../utils/auth';
 import Context from '../../utils/Context';
 import { QUERY_RIDDLES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+import { useMutation, useApolloClient } from '@apollo/client';
 import { LOGOUT_USER } from '../../utils/mutations';
 import './NavBar.css';
 
@@ -19,6 +19,7 @@ const NavBar = () => {
   const { loggedIn, setLoggedIn } = useContext(Context);
   const { loading, error, data } = useQuery(QUERY_RIDDLES);
   const [logoutUser] = useMutation(LOGOUT_USER);
+  const client = useApolloClient();
 
   const riddles = loading || error ? [] : data.getRiddles;
 
@@ -50,6 +51,7 @@ const NavBar = () => {
     try {
       await logoutUser();
       AuthService.logout();
+      client.resetStore();
       navigate('/');
       setLoggedIn(false);
       setShowModal(false);

@@ -14,6 +14,7 @@ const typeDefs = gql`
         login(username: String, email: String, password: String!): Auth
         logout: Boolean
         createUser(accesscode: String!, username: String, email: String!, password: String!): Auth
+        updateProfile(userId: ID!, username: String, email: String, password: String): User
         useAccessCode(_id: ID!): AccessCode
         assignAccessCode(userId: ID!, accessCodeId: ID!): User
         startRiddle(userId: ID!, riddleId: String!): UserInteraction

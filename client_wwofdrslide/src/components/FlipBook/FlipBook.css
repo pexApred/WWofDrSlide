@@ -1,0 +1,41 @@
+.flipbook {
+    display: flex;
+    align-items: center;
+    perspective: 1200px; 
+    width: 420px; /* Double the width of a single page */
+    height: 300px;
+    overflow: hidden; /* Hide the pages that are out of the container */
+}
+
+.page {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    backface-visibility: hidden;
+}
+
+.page img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.page.front {
+    transform: rotateY(0deg);
+}
+
+.page.back {
+    transform: rotateY(-180deg);
+}
+
+.flipping .page.front {
+    transform: rotateY(-180deg);
+}
+
+.flipping .page.back {
+    transform: rotateY(0deg);
+}

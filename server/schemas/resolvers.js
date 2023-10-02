@@ -1,6 +1,7 @@
 const { AccessCode, User, Riddle, UserInteraction } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError, ApolloError } = require('apollo-server-express');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     Query: {
@@ -152,6 +153,17 @@ module.exports = {
 
             return { token: accessToken, user };
         },
+        updateProfile: async (parent, args, context) => {
+            const updates = {};
+            if (args.username) updates.username = args.username;
+            if (args.email) updates.email = args.email;
+            // if (args.profilePicture) updates.profilePicture = args.profilePicture;
+            if (args.password) {
+                const saltRounds = 10;
+                updates.password = await bcrypt.hash(args.password, saltRounds);
+            }
+            return User.findByIdAndUpdate(args.userId, updates, { new: true });
+        },        
         useAccessCode: async (parent, { _id }) => {
             const accessCode = await AccessCode.findOne({ _id: _id });
             if (!accessCode) {
