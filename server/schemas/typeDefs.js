@@ -57,7 +57,7 @@ const typeDefs = gql`
         user_id: ID
         riddle_id: ID
         isSolved: Boolean
-        attempts: Int
+        attempted: Boolean
         usedHint: Boolean
         timestamp: String
         startTime: String

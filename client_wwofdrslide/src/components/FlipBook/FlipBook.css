@@ -1,41 +1,31 @@
 .flipbook {
     display: flex;
     align-items: center;
-    perspective: 1200px; 
-    width: 420px; /* Double the width of a single page */
-    height: 300px;
-    overflow: hidden; /* Hide the pages that are out of the container */
+    justify-content: center;
+    width: 100%; 
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    border-radius: 5px;
+    position: relative;
 }
 
 .page {
-    width: 200px;
-    height: 300px;
-    position: absolute;
-    transform-style: preserve-3d;
-    transition: transform 1s;
-    backface-visibility: hidden;
-}
-
-.page img {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 400px;
+    object-fit: cover;
 }
 
-.page.front {
-    transform: rotateY(0deg);
-}
+@media (min-width: 768px) {
+    .flipbook {
+        max-width: 800px;
+        height: auto;
+        border: none;
+        box-shadow: none;
+    }
 
-.page.back {
-    transform: rotateY(-180deg);
-}
-
-.flipping .page.front {
-    transform: rotateY(-180deg);
-}
-
-.flipping .page.back {
-    transform: rotateY(0deg);
+    .page {
+        max-width: 600px;
+        height: auto;
+    }
 }

@@ -5,7 +5,9 @@ import './RiddleStats.css';
 import { Col, Row } from "react-bootstrap";
 
 const RiddleStats = () => {
-    const { loading, error, data } = useQuery(QUERY_RIDDLES);
+    const { loading, error, data } = useQuery(QUERY_RIDDLES, {
+        fetchPolicy:"network-only"
+    });
 
     if (loading) return <p>'Loading...'</p>;
     if (error) return <p>`Error! ${error.message}`</p>;
@@ -17,15 +19,15 @@ const RiddleStats = () => {
             <h1>Riddle Statistics</h1>
             {riddles.map((riddle) => {
                 const interactions = riddle.interactions || [];
-
-                const totalAttempted = interactions.length;
+                console.log("start", riddle.id, interactions)
+                const totalAttempted = interactions.filter(interaction => interaction.attempted).length;
                 const totalSolved = interactions.filter(interaction => interaction.isSolved).length;
                 const solvedWithoutHint = interactions.filter(interaction => interaction.isSolved && interaction.hintsUsed.length === 0).length;
                 const solvedWithHint = totalSolved - solvedWithoutHint;
 
-                const percentSolved = ((totalSolved / totalAttempted) * 100).toFixed(2);
-                const percentSolvedWithoutHint = ((solvedWithoutHint / totalAttempted) * 100).toFixed(2);
-                const percentSolvedWithHint = ((solvedWithHint / totalAttempted) * 100).toFixed(2);
+                const percentSolved = totalAttempted ? ((totalSolved / totalAttempted) * 100).toFixed(2) : "0.00";
+                const percentSolvedWithoutHint = totalAttempted ? ((solvedWithoutHint / totalAttempted) * 100).toFixed(2) : "0.00";
+                const percentSolvedWithHint = totalAttempted ? ((solvedWithHint / totalAttempted) * 100).toFixed(2) : "0.00";                
 
                 return (
                     <Col xs={12} sm={6} md={6} lg={4} xl={3} xxl={2} key={riddle._id}>

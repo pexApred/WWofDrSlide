@@ -18,8 +18,8 @@ const UserInteractionSchema = new Schema({
         default: false,
         required: [true, "Solved is required"],
     },
-    attempts: {
-        type: Number,
+    attempted: {
+        type: Boolean,
         required: [true, "Attempts is required"],
     },
     usedHint: {

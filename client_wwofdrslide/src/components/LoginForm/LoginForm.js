@@ -39,7 +39,7 @@ const LoginForm = ({ setShowModal }) => {
         });
         if (data.login.token) {
           AuthService.login();
-          client.resetStore();
+          await client.resetStore();
           setLoggedIn(true);
           setShowModal(false);
           navigate('/profile');

@@ -200,7 +200,7 @@ module.exports = {
                 user_id: userId,
                 riddle_id: riddleId,
                 isSolved: false,
-                attempts: 0,
+                attempted: false,
                 usedHint: false,
                 timestamp: new Date(),
                 startTime: new Date(),
@@ -237,7 +237,7 @@ module.exports = {
             if (!userInteraction) {
                 throw new Error("Can't find this user interaction");
             }
-            userInteraction.attempts += 1;
+            userInteraction.attempted = true;
             userInteraction.isSolved = true;
             userInteraction.incorrectAnswers = incorrectAnswers;
             await userInteraction.save();

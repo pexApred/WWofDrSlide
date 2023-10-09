@@ -13,7 +13,6 @@ import { LOGOUT_USER } from '../../utils/mutations';
 import './NavBar.css';
 
 const NavBar = () => {
-  // set modal display state
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn } = useContext(Context);

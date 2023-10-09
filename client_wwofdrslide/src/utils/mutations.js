@@ -70,7 +70,7 @@ export const START_RIDDLE = gql`
             user_id
             riddle_id
             isSolved
-            attempts
+            attempted
             usedHint
             timestamp
             startTime
@@ -97,7 +97,7 @@ export const ATTEMPT_RIDDLE = gql`
             user_id
             riddle_id
             isSolved
-            attempts
+            attempted
             usedHint
             incorrectAnswers
         }

@@ -6,7 +6,8 @@ import { QUERY_RIDDLE, QUERY_ME } from '../../utils/queries';
 import { START_RIDDLE, ATTEMPT_RIDDLE, USE_HINT } from '../../utils/mutations';
 import './SpecificRiddle.css';
 
-const Notification = ({ message, onClose }) => {
+const Notification = ({ message, hint, onClose }) => {
+    
     useEffect(() => {
         if (message === 'Incorrect Answer! Try Again!') {
             const timer = setTimeout(() => {
@@ -16,8 +17,16 @@ const Notification = ({ message, onClose }) => {
         }
     }, [message, onClose]);
 
+    let notificationStyle = 'notification-container';
+
+    if (message === 'Correct!') {
+        notificationStyle += ' correct-style';
+    } else if (message === 'Incorrect, Try Again') {
+        notificationStyle += ' incorrect-style';
+    }
+
     return (
-        <div className='notification-container'>
+        <div className={notificationStyle}>
             {message}
         </div>
     );
@@ -29,6 +38,7 @@ const SpecificRiddle = ({ id }) => {
     const [showHintConfirmation, setShowHintConfirmation] = useState(false);
     const [userAnswer, setUserAnswer] = useState('');
     const [hintShown, setHintShown] = useState(false);
+    const [givenUp, setGivenUp] = useState(false);
     const { loading, error, data } = useQuery(QUERY_RIDDLE, {
         variables: { id: id }
     });
@@ -37,8 +47,6 @@ const SpecificRiddle = ({ id }) => {
     const [startRiddle] = useMutation(START_RIDDLE);
     const [attemptRiddle] = useMutation(ATTEMPT_RIDDLE);
     const [hintMutation] = useMutation(USE_HINT);
-
-
 
     const loggedInUserId = userData?.me?._id;
 
@@ -61,7 +69,7 @@ const SpecificRiddle = ({ id }) => {
         if (data.getRiddle.solutions.includes(userAnswer.trim().toLowerCase())) {
             setNotification('Correct!');
         } else {
-            setNotification('Incorrect Answer! Try Again!');
+            setNotification('Incorrect, Try Again');
             setTimeout(() => {
                 setNotification(null);
                 if (hintShown) {
@@ -105,6 +113,10 @@ const SpecificRiddle = ({ id }) => {
     const handleShowHintClick = () => {
         setShowHintConfirmation(true);
     };
+
+    const handleGivenUpClick = () => {
+        setGivenUp(true);
+    }
 
     const displayHint = () => {
         setNotification(data.getRiddle.hint);
@@ -167,7 +179,17 @@ const SpecificRiddle = ({ id }) => {
                                     </Button>
                                 </div>
                             )}
-                            <Button variant="primary" type="submit">
+                            {hintShown && !givenUp && (
+                                <Button className='give-up-btn' variant='danger' onClick={handleGivenUpClick}>
+                                    I GIVE UP
+                                </Button>
+                            )}
+                            {givenUp && (
+                                <div className='answer-display'>
+                                    Answer: {data.getRiddle.solutions.join(', ')}
+                                </div>
+                            )}
+                            <Button className='btn-submit' type="submit">
                                 SUBMIT
                             </Button>
                         </Form>
@@ -176,12 +198,12 @@ const SpecificRiddle = ({ id }) => {
             </Container>
             <Row className='navigation-buttons'>
                 <Col xs={12} md={6} className='text-left'>
-                    <Button variant="secondary" onClick={goToPreviousRiddle}>
+                    <Button className='btn-nav' onClick={goToPreviousRiddle}>
                         PREVIOUS RIDDLE
                     </Button>
                 </Col>
                 <Col xs={12} md={6} className='text-right'>
-                    <Button variant="secondary" onClick={goToNextRiddle}>
+                    <Button className='btn-nav' onClick={goToNextRiddle}>
                         NEXT RIDDLE
                     </Button>
                 </Col>
