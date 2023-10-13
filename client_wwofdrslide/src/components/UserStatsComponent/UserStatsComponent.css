@@ -1,17 +1,5 @@
 .user-component-container {
-    margin-top: 50px;
-}
-
-.profile-section {
-    margin-bottom: 30px;
-}
-
-.profile-image img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ddd;
+    /* margin-top: 50px; */
 }
 
 .stats-card {

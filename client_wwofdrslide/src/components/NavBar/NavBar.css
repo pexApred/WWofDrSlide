@@ -1,4 +1,4 @@
-nav .navbar {
+/* nav .navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,24 +7,37 @@ nav .navbar {
     background-color: rgb(44, 37, 37);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     z-index: 100;
-}
+} */
 
 .navbar {
     position: relative;
     background-color: rgb(44, 37, 37);
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .navbar .btn {
     background-color: transparent;
     border: none;
     color: rgb(255, 255, 255, 0.55);
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 0.1rem; */
     /* font-weight: bold; */
-    /* padding: 0.5rem; */
+    padding: 8px;
+    border-radius: 0;
 }
 
+/* #dropdown-split-basic {
+    padding-left: 0;
+} */
+
+.btnSplit {
+    align-self: center;
+    width: 100%;
+}
+
+.btnSplit:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 .navbar .btn:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
@@ -42,14 +55,16 @@ nav .navbar {
     overflow-y: auto;
 }
 
-.navbar-brand {
-    width: 100%;
-    color: rgb(255, 255, 255);
-    font-size: 1.1rem;
-    text-decoration: none;
+.navbar .navbar-brand {
+    /* width: 100%;
+    color: rgb(255, 255, 255);*/
+    /* text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    font-weight: bold;
+    font-weight: bold; */
+    white-space: nowrap;
+    font-size: 1.4rem;
+    margin: 0;
 }
 
 .navbar-brand:hover {
@@ -57,33 +72,24 @@ nav .navbar {
     background-color: transparent;
 }
 
-.navbar-nav {
-    display: flex;
+.navbar .navbar-nav {
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-weight: bold;
-    padding: 0.5rem;
-}
-
-a:hover {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    justify-content: space-between; */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
-    .navbar-brand {
-        font-size: 1.5rem;
+    .navbar .navbar-brand {
+        /* font-size: 2rem; */
+        width: 100%;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: .5rem;
+        font-weight: bold;
     }
 
-    .navbar {
-        padding: 1rem 1rem;
-    }
+    .navbar {}
 }

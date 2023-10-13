@@ -4,12 +4,24 @@
 
 .profile-section {
     margin-bottom: 30px;
+    padding: 1rem;
 }
 
 .profile-image img {
+    align-items: center;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ddd;
+    margin-bottom: 2rem;
+}
+
+.sbtn {
+    font-size: 9px;
+    padding: 2.5px 5px;
+}
+
+.sform {
+    font-size: 12px;
 }

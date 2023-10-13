@@ -62,17 +62,17 @@ const NavBar = () => {
   return (
     <>
       <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
-        <Container fluid>            
-        <Navbar.Brand as={Link} to='/'>
-              Wonderful World of Dr. Slide
-            </Navbar.Brand>
+        <Container fluid>
+          <Navbar.Brand as={Link} to='/'>
+            Wonderful World of dR slide
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='mr-auto'>
               {loggedIn && (
-              <Nav.Link className='profile' onClick={handleProfileClick}>Profile</Nav.Link>
+                <Nav.Link className='profile' onClick={handleProfileClick}>Profile</Nav.Link>
               )}
-              <Dropdown as={Nav.Item}>
+              <Dropdown className='btnSplit' as={Nav.Item}>
                 <Dropdown as={ButtonGroup}>
                   <Button className='btn' variant="success" onClick={handleRiddlesClick}>Riddles</Button>
                   <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
@@ -85,17 +85,16 @@ const NavBar = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Dropdown>
-              <Nav.Link as={Link} to='/statistics'>Statistics</Nav.Link>
+              <Nav.Link className='profile' as={Link} to='/statistics'>Statistics</Nav.Link>
               {loggedIn ? (
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                <Nav.Link className='profile' onClick={handleLogout}>Logout</Nav.Link>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/SignUp</Nav.Link>
+                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Login/SignUp</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* set modal data up */}
       <Modal
         size='lg'
         show={showModal}

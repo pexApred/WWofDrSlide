@@ -69,7 +69,7 @@ const EditProfile = () => {
                     <h4>
                         Email:{' '}
                         {editMode.email ? (
-                            <form onSubmit={handleFormSubmit}>
+                            <form className="sform" onSubmit={handleFormSubmit}>
                             <input
                                 type="email"
                                 name="email"
@@ -77,19 +77,19 @@ const EditProfile = () => {
                                 onChange={handleInputChange}
                                 autoComplete='email'
                             />
-                            <button type="submit">Update</button>
+                            <button className="sbtn" type="submit">Update</button>
                             </form>
                         ) : (
                             <>
                                 {userData.me.email}{' '}
-                                <button type='button' onClick={() => toggleEditMode('email')}>Edit</button>
+                                <button className="sbtn" type='button' onClick={() => toggleEditMode('email')}>Edit</button>
                             </>
                         )}
                     </h4>
                     <h4>
                         Username:{' '}
                         {editMode.username ? (
-                            <form onSubmit={handleFormSubmit}>
+                            <form className="sform" onSubmit={handleFormSubmit}>
                             <input
                                 type="text"
                                 name="username"
@@ -97,19 +97,19 @@ const EditProfile = () => {
                                 onChange={handleInputChange}
                                 autoComplete='username'
                             />
-                            <button type="submit">Update</button>
+                            <button className="sbtn" type="submit">Update</button>
                             </form>
                         ) : (
                             <>
                                 {userData.me.username}{' '}
-                                <button type='button' onClick={() => toggleEditMode('username')}>Edit</button>
+                                <button className="sbtn" type='button' onClick={() => toggleEditMode('username')}>Edit</button>
                             </>
                         )}
                     </h4>
                     <h4>
-                        Password:{' '}
+                        Password:{' xxxxxxxx '}
                         {editMode.password ? (
-                            <form onSubmit={handleFormSubmit}>
+                            <form className="sform" onSubmit={handleFormSubmit}>
                                 <input
                                     type="password"
                                     name="new-password"
@@ -118,11 +118,11 @@ const EditProfile = () => {
                                     placeholder="Enter new password"
                                     autoComplete='new-password'
                                 />
-                                <button type="submit">Update</button>
+                                <button className="sbtn" type="submit">Update</button>
                             </form>
                         ) : (
                             <>
-                                <button type='button' onClick={() => toggleEditMode('password')}>Change Password</button>
+                                <button className="sbtn" type='button' onClick={() => toggleEditMode('password')}>Change</button>
                             </>
                         )}
                     </h4>
