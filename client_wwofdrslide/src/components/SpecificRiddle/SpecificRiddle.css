@@ -1,7 +1,21 @@
+.id-diff {
+    display: flex;
+    justify-content: space-between;
+}
+
 .specific-riddle-difficulty {
     margin-right: 0;
     padding-right: 0;    
     text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #888;
+}
+
+.specific-riddle-id {
+    margin-left: 0;
+    padding-left: 0;    
+    text-align: left;
     font-size: 20px;
     font-weight: bold;
     color: #888;
@@ -22,6 +36,7 @@
     max-height: 400px;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
 }
 
 .specific-riddle-container .specific-riddle-text {

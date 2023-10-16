@@ -146,14 +146,17 @@ const SpecificRiddle = ({ id }) => {
 
     return (
         <>
+        <div className='id-diff'>
+            <h6 className='specific-riddle-id'>Riddle: {data.getRiddle.id}</h6>
             <h6 className='specific-riddle-difficulty'>Difficulty: {data.getRiddle.difficulty}</h6>
+            </div>
             <Container className="specific-riddle-container">
                 <Row>
                     <Col xs={12} md={6}>
                         <Image className="specific-riddle-image" src={data.getRiddle.background_image} fluid />
                     </Col>
                     <Col xs={12} md={6}>
-                        <h1 className="specific-riddle-text">{formattedRiddle}</h1>
+                        {/* <h1 className="specific-riddle-text">{formattedRiddle}</h1> */}
                         <Form className="specific-riddle-form" onSubmit={checkAnswer}>
                             <Form.Group controlId="formBasicEmail" className='answer-input-group'>
                                 <Form.Control type="text" placeholder="Enter answer" value={userAnswer} onChange={e => setUserAnswer(e.target.value)} autoComplete='off' />
