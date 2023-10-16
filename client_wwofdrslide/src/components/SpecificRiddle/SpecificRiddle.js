@@ -197,12 +197,12 @@ const SpecificRiddle = ({ id }) => {
                 </Row>
             </Container>
             <Row className='navigation-buttons'>
-                <Col xs={12} md={6} className='text-left'>
+                <Col xs={6} md={6} className='text-left'>
                     <Button className='btn-nav' onClick={goToPreviousRiddle}>
                         PREVIOUS RIDDLE
                     </Button>
                 </Col>
-                <Col xs={12} md={6} className='text-right'>
+                <Col xs={6} md={6} className='text-right'>
                     <Button className='btn-nav' onClick={goToNextRiddle}>
                         NEXT RIDDLE
                     </Button>

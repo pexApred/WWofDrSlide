@@ -91,5 +91,8 @@
         font-weight: bold;
     }
 
-    .navbar {}
+    .navbar {
+        position: flex;
+        
+    }
 }

@@ -120,8 +120,15 @@
 }
 
 .navigation-buttons {
-    margin-top: 4rem;
-    width: 100%;
+    margin-top: 1rem;
+}
+
+.navigation-buttons .text-left {
+    text-align: left;
+}
+
+.navigation-buttons .text-right {
+    text-align: right;
 }
 
 .btn-nav {
@@ -161,8 +168,9 @@
     }
 
     .navigation-buttons button {
+        margin-top: 4rem;
         padding: 5px 10px;
         font-size: 16px;
-        margin: 0;
+        /* margin: 0; */
     }
 }
