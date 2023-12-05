@@ -50,24 +50,6 @@ module.exports = {
             }
         },
 
-        // accessCode: async (parent, { _id }) => {
-        //     try {
-        //         const code = await AccessCode.findOne({ _id: _id });
-        //         return code;
-        //     } catch (err) {
-        //         console.error(err);
-        //         throw new ApolloError('Something went wrong with finding an access code by id!');
-        //     }
-        // },
-        // accessCodes: async () => {
-        //     try {
-        //         const accessCodes = await AccessCode.find();
-        //         return accessCodes;
-        //     } catch (err) {
-        //         console.error(err);
-        //         throw new ApolloError('Something went wrong with finding access codes!');
-        //     }
-        // },
     },
     Mutation: {
         login: async (parent, { username, password }, context) => {
