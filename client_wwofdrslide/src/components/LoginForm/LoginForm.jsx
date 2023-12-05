@@ -2,20 +2,17 @@ import React, { useState, useContext } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations'
-import AuthService from '../../utils/auth';
-import { useNavigate } from 'react-router-dom';
-import Context from '../../utils/Context';
-import { QUERY_ME } from '../../utils/queries';
-import { useQuery, useApolloClient } from '@apollo/client';
+import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../../utils/Context';
+import { useApolloClient } from '@apollo/client';
 
 const LoginForm = ({ setShowModal }) => {
-  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [userFormData, setUserFormData] = useState({ username: '', password: '' });
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
   const navigate = useNavigate()
-  const { setLoggedIn } = useContext(Context);
-  const { loading, error: userError, data: userData } = useQuery(QUERY_ME);
+  const { setLoggedIn, setUser } = useContext(AuthContext);
   const client = useApolloClient();
 
   const handleInputChange = (event) => {
@@ -29,7 +26,7 @@ const LoginForm = ({ setShowModal }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      if (!userFormData.email && !userFormData.username) {
+      if (!userFormData.username) {
         setShowAlert(true);
         return;
       }
@@ -38,9 +35,9 @@ const LoginForm = ({ setShowModal }) => {
           variables: { ...userFormData },
         });
         if (data.login.token) {
-          AuthService.login();
+          setLoggedIn(true); // This sets the loggedIn state in context
+          setUser(data.login.user); // Also set the user data in context
           await client.resetStore();
-          setLoggedIn(true);
           setShowModal(false);
           navigate('/profile');
         }
@@ -51,7 +48,7 @@ const LoginForm = ({ setShowModal }) => {
     }
     setValidated(true);
     setUserFormData({
-      email: '',
+      username: '',
       password: '',
     });
   };
@@ -72,20 +69,20 @@ const LoginForm = ({ setShowModal }) => {
             value={userFormData.username}
             required
           /> */}
-          {/* <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback> */}
+        {/* <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback> */}
         {/* </Form.Group> */}
         <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label htmlFor='username'>Username</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Your email'
-            name='email'
+            placeholder='Your username'
+            name='username'
             onChange={handleInputChange}
-            value={userFormData.email}
+            value={userFormData.username}
             required
-            autoComplete="email"
+            autoComplete="username"
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='password'>Password</Form.Label>
@@ -100,12 +97,37 @@ const LoginForm = ({ setShowModal }) => {
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
+        <div className="flex justify-between items-center mb-6">
+          <div className="form-group form-check">
+            <input
+              type="checkbox"
+              className=""
+              id="exampleCheck2"
+            />
+            <label
+              className="form-check-label inline-block text-gray-800"
+              htmlFor="exampleCheck2"
+            >
+              Remember me
+            </label>
+          </div>
+          <Link to="/forgot-password" className='forgot-password' >Forgot password?</Link>
+        </div>
         <Button
-          disabled={!(userFormData.email && userFormData.password)}
+          disabled={!(userFormData.username && userFormData.password)}
           type='submit'
           variant='success'>
           Submit
         </Button>
+        <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+          Don't have an account?
+          <Link
+            to="/"
+            className="signup-link"
+          >
+            SignUp
+          </Link>
+        </p>
       </Form>
     </>
   );

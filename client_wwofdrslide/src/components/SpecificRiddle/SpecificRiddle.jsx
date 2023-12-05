@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Image, Modal, Dropdown, Form, ButtonGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useQuery, useApolloClient, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_RIDDLE, QUERY_ME } from '../../utils/queries';
 import { START_RIDDLE, ATTEMPT_RIDDLE, USE_HINT } from '../../utils/mutations';
 import './SpecificRiddle.css';
@@ -34,7 +34,6 @@ const Notification = ({ message, hint, onClose }) => {
 
 const SpecificRiddle = ({ id }) => {
     const navigate = useNavigate();
-    const client = useApolloClient();
     const [showHintConfirmation, setShowHintConfirmation] = useState(false);
     const [userAnswer, setUserAnswer] = useState('');
     const [hintShown, setHintShown] = useState(false);
@@ -50,7 +49,7 @@ const SpecificRiddle = ({ id }) => {
 
     const loggedInUserId = userData?.me?._id;
 
-    useEffect(() => {
+    useEffect((id) => {
         if (loggedInUserId) {
             startRiddle({
                 variables: {
@@ -59,7 +58,7 @@ const SpecificRiddle = ({ id }) => {
                 }
             });
         }
-    }, [loggedInUserId]);
+    }, [loggedInUserId, startRiddle]);
 
     if (loading) return <p>'Loading...'</p>;
     if (error) return <p>`Error! ${error.message}`</p>;
@@ -132,17 +131,17 @@ const SpecificRiddle = ({ id }) => {
         });
     };
 
-    const paragraphs = data.getRiddle.riddle.split('\\n\\n');
-    const formattedRiddle = paragraphs.map((paragraph, pIndex) => (
-        <div key={pIndex} className='riddle-paragraph'>
-            {paragraph.split('\\n').map((line, lIndex) => (
-                <div key={lIndex} className='riddle-line'>
-                    {line}
-                    <br />
-                </div>
-            ))}
-        </div>
-    ));
+    // const paragraphs = data.getRiddle.riddle.split('\\n\\n');
+    // const formattedRiddle = paragraphs.map((paragraph, pIndex) => (
+    //     <div key={pIndex} className='riddle-paragraph'>
+    //         {paragraph.split('\\n').map((line, lIndex) => (
+    //             <div key={lIndex} className='riddle-line'>
+    //                 {line}
+    //                 <br />
+    //             </div>
+    //         ))}
+    //     </div>
+    // ));
 
     return (
         <>

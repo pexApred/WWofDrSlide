@@ -10,7 +10,7 @@
 } */
 
 .navbar {
-    position: relative;
+    /* position: relative; */
     background-color: rgb(44, 37, 37);
     padding: 0.5rem 1rem;
 }
@@ -25,10 +25,6 @@
     padding: 8px;
     border-radius: 0;
 }
-
-/* #dropdown-split-basic {
-    padding-left: 0;
-} */
 
 .btnSplit {
     align-self: center;

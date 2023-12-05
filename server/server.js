@@ -1,85 +1,58 @@
-require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { InMemoryLRUCache } = require('apollo-server-caching');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const connectDatabase = require('./config/database');
+const routes = require('./routes/routes');
 const { typeDefs, resolvers } = require('./schemas');
-const { authMiddleware } = require('./utils/auth');
+const authMiddleware = require('./utils/authMiddleware');
+const config = require('./config/config');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-const db = require('./config/connection');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  persistedQueries: {
-    cache: new InMemoryLRUCache({ maxSize: 1000 })
-  },
-  context: ({ req, res }) => {
-    // add the user to the context
-    const userReq = authMiddleware({ req });
-    return { user: userReq.user, res };
-    // return {};
+  context: async ({ req, res }) => {
+    return { user: req.user, res };
   },
 });
 
-// Adding multipe domains to CORS below
-const allowedOrigins = ['http://localhost:3000', 'https://wwofdrslide-0072af6d23f0.herokuapp.com/'];
+const allowedOrigins = ['http://localhost:3000', 'https://studio.apollographql.com', 'https://wwofdrslide-0072af6d23f0.herokuapp.com/'];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: allowedOrigins,
   credentials: true
 };
 
-// Add Specific Frontend Domain to CORS, credentials true allows cookies to be passed
-// const corsOptions = {
-//   origin: 'http://localhost:3000',
-//   credentials: true
-// };
 app.use(cors(corsOptions));
-
-// app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// if we're in production, serve client/build as static assets
+app.use(authMiddleware);
+
+app.use(routes);
+
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client_wwofdrslide/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
+  });
 }
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
-});
-
-// catch all route
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
-// });
-
-// app.use(routes);
-// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app, cors: false });
 
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`🌍 Now listening on localhost:${PORT}`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    })
+  connectDatabase();
+
+  app.listen(config.PORT, () => {
+    console.log(`Server listening on localhost:${config.PORT}`);
   })
 };
+console.log("Starting Apollo Server...");
 
-// Call the async function to start the server
 startApolloServer();

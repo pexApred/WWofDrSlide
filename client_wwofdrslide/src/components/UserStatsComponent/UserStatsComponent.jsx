@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { QUERY_RIDDLES, QUERY_ME } from '../../utils/queries';
 import { faHatWizard, faPuzzlePiece, faDice } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import * as d3 from "d3";
 import './UserStatsComponent.css'
 
 const UserComponent = () => {
-    const { loading: riddlesLoading, error: riddlesError, data, refetch } = useQuery(QUERY_RIDDLES);
+    const { loading: riddlesLoading, error: riddlesError, data } = useQuery(QUERY_RIDDLES);
     const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME);
 
     if (riddlesLoading || userLoading) return <p>'Loading...'</p>;

@@ -3,37 +3,24 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
     type Query {
         me: User
-        accessCode(_id: ID): AccessCode
-        accessCodes: [AccessCode]
         user(_id: ID!): User
         getRiddles: [Riddle]
         getRiddle(id: String!): Riddle
     }
 
     type Mutation {
-        login(username: String, email: String, password: String!): Auth
-        logout: Boolean
-        createUser(accesscode: String!, username: String, email: String!, password: String!): Auth
-        updateProfile(userId: ID!, username: String, email: String, password: String): User
-        useAccessCode(_id: ID!): AccessCode
-        assignAccessCode(userId: ID!, accessCodeId: ID!): User
+        login(username: String!, password: String!): Auth
+        createUser(email: String!, username: String!, password: String!): Auth
+        updateProfile(userId: ID!, email: String, username: String, password: String): User
         startRiddle(userId: ID!, riddleId: String!): UserInteraction
         attemptRiddle(userId: ID!, riddleId: String!, isSolved: Boolean!, incorrectAnswers: [String]): UserInteraction
         useHint(userId: ID!, riddleId: String!, hintNumber: Int!): UserInteraction
     }
 
-    type AccessCode {
-        _id: ID
-        accesscode: String!
-        isUsed: Boolean!
-        userId: User
-    }
-
     type User {
         _id: ID
-        accesscode: AccessCode!
-        username: String
         email: String!
+        username: String!
         userAnalytics: [UserInteraction]
     }
 

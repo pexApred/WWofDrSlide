@@ -1,65 +1,36 @@
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
-    mutation login($username: String, $email: String, $password: String!) {
-        login(username: $username, email: $email, password: $password) {
+    mutation login($username: String!, $password: String!) {
+        login(username: $username, password: $password) {
             token
             user {
                 _id
                 username
-                email
             }
         }
     }
 `;
 
 export const CREATE_USER = gql`
-    mutation createUser($accesscode: String!, $username: String, $email: String, $password: String!) {
-        createUser(accesscode: $accesscode, username: $username, email: $email, password: $password) {
+    mutation createUser($email: String!, $username: String!, $password: String!) {
+        createUser(email: $email, username: $username, password: $password) {
             token
             user {
                 _id
-                username
                 email
+                username
             }
         }
     }
 `;
 
 export const UPDATE_PROFILE = gql`
-    mutation updateProfile($userId: ID!, $username: String, $email: String, $password: String) {
-        updateProfile(userId: $userId, username: $username, email: $email, password: $password) {
+    mutation updateProfile($userId: ID!, $email: String, $username: String, $password: String) {
+        updateProfile(userId: $userId, email: $email, username: $username, password: $password) {
             _id
-            username
             email
-        }
-    }
-`;
-
-export const LOGOUT_USER = gql`
-    mutation logout {
-        logout
-    }
-`;
-
-export const USE_ACCESSCODE = gql`
-    mutation useAccessCode($_id: ID!) {
-        useAccessCode(_id: $_id) {
-            _id
-            isUsed
-        }
-    }
-`;
-
-export const ASSIGN_ACCESSCODE = gql`
-    mutation assignAccessCode($userId: ID!, $accessCodeId: ID!) {
-        assignAccessCode(userId: $userId, accessCodeId: $accessCodeId) {
-            _id
-            email 
-            accesscode {
-                _id
-                accesscode
-            }
+            username
         }
     }
 `;

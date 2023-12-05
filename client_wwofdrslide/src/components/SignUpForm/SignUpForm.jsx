@@ -1,64 +1,50 @@
 import React, { useState, useContext } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import AuthService from '../../utils/auth';
+import { AuthContext }  from '../../utils/Context';
 import { CREATE_USER } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import Context from '../../utils/Context';
 
 const SignUpForm = ({ setShowModal }) => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({
-    accesscode: '',
-    email: '',
+    email:'',
+    username: '',
     password: ''
   });
-  // set state for form validation
   const [validated, setValidated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
   const [createUser, { error }] = useMutation(CREATE_USER);
-
+  
+  const { setLoggedIn, setUser } = useContext(AuthContext);
   const navigate = useNavigate()
-  const { setLoggedIn } = useContext(Context);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-  // submit signup form
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      // event.preventDefault();
+    if (!form.checkValidity()) {
       event.stopPropagation();
       return;
     }
     setValidated(true);
 
     try {
-      const { data } = await createUser({
-        variables: { ...userFormData }
-      });
+      const { data } = await createUser({ variables: { ...userFormData } });
 
-      if (!data) {
-        throw new Error('Something went wrong!');
+      if (data && data.createUser) {
+        setUser(data.createUser.user); 
+        setLoggedIn(true); 
+        setShowModal(false);
+        navigate('/profile');
       }
-      AuthService.login(data.createUser.token);
-      navigate('/');
-      setLoggedIn(true);
-      setShowModal(false);
-
-      // setUserFormData({
-      //   accesscode: '',
-      //   email: '',
-      //   password: '',
-      // });
     } catch (err) {
       console.error(err);
-      // setShowAlert(true);
+      setShowAlert(true);
     }
   };
 
@@ -66,35 +52,36 @@ const SignUpForm = ({ setShowModal }) => {
     <>
       {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        {error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>}
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='accesscode'>AccessCode</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='ex. ABC123'
-            name='accesscode'
-            onChange={handleInputChange}
-            value={userFormData.accesscode}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>AccessCode is required!</Form.Control.Feedback>
-        </Form.Group>
+      {error && (
+          <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+            Something went wrong with your signup!
+          </Alert>
+        )}
 
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Your email address'
+            type='text'
+            placeholder='Your email'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
             required
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label htmlFor='username'>Username</Form.Label>
+          <Form.Control
+            type='username'
+            placeholder='Your username'
+            name='username'
+            onChange={handleInputChange}
+            value={userFormData.username}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className='mb-3'>
@@ -110,7 +97,7 @@ const SignUpForm = ({ setShowModal }) => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.accesscode && userFormData.email && userFormData.password)}
+          disabled={!(userFormData.username && userFormData.password)}
           type='submit'
           variant='success'>
           Submit

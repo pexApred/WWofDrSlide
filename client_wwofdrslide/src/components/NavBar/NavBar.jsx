@@ -4,20 +4,17 @@ import { Navbar, Nav, Container, Modal, Tab, Dropdown, ButtonGroup, Button } fro
 import SignUpForm from '../SignUpForm/SignUpForm';
 import LoginForm from '../LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../../utils/auth';
-import Context from '../../utils/Context';
+import { AuthContext } from '../../utils/Context';
 import { QUERY_RIDDLES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
-import { useMutation, useApolloClient } from '@apollo/client';
-import { LOGOUT_USER } from '../../utils/mutations';
+import { useApolloClient } from '@apollo/client';
 import './NavBar.css';
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const { loggedIn, setLoggedIn } = useContext(Context);
+  const { loggedIn, setLoggedIn, setUser } = useContext(AuthContext);
   const { loading, error, data } = useQuery(QUERY_RIDDLES);
-  const [logoutUser] = useMutation(LOGOUT_USER);
   const client = useApolloClient();
 
   const riddles = loading || error ? [] : data.getRiddles;
@@ -28,6 +25,9 @@ const NavBar = () => {
     } else {
       setShowModal(true);
     }
+    if (error) {
+      console.error("GraphQL Error:", error);
+  }
   };
 
   const handleProfileClick = () => {
@@ -36,6 +36,9 @@ const NavBar = () => {
     } else {
       setShowModal(true);
     }
+    if (error) {
+      console.error("GraphQL Error:", error);
+  }
   };
 
   const handleRiddlesClick = () => {
@@ -44,19 +47,19 @@ const NavBar = () => {
     } else {
       setShowModal(true);
     }
+    if (error) {
+      console.error("GraphQL Error:", error);
+  }
   };
 
-  const handleLogout = async () => {
-    try {
-      await logoutUser();
-      AuthService.logout();
-      client.resetStore();
-      navigate('/');
-      setLoggedIn(false);
-      setShowModal(false);
-    } catch (err) {
-      console.error("Error logging out", err);
-    }
+  const handleLogout = () => {
+    // Clear the user and loggedIn state
+    setUser(null);
+    setLoggedIn(false);
+    // Reset Apollo client store or any other cleanup needed
+    client.resetStore();
+    // Redirect to home or login page
+    navigate('/');
   };
 
   return (
@@ -64,7 +67,7 @@ const NavBar = () => {
       <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            Wonderful World of dR slide
+            The Wonderful World of dR slide
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>

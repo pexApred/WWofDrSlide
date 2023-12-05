@@ -14,10 +14,10 @@ const Footer = () => {
                         <p className='mb-0 cr'>Illustrator: </p>
                     </Col> */}                    
                     <Col xs={12} md={4} className='text-center text-md-right'>
-                        <p className='mb-0 cr'>Copyright © 2023 by Michael Schecter</p>
+                        <p className='mb-0 cr'>© 2023 The Wonderful World of Dr Slide</p>
                     </Col>
                     <Col xs={12} md={4} className='text-center md-0 '>
-                        <p className='mb-0 cr'>Web Design: Emmanuel (Manoli) Lakis</p>
+                        <p className='mb-0 cr'>Web Design: Emmanuel Lakis</p>
                     </Col>
 
 

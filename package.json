@@ -8,21 +8,23 @@
     "start": "cd server && node server.js",
     "install": "cd client_wwofdrslide && npm install && cd ../server && npm install",
     "dev": "concurrently \"cd server && npm run watch\" \"cd client_wwofdrslide && npm start\"",
-    "build": "cd client_wwofdrslide && npm run build",
-    "seed": "cd server && npm run seed"
+    "build": "cd client_wwofdrslide && npm run build"
   },
   "author": "Emmanuel Lakis",
   "license": "ISC",
   "dependencies": {
     "apollo-server-caching": "^3.3.0",
-    "concurrently": "^8.2.0",
+    "axios": "^1.6.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "d3": "^7.8.5",
     "dotenv": "^16.3.1",
     "mongodb": "^6.0.0",
-    "watch": "^1.0.2"
+    "nodemailer": "^6.9.7"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "watch": "^1.0.2"
   }
 }
