@@ -5,6 +5,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+
 const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
 
 const httpLink = createHttpLink({
