@@ -6,6 +6,8 @@ export const QUERY_ME = gql`
             _id
             email
             username
+            resetPasswordToken
+            resetPasswordExpires
         }
     }
 `;

@@ -85,3 +85,12 @@ export const USE_HINT = gql`
         }
     }
 `;
+
+export const FORGOT_PASSWORD = gql`
+    mutation ForgotPassword($email: String!) {
+        forgotPassword(email: $email) {
+            message
+            success
+        }
+    }
+`;

@@ -35,8 +35,8 @@ const LoginForm = ({ setShowModal }) => {
           variables: { ...userFormData },
         });
         if (data.login.token) {
-          setLoggedIn(true); // This sets the loggedIn state in context
-          setUser(data.login.user); // Also set the user data in context
+          setLoggedIn(true); 
+          setUser(data.login.user); 
           await client.resetStore();
           setShowModal(false);
           navigate('/profile');

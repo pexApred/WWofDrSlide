@@ -4,6 +4,8 @@ const { AuthenticationError, ApolloError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
+const sendEmail = require('../services/emailService');
+const crypto = require('crypto');
 
 module.exports = {
     Query: {
@@ -227,6 +229,36 @@ module.exports = {
 
             // Return the updated interaction (or you can fetch it again if needed)
             return userInteraction;
+        },
+        forgotPassword: async (_, { email }) => {
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw new Error('User not found');
+            }
+
+            // Generate a reset token
+            const resetToken = crypto.randomBytes(20).toString('hex');
+            const tokenExpiry = Date.now() + 3600000; // 1 hour from now
+
+            // Save the token and expiry in user's document
+            user.resetPasswordToken = resetToken;
+            user.resetPasswordExpires = tokenExpiry;
+            await user.save();
+
+            const subject = 'Password Reset';
+            const resetLink = 'http://localhost:3001/reset-password';
+            const text = `Please use the following link to reset your password: ${resetLink}`;
+
+            try {
+                await sendEmail(email, subject, text);
+                return {
+                    message: 'Password reset email sent successfully',
+                    success: true
+                };
+            } catch (error) {
+                console.error('Failed to send email:', error);
+                throw new Error('Failed to send password reset email');
+            }
         }
 
 
