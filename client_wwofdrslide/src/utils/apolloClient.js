@@ -3,7 +3,7 @@ import {
     InMemoryCache,
     createHttpLink
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+// import { setContext } from '@apollo/client/link/context';
 
 
 const graphqlEndpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT
@@ -13,19 +13,19 @@ const httpLink = createHttpLink({
     credentials: 'include'
 });
 
-const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem('id_token');
+// const authLink = setContext((_, { headers }) => {
+//     const token = localStorage.getItem('id_token');
 
-    return {
-        headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : '',
-        },
-    };
-});
+//     return {
+//         headers: {
+//             ...headers,
+//             authorization: token ? `Bearer ${token}` : '',
+//         },
+//     };
+// });
 
 const client = new ApolloClient({
-    link: authLink.concat(httpLink),
+    link: httpLink,
     cache: new InMemoryCache(),
 });
 

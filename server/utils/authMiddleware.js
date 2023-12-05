@@ -50,6 +50,7 @@ const config = require('../config/config');
 
 function authMiddleware(req, res, next) {
     const token = req.cookies?.auth_token;
+    console.log("Received token in authMiddleware:", token); 
     if (!token) {
         console.log("No token found in cookies");
         return next(); // Continue without setting req.user
@@ -57,6 +58,7 @@ function authMiddleware(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, config.JWT_SECRET);
+        console.log("Decoded token in authMiddleware:", decoded);
         req.user = decoded;
         next();
     } catch (error) {

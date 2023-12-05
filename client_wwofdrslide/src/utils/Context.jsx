@@ -22,12 +22,15 @@ export const ContextProvider = ({ children }) => {
     },
     onError: (error) => {
       console.error("Error loading user data:", error);
+      console.log(error.graphQLErrors);
+      console.log(error.networkError);
       setLoggedIn(false);
       setUser(null);
     },
   });
 
   useEffect(() => {
+    console.log("Query Data:", data); 
     if (!loading) {
         if (data && data.me) {
           setUser(data.me);
