@@ -19,7 +19,7 @@ const server = new ApolloServer({
   },
 });
 
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001/graphql', 'https://studio.apollographql.com', 'https://wwofdrslide-0072af6d23f0.herokuapp.com/','https://main--effervescent-mochi-51d9a5.netlify.app/', 'https://thewonderfulworldofdrslide.com'];
+const allowedOrigins = ['http://localhost:3000', 'https://studio.apollographql.com','https://main--effervescent-mochi-51d9a5.netlify.app/', 'https://thewonderfulworldofdrslide.com', 'https://www.thewonderfulworldofdrslide.com'];
 
 const corsOptions = {
   origin: allowedOrigins,
