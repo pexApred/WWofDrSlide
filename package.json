@@ -13,6 +13,7 @@
   "author": "Emmanuel Lakis",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "apollo-server-caching": "^3.3.0",
     "axios": "^1.6.2",
     "cookie-parser": "^1.4.6",
