@@ -30,7 +30,8 @@ export const ContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    console.log("Query Data:", data); 
+    console.log("Query Data in React Component:", data);
+    console.log("Query Error in React Component:", error);
     if (!loading) {
         if (data && data.me) {
           setUser(data.me);
