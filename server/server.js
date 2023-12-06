@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app, cors: false });
+  server.applyMiddleware({ app, path: '/graphql',cors: false });
 
   connectDatabase();
 
