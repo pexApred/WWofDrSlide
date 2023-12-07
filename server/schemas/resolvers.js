@@ -10,17 +10,14 @@ const crypto = require('crypto');
 module.exports = {
     Query: {
         me: async (parent, args, context) => {
-            console.log("Context.user in 'me' resolver:", context.user);
             if (!context.user) {
                 throw new AuthenticationError('Not logged in!');
             }
             const userId = context.user.data._id;
             try {
                 const user = await User.findById(userId);
-                console.log("User found in 'me' resolver:", user);
                 return user;
             } catch (err) {
-                console.error("Error in 'me' resolver:", err); 
                 throw new AuthenticationError('Something went wrong with finding myself!');
             }
         },
@@ -68,7 +65,6 @@ module.exports = {
                 throw new AuthenticationError("Wrong password!");
             }
             const { accessToken, refreshToken } = signToken(user);
-            console.log("Tokens in login mutation:", { accessToken, refreshToken });
             if (context.res) {
                 context.res.cookie('auth_token', accessToken, {
                     httpOnly: true,
@@ -84,7 +80,6 @@ module.exports = {
                 console.error('Response object is undefined in context');
                 throw new ApolloError('Internal server error');
             }
-            console.log("Attempting to set cookies in login mutation");
             return { token: accessToken, user };
         },
         createUser: async (parent, { email, username, password }, context) => {

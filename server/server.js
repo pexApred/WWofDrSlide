@@ -55,6 +55,5 @@ const startApolloServer = async () => {
     console.log(`Server listening on localhost:${config.PORT}`);
   })
 };
-console.log("Starting Apollo Server...");
 
 startApolloServer();

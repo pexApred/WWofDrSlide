@@ -12,34 +12,45 @@ export const AuthContext = createContext({
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isUserChecked, setIsUserChecked] = useState(false);
   const { data, loading, error } = useQuery(QUERY_ME, {
     fetchPolicy: "network-only",
+    skip: !isUserChecked,
     onCompleted: (data) => {
       if (data && data.me) {
         setUser(data.me);
         setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+        setUser(null);
       }
+      setIsUserChecked(true);
     },
     onError: (error) => {
-      console.error("Error loading user data:", error);
-      console.log(error.graphQLErrors);
-      console.log(error.networkError);
       setLoggedIn(false);
       setUser(null);
+      setIsUserChecked(true);
     },
   });
 
   useEffect(() => {
-    console.log("Query Data in React Component:", data);
-    console.log("Query Error in React Component:", error);
-    if (!loading) {
-        if (data && data.me) {
-          setUser(data.me);
-          setLoggedIn(true);
-        } else if (error) {
-          console.error("Error fetching user data:", error);
-        }
+    if (loading) {
+      return;
     }
+    if (data && data.me) {
+      setUser(data.me);
+      setLoggedIn(true);
+    }
+    if (error) {
+    }
+    // if (!loading) {
+    //     if (data && data.me) {
+    //       setUser(data.me);
+    //       setLoggedIn(true);
+    //     } else if (error) {
+    //       console.error("Error fetching user data:", error);
+    //     }
+    // }
   }, [data, loading, error]);
 
   return (

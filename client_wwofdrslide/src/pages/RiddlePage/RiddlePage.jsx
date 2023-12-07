@@ -9,14 +9,14 @@ import { QUERY_ME } from "../../utils/queries";
 
 const RiddlePage = () => {
     const { id } = useParams();
-    const { data: userData } = useQuery(QUERY_ME);
+    const { data: userData, loading } = useQuery(QUERY_ME);
     const navigate = useNavigate();
     
     useEffect(() => {
-        if (!userData) {
+        if (!userData && !loading) {
             navigate("/"); 
         }
-    }, [userData, navigate]);
+    }, [userData, loading, navigate]);
 
     return (
         <div>

@@ -41,16 +41,16 @@ const UserSchema = new Schema({
 
 UserSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
-      const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
     }
-  
-    next();
-  });
 
-  UserSchema.methods.isCorrectPassword = async function (password) {
+    next();
+});
+
+UserSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
-  };
+};
 //   Turn this Virtual into one for analytics of the user
 //   UserSchema.virtual('analytics').get(function () {
 //     return this.userAnalytics.length;

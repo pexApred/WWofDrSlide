@@ -49,8 +49,8 @@ const SpecificRiddle = ({ id }) => {
 
     const loggedInUserId = userData?.me?._id;
 
-    useEffect((id) => {
-        if (loggedInUserId) {
+    useEffect(() => {
+        if (loggedInUserId && id) {
             startRiddle({
                 variables: {
                     userId: loggedInUserId,
