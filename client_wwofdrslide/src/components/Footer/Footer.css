@@ -1,34 +1,37 @@
 #footer-container {
-    position: absolute;
     width: 100%;
-    bottom: 0;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: rgb(0, 0, 0);
     z-index: 10;
     display: flex;
   }
 
   .footer {
+    width: 100%;
     align-items: center;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
   }
 
   .cr {
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 1px;
     color: rgb(255, 255, 255, 0.55);
   }
 
   .cr a {
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 1px;
     color: rgb(255, 255, 255, 0.55);
     text-decoration: none;
   }
 
   @media (min-width: 768px) {
+
+    #footer-container {
+      padding: 1rem;
+    }
+
     .footer {
-      bottom: 0;
       display: flex;
       justify-content: space-evenly;
     }
