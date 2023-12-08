@@ -13,7 +13,8 @@
     text-align: center;  
     color: #333;
     background-color: #f9f9f9;
-    padding: 0.5rem; 
+    padding: 1rem 1rem; 
+    padding-bottom: 0;
     border-radius: 8px;
     letter-spacing: 1px;
 }

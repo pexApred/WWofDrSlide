@@ -67,7 +67,7 @@ const NavBar = () => {
       <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            The Wonderful World of dR slide
+            The Wonderful World of Dr. Slide
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
@@ -92,7 +92,7 @@ const NavBar = () => {
               {loggedIn ? (
                 <Nav.Link className='profile' onClick={handleLogout}>Logout</Nav.Link>
               ) : (
-                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Login/SignUp</Nav.Link>
+                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Login|SignUp</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>

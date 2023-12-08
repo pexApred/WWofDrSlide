@@ -58,7 +58,7 @@ const SpecificRiddle = ({ id }) => {
                 }
             });
         }
-    }, [loggedInUserId, startRiddle]);
+    }, [loggedInUserId, startRiddle, id]);
 
     if (loading) return <p>'Loading...'</p>;
     if (error) return <p>`Error! ${error.message}`</p>;

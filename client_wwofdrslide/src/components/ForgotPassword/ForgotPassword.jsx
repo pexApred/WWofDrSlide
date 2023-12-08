@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { FORGOT_PASSWORD } from "../../utils/mutations";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { FORGOT_PASSWORD } from '../../utils/mutations';
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");

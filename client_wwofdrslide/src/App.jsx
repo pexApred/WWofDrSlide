@@ -49,7 +49,7 @@ function App() {
                 element={<h1 className='display-2'>Wrong page!</h1>}
               />
             </Routes>
-            <Footer />
+            <Footer/>
           </Router>
         </div>
       </ContextProvider>

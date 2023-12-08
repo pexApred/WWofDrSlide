@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
-import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_RIDDLES, QUERY_ME } from "../../utils/queries";
-import { UPDATE_PROFILE } from "../../utils/mutations";
-import "./EditProfile.css";
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_RIDDLES, QUERY_ME } from '../../utils/queries';
+import { UPDATE_PROFILE } from '../../utils/mutations';
+import './EditProfile.css';
 
 const EditProfile = () => {
   const { loading: riddlesLoading } = useQuery(QUERY_RIDDLES);

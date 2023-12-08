@@ -18,6 +18,13 @@
     color: rgb(255, 255, 255, 0.55);
   }
 
+  .cr a {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgb(255, 255, 255, 0.55);
+    text-decoration: none;
+  }
+
   @media (min-width: 768px) {
     .footer {
       bottom: 0;
@@ -26,7 +33,14 @@
     }
 
     .cr {
-      font-size: 14px;
+      font-size: 12px;
       letter-spacing: 1px;
+    }
+
+    .cr a {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: rgb(255, 255, 255, 0.55);
+      text-decoration: none;
     }
   }
