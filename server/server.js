@@ -19,7 +19,13 @@ const server = new ApolloServer({
   },
 });
 
-const allowedOrigins = ['http://localhost:3000', 'https://studio.apollographql.com','https://main--effervescent-mochi-51d9a5.netlify.app/','https://main--effervescent-mochi-51d9a5.netlify.app/', 'https://thewonderfulworldofdrslide.com', 'https://www.thewonderfulworldofdrslide.com', 'https://wwofdrslide-0072af6d23f0.herokuapp.com/'];
+const allowedOrigins = [
+  'http://localhost:3000', 
+  'https://studio.apollographql.com', 
+  'https://main--effervescent-mochi-51d9a5.netlify.app/', 
+  'https://thewonderfulworldofdrslide.com', 
+  'https://www.thewonderfulworldofdrslide.com', 
+  'https://wwofdrslide-0072af6d23f0.herokuapp.com/'];
 
 const corsOptions = {
   origin: allowedOrigins,
@@ -34,6 +40,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(authMiddleware);
+
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect('https://' + req.headers.host + req.url);
+  }
+  next();
+});
 
 app.use(routes);
 
