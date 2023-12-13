@@ -6,22 +6,16 @@
     display: flex;
   }
 
-  .footer {
+  #footer-container .footer {
     width: 100%;
     align-items: center;
     line-height: 1.25rem;
   }
 
-  .cr {
+  #footer-container .cr, #footer-container .cr a {
     font-size: 8px;
     letter-spacing: 1px;
-    color: rgb(255, 255, 255, 0.55);
-  }
-
-  .cr a {
-    font-size: 8px;
-    letter-spacing: 1px;
-    color: rgb(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.55);    
     text-decoration: none;
   }
 
@@ -31,20 +25,12 @@
       padding: 1rem;
     }
 
-    .footer {
+    #footer-container .footer {
       display: flex;
       justify-content: space-evenly;
     }
 
-    .cr {
+    #footer-container .cr, .cr a {
       font-size: 12px;
-      letter-spacing: 1px;
-    }
-
-    .cr a {
-      font-size: 12px;
-      letter-spacing: 1px;
-      color: rgb(255, 255, 255, 0.55);
-      text-decoration: none;
     }
   }

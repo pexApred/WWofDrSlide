@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import RiddleStats from "../../components/RiddleStats/RiddleStats";
-import './StatsPage.css';
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
+import './StatsPage.css';
 
 const StatsPage = () => {
     const { data: userData } = useQuery(QUERY_ME);

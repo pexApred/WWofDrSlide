@@ -5,7 +5,7 @@
   min-height: 100vh;
 }
 
-header {
+/* header {
   flex-shrink: 0;
 }
 
@@ -17,4 +17,4 @@ main {
 
 footer {
   flex-shrink: 0;
-}
+} */

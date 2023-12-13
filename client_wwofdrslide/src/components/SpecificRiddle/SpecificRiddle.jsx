@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_RIDDLE, QUERY_ME } from '../../utils/queries';
 import { START_RIDDLE, ATTEMPT_RIDDLE, USE_HINT } from '../../utils/mutations';
+import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
 import './SpecificRiddle.css';
 
 const Notification = ({ message, hint, onClose }) => {
@@ -38,6 +38,7 @@ const SpecificRiddle = ({ id }) => {
     const [userAnswer, setUserAnswer] = useState('');
     const [hintShown, setHintShown] = useState(false);
     const [givenUp, setGivenUp] = useState(false);
+    const [isSolved, setIsSolved] = useState(false);
     const { loading, error, data } = useQuery(QUERY_RIDDLE, {
         variables: { id: id }
     });
@@ -65,8 +66,14 @@ const SpecificRiddle = ({ id }) => {
 
     const checkAnswer = (e) => {
         e.preventDefault();
-        if (data.getRiddle.solutions.includes(userAnswer.trim().toLowerCase())) {
+        const isCorrect = data.getRiddle.solutions.includes(userAnswer.trim().toLowerCase());
+
+        if (isCorrect) {
+
             setNotification('Correct!');
+    
+            // Update the isSolved state to true
+            setIsSolved(true);
         } else {
             setNotification('Incorrect, Try Again');
             setTimeout(() => {

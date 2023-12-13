@@ -16,7 +16,7 @@ const HomePage = () => {
     <>
       <div className="homeContent-wrapper">
         <div className="pHome">
-      <p> Welcome to The Wonderful World of Dr. Slide!<br/> To get started, please create a username and password in order to access the site. From there, you will be able to solve the riddles and see how well you do overall.</p> 
+      <p> Welcome to The Wonderful World of dR slide!<br/> To get started, please create a username and password in order to access the site. From there, you will be able to solve the riddles and see how well you do overall.</p> 
 
 <p>Need help? You can ask for a hint and then try again.<br/> Alas, some are quite difficult so if the answer still evades you then click “I Give Up” to see the solution. It is highly encouraged that you try for a while before giving up as some require quite a lot of thought before the answer may become clear.</p>
 

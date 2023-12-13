@@ -67,7 +67,7 @@ const NavBar = () => {
       <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            The Wonderful World of Dr. Slide
+            The Wonderful World of dR slide
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>

@@ -18,7 +18,7 @@
 .navbar .btn {
     background-color: transparent;
     border: none;
-    color: rgb(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
     /* text-transform: uppercase; */
     /* letter-spacing: 0.1rem; */
     /* font-weight: bold; */

@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" alt="Magnifying Glass Image" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description"
+    content="Explore the educational and interactive world of dR slide. Dive into a universe of riddles, statistics, and engaging content designed to challenge and entertain." />
+  <meta property="og:title" content="The Wonderful World of dR slide" />
+  <meta property="og:description"
+    content="Join dR slide on an educational adventure filled with riddles and learning." />
+  <meta property="og:image" content="%PUBLIC_URL%/social-image.png" />
+  <meta property="og:url" content="https://www.thewonderfulworldofdrslide.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
+  <link rel="apple-touch-icon" sizes="180x180" alt="Magnifying Glass Image" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" alt="Magnifying Glass Image" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" alt="Magnifying Glass Image" href="/favicon-16x16.png">
+  <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -28,12 +33,33 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>The Wonderful World of Dr. Slide</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "The Wonderful World of dR slide",
+        "url": "https://www.thewonderfulworldofdrslide.com",
+        "description": "Explore the educational and interactive world of dR slide. Dive into a universe of riddles, statistics, and engaging content designed to challenge and entertain.",
+        "author": {
+          "@type": "Person",
+          "name": "Emmanuel Lakis",
+          "url": "https://emmanuellakis.dev" 
+          }
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.thewonderfulworldofdrslide.com/search?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+      </script>
+  <title>The Wonderful World of dR slide</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -43,5 +69,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

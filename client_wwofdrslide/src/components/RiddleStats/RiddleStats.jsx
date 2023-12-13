@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_RIDDLES } from '../../utils/queries';
-import './RiddleStats.css';
 import { Col, Row } from 'react-bootstrap';
+import './RiddleStats.css';
 
 const RiddleStats = () => {
     const { loading, error, data } = useQuery(QUERY_RIDDLES, {
