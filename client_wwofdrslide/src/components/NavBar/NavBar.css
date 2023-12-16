@@ -1,43 +1,41 @@
-/* nav .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    background-color: rgb(44, 37, 37);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-} */
-
 .navbar {
-    /* position: relative; */
-    background-color: rgb(44, 37, 37);
+    background-color: rgba(62,78,66,1);
     padding: 0.5rem 1rem;
+    color: white;
+}
+
+.text-em {
+    font-size: larger;
 }
 
 .navbar .btn {
     background-color: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.55);
-    /* text-transform: uppercase; */
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
     /* letter-spacing: 0.1rem; */
     /* font-weight: bold; */
-    padding: 8px;
+    padding: 5px;
     border-radius: 0;
 }
 
 .btnSplit {
     align-self: center;
-    width: 100%;
+    max-width: 100%;
 }
 
 .btnSplit:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 .navbar .btn:hover {
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .profile {
+    color: white;
+    text-transform: uppercase;
 }
 
 .navbar .profile:hover {
@@ -47,26 +45,26 @@
 }
 
 .navbar .dropdown-menu {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.navbar .navbar-brand {
-    /* width: 100%;
-    color: rgb(255, 255, 255);*/
-    /* text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-weight: bold; */
-    white-space: nowrap;
-    font-size: 1.4rem;
+    max-height: 2.5rem;
+    overflow-y: auto;    
+    min-width: 3rem;
+    border-radius: 0;
     margin: 0;
 }
 
-.navbar-brand:hover {
-    color: rgb(255, 255, 255);
-    background-color: transparent;
+.navbar .dropdown-menu .dropdown-item {
+    padding: 0 0 0 .75rem;
 }
+
+.navbar .navbar-brand {
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 1.12rem;
+    /* margin-left: 1rem; */
+}
+
+
 
 .navbar .navbar-nav {
     /* display: flex;
@@ -76,19 +74,32 @@
     margin-bottom: 0;
 }
 
+.navbar-toggler {
+    border-color: white;
+    padding: 0.25rem;
+}
+
+.navbar-toggler-icon {
+    filter: invert(100%);
+    color: white;
+}
+
 @media (min-width: 768px) {
+    .navbar {
+        padding: 2.5rem 1rem;
+    }
     .navbar .navbar-brand {
         /* font-size: 2rem; */
-        width: 100%;
+        /* width: 100%; */
         color: rgb(255, 255, 255);
         text-decoration: none;
         text-transform: uppercase;
         letter-spacing: .5rem;
-        font-weight: bold;
+        padding-left: 1rem;
+        /* font-weight: bold; */
     }
 
-    .navbar {
-        position: flex;
-        
+    .navbar .profile {
+        align-items: right;
     }
 }

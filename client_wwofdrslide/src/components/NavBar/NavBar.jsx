@@ -64,12 +64,13 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar className='navbar' bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
+      <Navbar className='navbar' expand='lg'>
+        {/* <Container fluid> */}
           <Navbar.Brand as={Link} to='/'>
-            The Wonderful World of dR slide
+            {/* The Wonderful World of dR slide */}
+            <strong class='text-em'>T</strong>he <strong class='text-em'>W</strong>onderful <strong class='text-em'>W</strong>orld of d<strong class='text-em'>R</strong> slide
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
+          <Navbar.Toggle aria-controls='navbar'/>
           <Navbar.Collapse id='navbar'>
             <Nav className='mr-auto'>
               {loggedIn && (
@@ -92,11 +93,11 @@ const NavBar = () => {
               {loggedIn ? (
                 <Nav.Link className='profile' onClick={handleLogout}>Logout</Nav.Link>
               ) : (
-                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Login|SignUp</Nav.Link>
+                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Enter</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
-        </Container>
+        {/* </Container> */}
       </Navbar>
       <Modal
         size='lg'

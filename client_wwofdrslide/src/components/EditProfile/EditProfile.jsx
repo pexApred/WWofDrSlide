@@ -66,7 +66,7 @@ const EditProfile = () => {
       <Col sm={8}>
         <div className="profile-section text-center">
           <div className="profile-image">
-            <img src="https://via.placeholder.com/150" alt="User Profile Image" />
+            <img src="https://via.placeholder.com/150" alt="User Profile" />
           </div>
           {/* <h4>
                         Email:{' '}

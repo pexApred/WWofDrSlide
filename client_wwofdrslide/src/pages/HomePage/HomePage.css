@@ -5,18 +5,36 @@
     justify-content: center;
 }
 
+.book-cover {
+    max-width: 90%;
+    height: auto;
+    padding-top: 1rem;
+    border-radius: 8px 8px 0 0;
+}
+
 .pHome {
-    font-size: 11px;    
+    font-size: 11px;  
+    font-weight: 400;  
     line-height: 1.8;
     margin: 0.5rem 0;
-    width: 100%;
-    text-align: center;  
-    color: #333;
-    background-color: #f9f9f9;
+    max-width: 90%;
+    text-align: left;  
+    color: rgba(101,101,68,255);
+    background-color: rgba(101,101,68,0.1);
     padding: 1rem 1rem; 
-    padding-bottom: 0;
-    border-radius: 8px;
+    margin-top: 0;
+    border-radius: 8px 8px 0 0;
     letter-spacing: 1px;
+}
+
+.headings {
+    font-weight: 600;
+    /* font-size: 12px; */
+}
+
+.text-b {
+    font-size: 13px;
+    font-weight: 900;
 }
 
 @media (min-width: 600px) {
@@ -36,10 +54,11 @@
         /* margin-left: 4rem; */
         /* margin-right: 0; */
     }
-
-    .flipBook {
+    /* .flipBook {
         max-width: 50%;
-        /* margin-right: 4rem; */
+    } */
+    .book-cover {
+        max-width: 50%;
     }
 }
 
@@ -58,5 +77,8 @@
         padding: 0; */
         /* margin-left: 4rem; */
         /* margin-right: 0; */
+    }
+    .book-cover {
+        max-width: 30%;
     }
 }

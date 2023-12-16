@@ -1,26 +1,52 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_RIDDLES } from "../../utils/queries";
-import FlipBook from "../../components/FlipBook/FlipBook";
+// import FlipBook from "../../components/FlipBook/FlipBook";
 import "./HomePage.css";
 
 const HomePage = () => {
-  const { loading, error, data } = useQuery(QUERY_RIDDLES);
+  const { loading, error } = useQuery(QUERY_RIDDLES);
 
   if (loading) return <p>'Loading...'</p>;
   if (error) return <p>Error! {error.message}</p>;
 
-  const images = data.getRiddles.map((riddle) => riddle.background_image);
+  // const images = data.getRiddles.map((riddle) => riddle.background_image);
 
   return (
     <>
       <div className="homeContent-wrapper">
+      <img
+          src="../../cover dr2.jpeg"
+          alt="Book Cover"
+          className="book-cover"
+        ></img>
         <div className="pHome">
-      <p> Welcome to The Wonderful World of dR slide!<br/> To get started, please create a username and password in order to access the site. From there, you will be able to solve the riddles and see how well you do overall.</p> 
+          <p>
+            <em className="headings">Welcome to <strong className="text-b">T</strong>HE <strong>W</strong>ONDERFUL<strong>W</strong>ORLD OF d<strong>R</strong> SLIDE!</em>
+            <br /> To get started, please create a username and password in
+            order to access the site. From there, you will be able to solve the
+            riddles and see how well you do overall.
+          </p>
 
-<p>Need help? You can ask for a hint and then try again.<br/> Alas, some are quite difficult so if the answer still evades you then click “I Give Up” to see the solution. It is highly encouraged that you try for a while before giving up as some require quite a lot of thought before the answer may become clear.</p>
+          <p>
+            <em className="headings">
+              Need help? You can ask for a hint and then try again.
+            </em>
+            <br /> Alas, some are quite difficult so if the answer still evades
+            you then click “I Give Up” to see the solution. It is highly
+            encouraged that you try for a while before giving up as some require
+            quite a lot of thought before the answer may become clear.
+          </p>
 
-<p>Are you amongst the best of the best?<br/>On this site, you will also be able to see your own personal statistics with regard to your success rate on the riddles.  Your username will proudly be displayed on the Leader Board for all to see. Regardless of your success, please enjoy the process and comfort in knowing you are exercising your brain!</p>
+          <p>
+            <em className="headings">Are you amongst the best of the best?</em>
+            <br />
+            On this site, you will also be able to see your own personal
+            statistics with regard to your success rate on the riddles. Your
+            username will proudly be displayed on the Leader Board for all to
+            see. Regardless of your success, please enjoy the process and
+            comfort in knowing you are exercising your brain!
+          </p>
           {/* <p>
             Welcome to The Wonderful World of Dr. Slide!
             <br />
@@ -42,7 +68,7 @@ const HomePage = () => {
             see. Regardless of your success, please enjoy the process and
             comfort in knowing you are exercising your brain.
           </p> */}
-          
+
           {/* <p>Welcome to The Wonderful World of Dr. Slide!</p>
           <p>
             Embark on a Riddle Journey with Your Own Book! Purchase Dr.
@@ -67,7 +93,12 @@ const HomePage = () => {
 
           <p>Ready to test your wit? Let's solve some riddles!</p> */}
         </div>
-        <FlipBook className="flipBook" images={images} />
+        {/* <img
+          src="../../cover dr2.jpeg"
+          alt="Book Cover"
+          className="book-cover"
+        ></img> */}
+        {/* <FlipBook className="flipBook" images={images} /> */}
       </div>
     </>
   );
