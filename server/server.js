@@ -50,7 +50,6 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client_wwofdrslide/build')));
   app.get('*', (req, res) => {

@@ -12,11 +12,12 @@ export const AuthContext = createContext({
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isUserChecked, setIsUserChecked] = useState(false);
   const { data, loading, error } = useQuery(QUERY_ME, {
     fetchPolicy: "network-only",
-    skip: !isUserChecked,
-    onCompleted: (data) => {
+  });
+
+  useEffect(() => {
+    if (!loading) {
       if (data && data.me) {
         setUser(data.me);
         setLoggedIn(true);
@@ -24,33 +25,7 @@ export const ContextProvider = ({ children }) => {
         setLoggedIn(false);
         setUser(null);
       }
-      setIsUserChecked(true);
-    },
-    onError: (error) => {
-      setLoggedIn(false);
-      setUser(null);
-      setIsUserChecked(true);
-    },
-  });
-
-  useEffect(() => {
-    if (loading) {
-      return;
     }
-    if (data && data.me) {
-      setUser(data.me);
-      setLoggedIn(true);
-    }
-    if (error) {
-    }
-    // if (!loading) {
-    //     if (data && data.me) {
-    //       setUser(data.me);
-    //       setLoggedIn(true);
-    //     } else if (error) {
-    //       console.error("Error fetching user data:", error);
-    //     }
-    // }
   }, [data, loading, error]);
 
   return (

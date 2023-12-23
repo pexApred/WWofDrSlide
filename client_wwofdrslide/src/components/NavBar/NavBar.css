@@ -1,75 +1,70 @@
 .navbar {
-    background-color: rgba(62,78,66,1);
-    padding: 0.5rem 1rem;
+    background-color: rgba(62, 78, 66, 1);
+    padding: 1rem;
     color: white;
-}
-
-.text-em {
-    font-size: larger;
-}
-
-.navbar .btn {
-    background-color: transparent;
-    border: none;
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    /* letter-spacing: 0.1rem; */
-    /* font-weight: bold; */
-    padding: 5px;
-    border-radius: 0;
-}
-
-.btnSplit {
-    align-self: center;
-    max-width: 100%;
-}
-
-.btnSplit:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-.navbar .btn:hover {
-    /* color: rgb(255, 255, 255); */
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navbar .profile {
-    color: white;
-    text-transform: uppercase;
-}
-
-.navbar .profile:hover {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navbar .dropdown-menu {
-    max-height: 2.5rem;
-    overflow-y: auto;    
-    min-width: 3rem;
-    border-radius: 0;
-    margin: 0;
-}
-
-.navbar .dropdown-menu .dropdown-item {
-    padding: 0 0 0 .75rem;
+    margin-right: 0;
 }
 
 .navbar .navbar-brand {
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     white-space: nowrap;
-    font-size: 1.12rem;
-    /* margin-left: 1rem; */
+    font-size: .9rem;
+    margin-right: 0;
+    letter-spacing: .05rem;
 }
 
+.navbar .navbar-brand .text-em {
+    font-size: 1.25rem;
+}
 
+#navbar {
+    justify-content: right;
+    font-size: .75rem;
+}
+
+.navbar .btn {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 8px 0;
+    border-radius: 0;
+    font-size: .75rem;
+}
+
+.navbar .btn:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#dropdown-split-basic {
+    padding-left: 1rem;
+}
+
+.navbar .nav-link {
+    color: white;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .btnSplit .dropdown-menu {
+    max-height: 1rem;
+    overflow-y: auto;
+    min-width: 3rem;
+    border-radius: 0;
+    margin: 0;
+    padding-bottom: 1.9rem;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+    padding: 0 0 0 .75rem;
+    font-size: 1rem;
+}
 
 .navbar .navbar-nav {
-    /* display: flex;
-    align-items: center;
-    justify-content: space-between; */
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -84,22 +79,91 @@
     color: white;
 }
 
-@media (min-width: 768px) {
+.navbar-expand-lg .navbar-nav .nav-link {
+    font-size: .75rem;
+}
+#dropdown-split-basic {
+    padding-right: 1rem;
+    font-size: 1rem;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .navbar {
-        padding: 2.5rem 1rem;
-    }
+        padding: 2rem;
+    }    
+    
     .navbar .navbar-brand {
-        /* font-size: 2rem; */
-        /* width: 100%; */
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: .5rem;
-        padding-left: 1rem;
-        /* font-weight: bold; */
+        letter-spacing: .25rem;
+        padding-left: 2rem;
+        font-size: 2rem;
     }
 
-    .navbar .profile {
-        align-items: right;
+    .navbar .navbar-brand .text-em {
+        font-size: 2.75rem;
+    }
+
+    .navbar-toggler {
+        padding: .5rem;
+    }
+
+    .navbar-toggler-icon {
+        font-size: 2.5rem;
+    }
+
+    #navbar {
+        padding-left: 2rem;
+        font-size: 1.25rem;
+    }
+
+    .navbar .btn {
+        font-size: 1.25rem;
+    }
+
+    #dropdown-split-basic {
+        padding-right: 2rem;
+        font-size: 1.25rem;
+    }
+
+    .navbar .btnSplit .dropdown-menu {
+        padding-bottom: 1.75rem;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .navbar {
+        padding: 3rem;
+    }
+
+    .navbar .navbar-brand {
+        letter-spacing: .5rem;
+        font-size: 1.25rem;
+    }
+
+    .navbar .navbar-brand .text-em {
+        font-size: 2rem;
+    }
+
+    #navbar {
+        justify-content: right;
+        font-size: 1.2rem;
+    }
+
+    #dropdown-split-basic {
+        font-size: 1.2rem;
+    }
+
+    .navbar .btn {
+        padding: 8px 0;
+        font-size: 1.2rem;
+        padding-left: 8px;
+
+    }
+
+    .navbar .btnSplit {
+        margin: 0;
+    }
+
+    .navbar .btnSplit .dropdown-menu {
+        right: 0;
     }
 }

@@ -65,9 +65,9 @@ const EditProfile = () => {
     <Row className="edit-component-container justify-content-center">
       <Col sm={8}>
         <div className="profile-section text-center">
-          <div className="profile-image">
+          {/* <div className="profile-image">
             <img src="https://via.placeholder.com/150" alt="User Profile" />
-          </div>
+          </div> */}
           {/* <h4>
                         Email:{' '}
                         {editMode.email ? (

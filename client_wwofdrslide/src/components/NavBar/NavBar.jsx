@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab, Dropdown, ButtonGroup, Button } from 'react-bootstrap';
+import { Navbar, Nav, Modal, Tab, Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import LoginForm from '../LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../utils/Context';
-import { QUERY_RIDDLES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
+import { QUERY_RIDDLES } from '../../utils/queries';
 import { useApolloClient } from '@apollo/client';
 import './NavBar.css';
 
@@ -52,52 +52,55 @@ const NavBar = () => {
   }
   };
 
-  const handleLogout = () => {
-    // Clear the user and loggedIn state
-    setUser(null);
-    setLoggedIn(false);
-    // Reset Apollo client store or any other cleanup needed
-    client.resetStore();
-    // Redirect to home or login page
-    navigate('/');
+  const handleLogout = async () => {
+    await fetch('/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    .then(() => {
+      setUser(null);
+      setLoggedIn(false);
+      client.resetStore();
+      navigate('/');
+    })
+    .catch(error => {
+      console.error('Logout error:', error);
+    });
   };
 
   return (
     <>
-      <Navbar className='navbar' expand='lg'>
-        {/* <Container fluid> */}
-          <Navbar.Brand as={Link} to='/'>
-            {/* The Wonderful World of dR slide */}
-            <strong class='text-em'>T</strong>he <strong class='text-em'>W</strong>onderful <strong class='text-em'>W</strong>orld of d<strong class='text-em'>R</strong> slide
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar'/>
-          <Navbar.Collapse id='navbar'>
-            <Nav className='mr-auto'>
-              {loggedIn && (
-                <Nav.Link className='profile' onClick={handleProfileClick}>Profile</Nav.Link>
-              )}
-              <Dropdown className='btnSplit' as={Nav.Item}>
-                <Dropdown as={ButtonGroup}>
-                  <Button className='btn' variant="success" onClick={handleRiddlesClick}>Riddles</Button>
-                  <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-                  <Dropdown.Menu>
-                    {riddles.map((riddle) => (
-                      <Dropdown.Item key={riddle.id} onClick={() => handleRiddleSelect(riddle.id)}>
-                        {riddle.id}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
+      <Navbar className='navbar' expand='xl'>
+        <Navbar.Brand as={Link} to='/'>
+          <span className='text-em'>T</span>he <span className='text-em'>W</span>onderful <span className='text-em'>W</span>orld of d<span className='text-em'>R</span> slide
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='navbar'/>
+        <Navbar.Collapse id='navbar'>
+          <Nav className='mr-auto'>
+            {loggedIn ? (
+              <>
+                <Nav.Link className='profile' onClick={handleProfileClick}>My Profile</Nav.Link>
+                <Dropdown className='btnSplit' as={Nav.Item}>
+                  <Dropdown as={ButtonGroup}>
+                    <Button className='btn' variant="success" onClick={handleRiddlesClick}>Solve a Riddle</Button>
+                    <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+                    <Dropdown.Menu>
+                      {riddles.map((riddle) => (
+                        <Dropdown.Item key={riddle.id} onClick={() => handleRiddleSelect(riddle.id)}>
+                          {riddle.id}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Dropdown>
-              </Dropdown>
-              <Nav.Link className='profile' as={Link} to='/statistics'>Statistics</Nav.Link>
-              {loggedIn ? (
-                <Nav.Link className='profile' onClick={handleLogout}>Logout</Nav.Link>
-              ) : (
-                <Nav.Link className='profile' onClick={() => setShowModal(true)}>Enter</Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        {/* </Container> */}
+                <Nav.Link className='profile' as={Link} to='/statistics'>Riddle Insights</Nav.Link>
+                <Nav.Link className='profile' onClick={handleLogout}>Exit</Nav.Link>
+              </>
+            ) : (
+              <Nav.Link className='profile' onClick={() => setShowModal(true)}>Enter</Nav.Link>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
       <Modal
         size='lg'
@@ -110,10 +113,10 @@ const NavBar = () => {
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
                 <Nav.Item>
-                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                  <Nav.Link eventKey='login'>Enter</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                  <Nav.Link eventKey='signup'>Join</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Modal.Title>

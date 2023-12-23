@@ -4,7 +4,7 @@ const config = require('../config/config');
 
 const secret = config.JWT_SECRET;
 const expiration = '24h';
-const refreshTokenExpiration = '7d';
+const refreshTokenExpiration = '365d';
 
 class TokenManager {
   static signToken({ email, username, _id }) {

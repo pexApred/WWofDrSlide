@@ -9,76 +9,73 @@
     max-width: 90%;
     height: auto;
     padding-top: 1rem;
-    border-radius: 8px 8px 0 0;
+    border-radius: 25% 0;
 }
 
 .pHome {
-    font-size: 11px;  
+    font-size: 0.7rem;  
     font-weight: 400;  
     line-height: 1.8;
     margin: 0.5rem 0;
     max-width: 90%;
+    height: auto;
     text-align: left;  
     color: rgba(101,101,68,255);
-    background-color: rgba(101,101,68,0.1);
-    padding: 1rem 1rem; 
+    background-color: rgba(101,101,68,0.2);
+    padding: 1rem; 
     margin-top: 0;
-    border-radius: 8px 8px 0 0;
-    letter-spacing: 1px;
+    border-radius: 0;
 }
 
 .headings {
     font-weight: 600;
-    /* font-size: 12px; */
 }
 
 .text-b {
-    font-size: 13px;
-    font-weight: 900;
+    font-size: .8rem;
 }
 
-@media (min-width: 600px) {
+#last-p {
+    margin-bottom: 0;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
     .homeContent-wrapper {
-        margin-top: 5rem;
-        flex-direction: row;
-        gap: 1rem;
-        /* justify-content: space-around; */
+        margin-top: 2rem;
     }
 
     .pHome {
-        /* flex:1; */
         max-width: 50%;
-        /* font-size: 16px; */
-        letter-spacing: 2px;
         padding: 1rem;
-        /* margin-left: 4rem; */
-        /* margin-right: 0; */
+        font-size: 1rem;
     }
-    /* .flipBook {
-        max-width: 50%;
-    } */
+
     .book-cover {
         max-width: 50%;
     }
 }
 
-@media (min-width: 1024px) {
+@media screen and (min-width: 1025px) {
     .homeContent-wrapper {
-        margin-top: 5rem;
+        margin-top: 2rem;
         flex-direction: row;
-        /* justify-content: space-around; */
+        justify-content: space-around;
+    }
+
+    .headings {
+        font-weight: 500;
+        font-size: 1.5rem;
     }
 
     .pHome {
-        /* flex:1; */
-        /* max-width: 50%; */
-        font-size: 20px;
-        /* letter-spacing: 2px;
-        padding: 0; */
-        /* margin-left: 4rem; */
-        /* margin-right: 0; */
+        max-width: 50%;
+        font-size: 1.25rem;
     }
     .book-cover {
         max-width: 30%;
+    }
+
+    .text-b {
+        font-size: 1.75rem;
     }
 }
