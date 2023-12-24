@@ -1,4 +1,4 @@
-.footer-container{    
+footer {    
     display: flex;
     max-width: 100%;
     padding: 0.5rem;
@@ -10,13 +10,13 @@
     font-size: .8rem;
   }
 
-  .footer-container .footer {
+  footer  .footer {
     width: 100%;
     align-items: center;
     line-height: 1.25rem;
   }
 
-  .footer-container .cr, .footer-container .cr a {
+  footer  .cr,  footer  .cr a {
     font-size: 10px;
     letter-spacing: 1px;
     color: white;    
@@ -26,16 +26,16 @@
 
   @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
 
-    .footer-container {
+    footer {
       padding: 1rem;
     }
 
-    .footer-container .footer {
+    footer  .footer {
       display: flex;
       justify-content: space-evenly;
     }
 
-    .footer-container .cr, .footer-container .cr a {
+    footer  .cr,  footer  .cr a {
       font-size: 12px;
     }
   }
