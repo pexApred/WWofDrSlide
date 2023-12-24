@@ -9,7 +9,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RiddlePage from './pages/RiddlePage/RiddlePage';
 import StatsPage from './pages/StatsPage/StatsPage';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer.jsx';
 import './App.css';
 
 function App() {

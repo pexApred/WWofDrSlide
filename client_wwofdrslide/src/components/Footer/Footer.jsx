@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "./Footer.css";
+import './Footer.css'
 
 const Footer = () => {
   return (
     <>
-      <footer className="footer-container mt-auto ">
+      <footer className="footer-container mt-auto">
           <Row className="footer">
             {/* <Col xs={12} md={4} className="text-center text-md-left md-0">
               <p className="mb-0 cr">Author: Michael H. Schecter, MD</p>
