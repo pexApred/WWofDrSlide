@@ -1,0 +1,48 @@
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: rgba(62, 78, 66, 1);
+    color: white;
+}
+
+.nav-pills .nav-link {
+    color: rgba(62, 78, 66, 1);
+}
+
+.forgot-password {
+    color: rgba(25, 50, 33, 1);
+    font-weight: 600;
+    font-size: .9rem
+}
+
+.signup-link {
+    color: rgba(25, 50, 33, 1);
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.login-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-check {
+    padding-left: 0;
+}
+.form-check-label {
+    padding-left: .2rem;
+}
+
+.join-login {
+    text-align: right;
+}
+
+.signup-link {
+    color: rgba(25, 50, 33, 1);
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    margin: 0;
+}

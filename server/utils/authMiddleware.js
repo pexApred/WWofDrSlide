@@ -4,7 +4,7 @@ const config = require('../config/config');
 function authMiddleware(req, res, next) {
     const token = req.cookies?.auth_token;
     if (!token) {
-        return next(); // Continue without setting req.user
+        return next();
     }
 
     try {

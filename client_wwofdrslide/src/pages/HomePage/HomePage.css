@@ -20,8 +20,8 @@
     max-width: 90%;
     height: auto;
     text-align: left;  
-    color: rgba(101,101,68,255);
-    background-color: rgba(101,101,68,0.2);
+    color: rgba(101,101,68,1);
+    /* background-color: rgba(62,78,66,0); */
     padding: 1rem; 
     margin-top: 0;
     border-radius: 0;

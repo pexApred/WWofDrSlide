@@ -42,7 +42,7 @@
 .specific-riddle-container .specific-riddle-text {
     margin-top: 0;
     font-size: 16px;
-    font-family: 'Cursive', 'Times New Roman', serif;
+    /* font-family: 'Open Sans Condensed, Cursive', 'Times New Roman', serif; */
     line-height: 1.5;
     text-align: center;
     padding: 20px;
@@ -66,11 +66,11 @@
 }
 
 .notification-container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #FFEB3B;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    padding: 0 .5rem;
+    background-color: rgba(252, 227, 74, 1);
     color: black;
     border-radius: 5px;
-    border: 1px solid black;
 }
 
 .correct-style {
@@ -125,13 +125,19 @@
 }
 
 .btn-submit {
-    background-color: green;
+    background-color: rgba(62, 78, 66, 1);
     border: none;
 }
 
 .btn-submit:hover {
-    background-color: green;
+    background-color: rgba(62,78,66,1);
     border: none;
+}
+
+.btn-submit:disabled {
+    color: #666;
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .navigation-buttons {
@@ -147,12 +153,13 @@
 }
 
 .btn-nav {
-    background-color: green;
+    background-color: rgba(62,78,66,1);
     border: none;
 }
 
 .btn-nav:hover {
-    background-color: green;
+    background-color: rgba(91,97,68,1);
+
     border: none;
 }
 

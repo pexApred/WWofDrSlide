@@ -12,9 +12,11 @@ import './NavBar.css';
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
+  const [activeTabKey, setActiveTabKey] = useState('login');
   const navigate = useNavigate();
   const { loggedIn, setLoggedIn, setUser } = useContext(AuthContext);
   const { loading, error, data } = useQuery(QUERY_RIDDLES);
+  const [expanded, setExpanded] = useState(false);
   const client = useApolloClient();
 
   const riddles = loading || error ? [] : data.getRiddles;
@@ -30,6 +32,10 @@ const NavBar = () => {
   }
   };
 
+  const collapseNavbar = () => {
+    setExpanded(false);
+  };
+
   const handleProfileClick = () => {
     if (loggedIn) {
       navigate('/profile');
@@ -39,6 +45,7 @@ const NavBar = () => {
     if (error) {
       console.error("GraphQL Error:", error);
   }
+  collapseNavbar();
   };
 
   const handleRiddlesClick = () => {
@@ -50,6 +57,7 @@ const NavBar = () => {
     if (error) {
       console.error("GraphQL Error:", error);
   }
+  collapseNavbar();
   };
 
   const handleLogout = async () => {
@@ -66,15 +74,16 @@ const NavBar = () => {
     .catch(error => {
       console.error('Logout error:', error);
     });
+    collapseNavbar();
   };
 
   return (
     <>
-      <Navbar className='navbar' expand='xl'>
-        <Navbar.Brand as={Link} to='/'>
+      <Navbar className='navbar' expand='xl' expanded={expanded}>
+        <Navbar.Brand as={Link} to='/' onClick={collapseNavbar}>
           <span className='text-em'>T</span>he <span className='text-em'>W</span>onderful <span className='text-em'>W</span>orld of d<span className='text-em'>R</span> slide
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='navbar'/>
+        <Navbar.Toggle aria-controls='navbar' onClick={() => setExpanded(expanded => !expanded)}/>
         <Navbar.Collapse id='navbar'>
           <Nav className='mr-auto'>
             {loggedIn ? (
@@ -93,7 +102,7 @@ const NavBar = () => {
                     </Dropdown.Menu>
                   </Dropdown>
                 </Dropdown>
-                <Nav.Link className='profile' as={Link} to='/statistics'>Riddle Insights</Nav.Link>
+                <Nav.Link className='profile' as={Link} to='/statistics' onClick={collapseNavbar}>Riddle Insights</Nav.Link>
                 <Nav.Link className='profile' onClick={handleLogout}>Exit</Nav.Link>
               </>
             ) : (
@@ -108,7 +117,7 @@ const NavBar = () => {
         onHide={() => setShowModal(false)}
         aria-labelledby='signup-modal'>
         {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
+        <Tab.Container activeKey={activeTabKey} onSelect={(k) => setActiveTabKey(k)}>
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
@@ -124,7 +133,7 @@ const NavBar = () => {
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='login'>
-                <LoginForm setShowModal={setShowModal} />
+                <LoginForm setShowModal={setShowModal} onShowSignup={() => setActiveTabKey('signup')}/>
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
                 <SignUpForm setShowModal={setShowModal} />
