@@ -22,7 +22,7 @@ const HomePage = () => {
         ></img>
         <div className="pHome">
           <p>
-            <span className="headings">Welcome to <span className="text-b">T</span>HE <span className="text-b">W</span>ONDERFUL <span className="text-b">W</span>ORLD OF d<span className="text-b">R</span> SLIDE!</span>
+            <span className="headings">Welcome to <span className="text-b">T</span>HE <span className="text-b">W</span>ONDERFUL <span className="text-b">W</span>ORLD OF D<span className="text-b">R</span> SLIDE!</span>
             <br /> To get started, please create a username and password in
             order to access the site. From there, you will be able to solve the
             riddles and see how well you do overall.
