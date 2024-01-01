@@ -6,16 +6,14 @@ const Footer = () => {
   return (
     <>
       <footer className="footer-container mt-auto">
-        <div className="footer">
-          <div className="text-center text-md-right">
+          {/* <div className="text-center text-md-right"> */}
             <p className="mb-0 cr">
               © 2023 <span className="text-sz">T</span>he{" "}
               <span className="text-sz">W</span>onderful{" "}
               <span className="text-sz">W</span>orld of d
               <span className="text-sz">R</span> slide
             </p>
-          </div>          
-        </div>
+          {/* </div>           */}
       </footer>
     </>
   );
