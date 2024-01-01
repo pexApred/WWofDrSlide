@@ -5,7 +5,7 @@
 
 .specific-riddle-difficulty {
     margin-right: 0;
-    padding-right: 0;    
+    padding-right: 0;
     text-align: right;
     font-size: 20px;
     font-weight: bold;
@@ -14,11 +14,12 @@
 
 .specific-riddle-id {
     margin-left: 0;
-    padding-left: 0;    
+    padding-left: 0;
     text-align: left;
     font-size: 20px;
     font-weight: bold;
     color: #888;
+    /* color: rgba(129, 62, 52, 1); */
 }
 
 .specific-riddle-container {
@@ -29,6 +30,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+    /* text-align: center; */
 }
 
 .specific-riddle-container .specific-riddle-image {
@@ -66,17 +68,16 @@
 }
 
 .notification-container {
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
-    padding: 0 .5rem;
     background-color: rgba(252, 227, 74, 1);
     color: black;
     border-radius: 5px;
+    margin: 0 0.25rem;
 }
 
 .correct-style {
     background-color: green;
-    color: #fff;  
-    padding: 5px 10px;
+    color: #fff;
+    padding: 0.5rem;
     border-radius: 5px;
     border: none;
 }
@@ -84,9 +85,10 @@
 .incorrect-style {
     background-color: red;
     color: #fff;
-    padding: 5px 10px;
+    padding: 0.5rem;
     border-radius: 5px;
     border: none;
+    margin: 0;
 }
 
 .hint-confirmation {
@@ -117,11 +119,12 @@
 }
 
 .give-up-btn {
-
+    background-color: red;
 }
 
 .answer-display {
-
+    color: rgba(62, 78, 66, 1);
+    font-weight: 800;
 }
 
 .btn-submit {
@@ -130,7 +133,7 @@
 }
 
 .btn-submit:hover {
-    background-color: rgba(62,78,66,1);
+    background-color: rgba(62, 78, 66, 0.75);
     border: none;
 }
 
@@ -153,13 +156,12 @@
 }
 
 .btn-nav {
-    background-color: rgba(62,78,66,1);
+    background-color: rgba(62, 78, 66, 1);
     border: none;
 }
 
 .btn-nav:hover {
-    background-color: rgba(91,97,68,1);
-
+    background-color: rgba(62, 78, 66, 0.75);
     border: none;
 }
 
@@ -184,7 +186,7 @@
     .navigation-buttons .text-left {
         text-align: left;
     }
-    
+
     .navigation-buttons .text-right {
         text-align: right;
     }
@@ -194,5 +196,15 @@
         padding: 5px 10px;
         font-size: 16px;
         /* margin: 0; */
+    }
+
+    .specific-riddle-container .answer-form {
+        margin: auto 0;
+        text-align: center;
+    }
+
+    .notification-container {
+        text-align: left;
+        margin: 0 0.25rem;
     }
 }

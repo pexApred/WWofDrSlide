@@ -190,7 +190,7 @@ const SpecificRiddle = ({ id }) => {
               fluid
             />
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="answer-form">
             {/* <h1 className="specific-riddle-text">{formattedRiddle}</h1> */}
             <Form className="specific-riddle-form" onSubmit={checkAnswer}>
               <Form.Group
