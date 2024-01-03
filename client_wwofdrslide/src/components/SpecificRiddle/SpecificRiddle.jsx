@@ -73,8 +73,6 @@ const SpecificRiddle = ({ id }) => {
 
     if (isCorrect) {
       setNotification("Correct!");
-
-      // Update the isSolved state to true
       setIsSolved(true);
     } else {
       setNotification("Incorrect, Try Again");
@@ -91,14 +89,9 @@ const SpecificRiddle = ({ id }) => {
       variables: {
         userId: loggedInUserId,
         riddleId: id,
-        isSolved: data.getRiddle.solutions.includes(
-          userAnswer.trim().toLowerCase()
-        ),
-        incorrectAnswers: !data.getRiddle.solutions.includes(
-          userAnswer.trim().toLowerCase()
-        )
-          ? [userAnswer]
-          : [],
+        isSolved: isCorrect,
+        incorrectAnswers: isCorrect ? [] : [userAnswer],
+        attempted: true,
       },
     });
   };
@@ -143,10 +136,6 @@ const SpecificRiddle = ({ id }) => {
     setShowHintConfirmation(true);
   };
 
-  const handleGivenUpClick = () => {
-    setGivenUp(true);
-  };
-
   const displayHint = () => {
     setNotification(data.getRiddle.hint);
     setShowHintConfirmation(false);
@@ -160,19 +149,21 @@ const SpecificRiddle = ({ id }) => {
       },
     });
   };
+  
+  const handleGivenUpClick = () => {
+    setGivenUp(true);
+    setNotification(`Answer: ${data.getRiddle.solutions.join(", ")}`);
 
-  // const paragraphs = data.getRiddle.riddle.split('\\n\\n');
-  // const formattedRiddle = paragraphs.map((paragraph, pIndex) => (
-  //     <div key={pIndex} className='riddle-paragraph'>
-  //         {paragraph.split('\\n').map((line, lIndex) => (
-  //             <div key={lIndex} className='riddle-line'>
-  //                 {line}
-  //                 <br />
-  //             </div>
-  //         ))}
-  //     </div>
-  // ));
-
+    attemptRiddle({
+      variables: {
+        userId: loggedInUserId,
+        riddleId: id,
+        isSolved: false,
+        incorrectAnswers: [],
+        attempted: true,
+      },
+    });
+  };
   return (
     <>
       <div className="id-diff">

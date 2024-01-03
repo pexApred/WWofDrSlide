@@ -63,8 +63,8 @@ export const START_RIDDLE = gql`
 `;
 
 export const ATTEMPT_RIDDLE = gql`
-    mutation attemptRiddle($userId: ID!, $riddleId: String!, $isSolved: Boolean!, $incorrectAnswers: [String]) {
-        attemptRiddle(userId: $userId, riddleId: $riddleId, isSolved: $isSolved, incorrectAnswers: $incorrectAnswers) {
+    mutation attemptRiddle($userId: ID!, $riddleId: String!, $isSolved: Boolean!, $incorrectAnswers: [String], $attempted: Boolean!) {
+       attemptRiddle(userId: $userId, riddleId: $riddleId, isSolved: $isSolved, incorrectAnswers: $incorrectAnswers, attempted: $attempted) {
             user_id
             riddle_id
             isSolved

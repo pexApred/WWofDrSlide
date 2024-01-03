@@ -129,60 +129,64 @@ module.exports = {
             return User.findByIdAndUpdate(args.userId, updates, { new: true });
         },
         startRiddle: async (parent, { userId, riddleId }) => {
-            const user = await User.findOne({ _id: userId });
-            if (!user) {
-                throw new Error("Can't find this user");
-            }
-            const riddle = await Riddle.findOne({ id: riddleId });
-            if (!riddle) {
-                throw new Error("Can't find this riddle");
-            }
-            const userInteraction = await UserInteraction.create({
-                user_id: userId,
-                riddle_id: riddleId,
-                isSolved: false,
-                attempted: false,
-                usedHint: false,
-                timestamp: new Date(),
-                startTime: new Date(),
-                solveTime: null,
-                incorrectAnswers: [],
-                hintsUsed: [],
-                hintUsageTime: null,
-                userFeedback: {
-                    difficultyRating: null,
-                    enjoymentRating: null,
-                },
-                userEngagement: {
-                    visits: 1,
-                    riddlesAttempted: 0,
-                    timeSpent: 0,
-                },
-            });
-            if (!user.interactions) {
-                user.interactions = [];
-            }
-            user.interactions.push(userInteraction._id);
-            await user.save();
+            try {
+                const user = await User.findById({ _id: userId }); const riddle = await Riddle.findOne({ id: riddleId });
+                if (!user || !riddle) {
+                    throw new Error("User or Riddle not found");
+                }
 
-            if (!riddle.interactions) {
-                riddle.interactions = [];
-            }
-            riddle.interactions.push(userInteraction.id);
-            await riddle.save();
+                let interaction = await UserInteraction.findOne({ user_id: userId, riddle_id: riddleId });
 
-            return userInteraction;
+                if (!interaction) {
+                    interaction = await UserInteraction.create({
+                        user_id: userId,
+                        riddle_id: riddleId,
+                        isSolved: false,
+                        attempted: false,
+                        usedHint: false,
+                        timestamp: new Date(),
+                        startTime: new Date(),
+                        solveTime: null,
+                        incorrectAnswers: [],
+                        hintsUsed: [],
+                        hintUsageTime: null,
+                        userFeedback: {
+                            difficultyRating: null,
+                            enjoymentRating: null,
+                        },
+                        userEngagement: {
+                            visits: 1,
+                            riddlesAttempted: 0,
+                            timeSpent: 0,
+                        },
+                    });
+                    riddle.interactions.push(interaction._id);
+                    await riddle.save();
+                }
+
+                return interaction;
+            } catch (error) {
+                console.error('Error in startRiddle:', error);
+                throw new ApolloError('Error starting riddle');
+            }
         },
-        attemptRiddle: async (parent, { userId, riddleId, isSolved, incorrectAnswers }) => {
-            const userInteraction = await UserInteraction.findOne({ user_id: userId, riddle_id: riddleId });
-            if (!userInteraction) {
-                throw new Error("Can't find this user interaction");
+        attemptRiddle: async (parent, { userId, riddleId, isSolved, incorrectAnswers, attempted }) => {
+            try {
+                const userInteraction = await UserInteraction.findOneAndUpdate(
+                    { user_id: userId, riddle_id: riddleId },
+                    { attempted, isSolved, incorrectAnswers },
+                    { new: true, upsert: true }
+                );
+        
+                if (!userInteraction) {
+                    throw new Error("User interaction not found");
+                }
+        
+                return userInteraction;
+            } catch (error) {
+                console.error('Error in attemptRiddle:', error);
+                throw new ApolloError('Error attempting riddle');
             }
-            userInteraction.attempted = true;
-            userInteraction.isSolved = true;
-            userInteraction.incorrectAnswers = incorrectAnswers;
-            await userInteraction.save();
-            return userInteraction;
         },
         useHint: async (parent, { userId, riddleId, hintNumber }) => {
             // Find the existing interaction
