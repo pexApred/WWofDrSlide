@@ -74,7 +74,7 @@
     /* margin: 0 0.25rem; */
 }
 
-.correct-style {
+.notification-container .correct-style {
     background-color: green;
     color: #fff;
     padding: 0.5rem;
@@ -206,5 +206,8 @@
     .notification-container {
         text-align: left;
         margin: 0 0.25rem;
+    }
+    .notification-container .correct-style {
+        margin: 0;
     }
 }

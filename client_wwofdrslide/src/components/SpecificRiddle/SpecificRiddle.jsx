@@ -74,6 +74,7 @@ const SpecificRiddle = ({ id }) => {
     if (isCorrect) {
       setNotification("Correct!");
       setIsSolved(true);
+
     } else {
       setNotification("Incorrect, Try Again");
       setTimeout(() => {
@@ -152,7 +153,7 @@ const SpecificRiddle = ({ id }) => {
   
   const handleGivenUpClick = () => {
     setGivenUp(true);
-    setNotification(`Answer: ${data.getRiddle.solutions.join(", ")}`);
+    // setNotification(`Answer: ${data.getRiddle.solutions.join(", ")}`);
 
     attemptRiddle({
       variables: {
@@ -164,6 +165,7 @@ const SpecificRiddle = ({ id }) => {
       },
     });
   };
+  
   return (
     <>
       <div className="id-diff">
@@ -194,6 +196,7 @@ const SpecificRiddle = ({ id }) => {
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   autoComplete="off"
+                  disabled={givenUp || isSolved}
                 />
                 {notification && (
                   <div className="notification-container">
@@ -208,6 +211,7 @@ const SpecificRiddle = ({ id }) => {
                     className="hint-btn"
                     variant="success"
                     onClick={handleShowHintClick}
+                    disabled={givenUp || isSolved}
                   >
                     SHOW HINT
                   </Button>
@@ -243,10 +247,10 @@ const SpecificRiddle = ({ id }) => {
               )}
               {givenUp && (
                 <div className="answer-display">
-                  Answer: {data.getRiddle.solutions.join(", ")}
+                  Answer: {data.getRiddle.solutions[0]}
                 </div>
               )}
-              <Button className="btn-submit" type="submit" disabled={givenUp}>
+              <Button className="btn-submit" type="submit" disabled={givenUp || isSolved}>
                 SUBMIT
               </Button>
             </Form>
