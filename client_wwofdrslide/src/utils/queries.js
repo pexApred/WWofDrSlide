@@ -80,4 +80,30 @@ export const QUERY_RIDDLE = gql`
     }
 `;
 
+export const QUERY_USER_INTERACTION = gql`
+    query getUserInteraction($userId: ID!, $riddleId: ID!) {
+        getUserInteraction(userId: $userId, riddleId: $riddleId) {
+            user_id
+            riddle_id
+            isSolved
+            attempted
+            usedHint
+            timestamp
+            startTime
+            solveTime
+            incorrectAnswers
+            hintsUsed
+            hintUsageTime
+            userFeedback {
+                difficultyRating
+                enjoymentRating
+            }
+            userEngagement {
+                visits
+                riddlesAttempted
+                timeSpent
+            }   
+        }
+    }
+`;
 

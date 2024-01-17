@@ -6,6 +6,7 @@ const typeDefs = gql`
         user(_id: ID!): User
         getRiddles: [Riddle]
         getRiddle(id: String!): Riddle
+        getUserInteraction(userId: ID!, riddleId: ID!): UserInteraction
     }
 
     type Mutation {

@@ -8,10 +8,10 @@ import "./SpecificRiddle.css";
 
 const Notification = ({ message, hint, onClose }) => {
   useEffect(() => {
-    if (message === "Incorrect Answer! Try Again!") {
+    if (message === "Incorrect Answer, Try Again") {
       const timer = setTimeout(() => {
         onClose();
-      }, 3000);
+      }, 2000);
       return () => clearInterval(timer);
     }
   }, [message, onClose]);
@@ -101,6 +101,8 @@ const SpecificRiddle = ({ id }) => {
     setUserAnswer("");
     setNotification(null);
     setHintShown(false);
+    setGivenUp(false);
+    setIsSolved(false); 
   };
 
   const goToPreviousRiddle = () => {
@@ -199,7 +201,7 @@ const SpecificRiddle = ({ id }) => {
                   disabled={givenUp || isSolved}
                 />
                 {notification && (
-                  <div className="notification-container">
+                  <div>
                     <Notification
                       message={notification}
                       onClose={() => setNotification(null)}
@@ -213,7 +215,7 @@ const SpecificRiddle = ({ id }) => {
                     onClick={handleShowHintClick}
                     disabled={givenUp || isSolved}
                   >
-                    SHOW HINT
+                    HINT
                   </Button>
                 )}
               </Form.Group>
@@ -241,6 +243,7 @@ const SpecificRiddle = ({ id }) => {
                   className="give-up-btn"
                   variant="danger"
                   onClick={handleGivenUpClick}
+                  disabled={isSolved}
                 >
                   I GIVE UP
                 </Button>
@@ -250,7 +253,7 @@ const SpecificRiddle = ({ id }) => {
                   Answer: {data.getRiddle.solutions[0]}
                 </div>
               )}
-              <Button className="btn-submit" type="submit" disabled={givenUp || isSolved}>
+              <Button className="btn-submit" type="submit" disabled={givenUp || isSolved || userAnswer.length === 0}>
                 SUBMIT
               </Button>
             </Form>

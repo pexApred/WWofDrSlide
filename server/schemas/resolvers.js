@@ -48,6 +48,18 @@ module.exports = {
                 throw new ApolloError('Something went wrong with finding a riddle by id!');
             }
         },
+        getUserInteraction: async (parent, { userId, riddleId }) => {
+            try {
+                const interaction = await UserInteraction.findOne({ user_id: userId, riddle_id: riddleId }).populate('user_id').populate('riddle_id');
+                if (!interaction) {
+                    throw new ApolloError('User Interaction not found');
+                }
+                return interaction;
+            } catch (err) {
+                console.error(err);
+                throw new ApolloError('Something went wrong fetching the User Interaction');
+            }
+        },
 
     },
     Mutation: {

@@ -1,13 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_RIDDLES } from "../../utils/queries";
-// import FlipBook from "../../components/FlipBook/FlipBook";
 import "./HomePage.css";
 
 const HomePage = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { loading, error } = useQuery(QUERY_RIDDLES);
 
-  if (loading) return <p>'Loading...'</p>;
+  useEffect(() => {
+    const img = new Image();
+    img.src = "../../cover-dr2.jpeg";
+    img.onload = () => setImageLoaded(true);
+  }, []);
+
+  if (loading || !imageLoaded) return <p className="spinner"></p>;
   if (error) return <p>Error! {error.message}</p>;
 
   // const images = data.getRiddles.map((riddle) => riddle.background_image);
@@ -16,13 +22,14 @@ const HomePage = () => {
     <>
       <div className="homeContent-wrapper">
       <img
-          src="../../cover dr2.jpeg"
+          src="../../cover-dr2.jpeg"
           alt="Book Cover"
           className="book-cover"
         ></img>
+        <div className="book-line"></div>
         <div className="pHome">
           <p>
-            <span className="headings">Welcome to <span className="text-b">T</span>HE <span className="text-b">W</span>ONDERFUL <span className="text-b">W</span>ORLD OF D<span className="text-b">R</span> SLIDE!</span>
+            <span className="headings">Welcome to T<span className="text-b">HE </span>W<span className="text-b">ONDERFUL </span>W<span className="text-b">ORLD OF D</span>R <span className="text-b">SLIDE!</span></span>
             <br /> To get started, please create a username and password in
             order to access the site. From there, you will be able to solve the
             riddles and see how well you do overall.

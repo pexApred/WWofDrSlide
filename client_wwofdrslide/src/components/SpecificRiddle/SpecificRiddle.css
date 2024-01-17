@@ -3,54 +3,48 @@
     justify-content: space-between;
 }
 
-.specific-riddle-difficulty {
+.specific-riddle-difficulty,
+.specific-riddle-id  {
     margin-right: 0;
     padding-right: 0;
-    text-align: right;
-    font-size: 20px;
-    font-weight: bold;
-    color: #888;
-}
-
-.specific-riddle-id {
-    margin-left: 0;
-    padding-left: 0;
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
-    color: #888;
-    /* color: rgba(129, 62, 52, 1); */
+    /* text-align: right; */
+    font-size: 1.5rem;
 }
 
 .specific-riddle-container {
     margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     width: 100%;
     min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    /* text-align: center; */
+    border: 1px solid rgba(62, 78, 66, 1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 .specific-riddle-container .specific-riddle-image {
     max-width: 100%;
     max-height: 400px;
     border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
+    border: 1mm ridge rgba(62, 78, 66, 1);
 }
 
-.specific-riddle-container .specific-riddle-text {
-    margin-top: 0;
-    font-size: 16px;
-    /* font-family: 'Open Sans Condensed, Cursive', 'Times New Roman', serif; */
-    line-height: 1.5;
-    text-align: center;
-    padding: 20px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .specific-riddle-form {
@@ -58,6 +52,10 @@
     flex-direction: column;
     gap: 10px;
     width: 100%;
+}
+
+.specific-riddle-form input[type="text"]:focus {
+    box-shadow: 0 0 10px rgba(62, 78, 66, 1);
 }
 
 .answer-input-group {
@@ -68,18 +66,33 @@
 }
 
 .notification-container {
-    background-color: rgba(252, 227, 74, 1);
-    color: black;
+    align-content: center;
+    color: rgba(62, 78, 66, 1);
     border-radius: 5px;
-    /* margin: 0 0.25rem; */
+    padding: 0 1rem;
+    background-color: rgba(62, 78, 66, .1);
+    box-shadow:        
+    inset 3px 3px 6px rgba(48, 87, 85, 0.5),
+    inset -3px -3px 6px rgba(48, 87, 85, 0.5);
 }
 
-.notification-container .correct-style {
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.correct-style {
     background-color: green;
     color: #fff;
     padding: 0.5rem;
     border-radius: 5px;
     border: none;
+    animation: pulse 1s ease-in-out infinite;
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
 }
 
 .incorrect-style {
@@ -88,7 +101,7 @@
     padding: 0.5rem;
     border-radius: 5px;
     border: none;
-    margin: 0;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 .hint-confirmation {
@@ -101,16 +114,24 @@
 }
 
 .hint-btn {
-    font-size: 12px;
-    background-color: gray;
+    font-size: 16px;
+    background-color: goldenrod;
     border: none;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .hint-btn:hover {
-    font-size: 12px;
-    color: black;
+    background-color: gold ;
+}
+
+.hint-btn:active {
+    background-color: goldenrod!important;
+    transform: scale(0.95);
+}
+
+.hint-btn:focus {
     background-color: gold;
-    border: none;
+    outline: none;
 }
 
 .hint-confirmation button {
@@ -119,7 +140,10 @@
 }
 
 .give-up-btn {
+    border: none;
     background-color: red;
+    letter-spacing: 0.25rem;
+    padding: 0;
 }
 
 .answer-display {
@@ -130,11 +154,23 @@
 .btn-submit {
     background-color: rgba(62, 78, 66, 1);
     border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    letter-spacing: .25rem;
 }
 
 .btn-submit:hover {
     background-color: rgba(62, 78, 66, 0.75);
-    border: none;
+    border: none;    
+    animation: colorPulse 1s infinite;
+}
+
+@keyframes colorPulse {
+    0%, 100% {
+        background-color: rgba(62, 78, 66, 0.75);
+    }
+    50% {
+        background-color: rgba(62, 78, 66, 0.5);
+    }
 }
 
 .btn-submit:disabled {
@@ -158,11 +194,14 @@
 .btn-nav {
     background-color: rgba(62, 78, 66, 1);
     border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-nav:hover {
     background-color: rgba(62, 78, 66, 0.75);
     border: none;
+    transform: scale(1.05);
 }
 
 .riddle-paragraph {
@@ -177,10 +216,7 @@
     .specific-riddle-container .specific-riddle-image {
         max-width: 100%;
         max-height: 500px;
-    }
-
-    .specific-riddle-container .specific-riddle-text {
-        font-size: 18px;
+        margin-bottom: 0;
     }
 
     .navigation-buttons .text-left {
@@ -205,9 +241,9 @@
 
     .notification-container {
         text-align: left;
-        margin: 0 0.25rem;
     }
-    .notification-container .correct-style {
+
+    .correct-style {
         margin: 0;
     }
 }

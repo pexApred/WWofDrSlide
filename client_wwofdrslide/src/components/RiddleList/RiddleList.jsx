@@ -13,7 +13,7 @@ const RiddleList = () => {
 
     return (
         <Container>
-            <h1>Select a Riddle</h1>
+            <h1 className='riddle-list'>Select a Riddle</h1>
             <Row>
                 {data.getRiddles.map((riddle) => (
                     <Col xs={4} sm={3} md={3} lg={2} key={riddle.id}>
