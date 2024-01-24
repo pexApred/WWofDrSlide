@@ -7,8 +7,7 @@
 
 @keyframes zoomIn {
     from { transform: scale(0); }
-    to { transform: scale(1);
-    rotate: 360deg; }
+    to { transform: scale(1); }
 }
 .book-cover {
     max-width: 90%;
@@ -34,7 +33,7 @@
     padding: 0.5rem; 
     margin: 1rem;
     border-radius: 8px;
-    animation: fadeIn 4s ease-in-out;
+    animation: fadeIn 2s ease-in-out;
     box-shadow: 
     0 1px 3px rgba(0, 0, 0, 0.12), 
     0 3px 6px rgba(0, 0, 0, 0.16), 
@@ -65,7 +64,7 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    animation: spin .01s linear infinite;
+    /* animation: spin 1s linear infinite; */
 }
 
 @keyframes spin {
@@ -114,12 +113,12 @@
         animation: fadeIn 4s ease-in-out;
     }
     .book-cover {
-        max-width: 585px;
+        max-width: 550px;
         padding-top: 0;
         border-radius: 8px;
         box-shadow: 
-        -5px 0 12px rgba(0, 0, 0, 0.12), /* Left shadow */
-        0 -5px 12px rgba(0, 0, 0, 0.16), /* Top shadow */
+        -5px 0 12px rgba(0, 0, 0, 0.12),
+        0 -5px 12px rgba(0, 0, 0, 0.16),
         0 5px 12px rgba(0, 0, 0, 0.2),
         inset 5px 0 2100px -3px rgba(0, 0, 0, 0.2);
         animation: fadeIn 4s ease-in-out;
@@ -128,7 +127,7 @@
 
     .book-line {
         content: '';
-        height: 570px;
+        height: 540px;
         width: 5px; /* Adjust the width as needed */
         background: linear-gradient(
             to bottom, 

@@ -38,17 +38,14 @@ export const UPDATE_PROFILE = gql`
 export const START_RIDDLE = gql`
     mutation startRiddle($userId: ID!, $riddleId: String!) {
         startRiddle(userId: $userId, riddleId: $riddleId) {
-            user_id
-            riddle_id
+            userId
+            riddleId
             isSolved
             attempted
             usedHint
-            timestamp
-            startTime
-            solveTime
+            givenUp
             incorrectAnswers
             hintsUsed
-            hintUsageTime
             userFeedback {
                 difficultyRating
                 enjoymentRating
@@ -63,13 +60,14 @@ export const START_RIDDLE = gql`
 `;
 
 export const ATTEMPT_RIDDLE = gql`
-    mutation attemptRiddle($userId: ID!, $riddleId: String!, $isSolved: Boolean!, $incorrectAnswers: [String], $attempted: Boolean!) {
-       attemptRiddle(userId: $userId, riddleId: $riddleId, isSolved: $isSolved, incorrectAnswers: $incorrectAnswers, attempted: $attempted) {
-            user_id
-            riddle_id
+    mutation attemptRiddle($userId: ID!, $riddleId: String!, $isSolved: Boolean!, $incorrectAnswers: [String], $attempted: Boolean!, $givenUp: Boolean!, $usedHint: Boolean!) {
+       attemptRiddle(userId: $userId, riddleId: $riddleId, isSolved: $isSolved, incorrectAnswers: $incorrectAnswers, attempted: $attempted, givenUp: $givenUp, usedHint: $usedHint) {
+            userId
+            riddleId
             isSolved
             attempted
             usedHint
+            givenUp
             incorrectAnswers
         }
     }
@@ -78,8 +76,8 @@ export const ATTEMPT_RIDDLE = gql`
 export const USE_HINT = gql`
     mutation useHint($userId: ID!, $riddleId: String!, $hintNumber: Int!) {
         useHint(userId: $userId, riddleId: $riddleId, hintNumber: $hintNumber) {
-            user_id
-            riddle_id
+            userId
+            riddleId
             usedHint
             hintsUsed
         }

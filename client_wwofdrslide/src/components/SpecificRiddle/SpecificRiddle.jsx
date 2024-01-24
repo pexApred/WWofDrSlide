@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_RIDDLE, QUERY_ME } from "../../utils/queries";
+import { QUERY_RIDDLE, QUERY_ME, QUERY_RIDDLES } from "../../utils/queries";
 import { START_RIDDLE, ATTEMPT_RIDDLE, USE_HINT } from "../../utils/mutations";
 import { Container, Row, Col, Image, Form, Button } from "react-bootstrap";
 import "./SpecificRiddle.css";
@@ -32,16 +32,27 @@ const SpecificRiddle = ({ id }) => {
   const [showHintConfirmation, setShowHintConfirmation] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [hintShown, setHintShown] = useState(false);
-  const [givenUp, setGivenUp] = useState(false);
+  const [userGivenUp, setGivenUp] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
+  const [notification, setNotification] = useState(null);
+  const [uiHintShown, setUIHintShown] = useState(false);
+  const [uiGivenUp, setUIGivenUp] = useState(false);
+  const [uiIsSolved, setUIIsSolved] = useState(false);
+
   const { loading, error, data } = useQuery(QUERY_RIDDLE, {
     variables: { id: id },
   });
   const { data: userData } = useQuery(QUERY_ME);
-  const [notification, setNotification] = useState(null);
-  const [startRiddle] = useMutation(START_RIDDLE);
-  const [attemptRiddle] = useMutation(ATTEMPT_RIDDLE);
-  const [hintMutation] = useMutation(USE_HINT);
+
+  const [startRiddle] = useMutation(START_RIDDLE, {
+    refetchQueries: [{ query: QUERY_RIDDLES }, { query: QUERY_ME }],
+  });
+  const [attemptRiddle] = useMutation(ATTEMPT_RIDDLE, {
+    refetchQueries: [{ query: QUERY_RIDDLES }, { query: QUERY_ME }],
+  });
+  const [hintMutation] = useMutation(USE_HINT, {
+    refetchQueries: [{ query: QUERY_RIDDLES }, { query: QUERY_ME }],
+  });
 
   const loggedInUserId = userData?.me?._id;
 
@@ -62,6 +73,20 @@ const SpecificRiddle = ({ id }) => {
     setGivenUp(false);
   }, [id]);
 
+  useEffect(() => {
+    if (data && data.getRiddle && data.getRiddle.interactions) {
+      // Find the interaction for the current user
+      const interaction = data.getRiddle.interactions.find(
+        (interaction) => interaction.userId === loggedInUserId
+      );
+      if (interaction) {
+        setIsSolved(interaction.isSolved);
+        setHintShown(interaction.usedHint);
+        setGivenUp(interaction.givenUp);
+      }
+    }
+  }, [data, loggedInUserId, id]);
+
   if (loading) return <p>'Loading...'</p>;
   if (error) return <p>`Error! ${error.message}`</p>;
 
@@ -74,7 +99,7 @@ const SpecificRiddle = ({ id }) => {
     if (isCorrect) {
       setNotification("Correct!");
       setIsSolved(true);
-
+      setUIIsSolved(true);
     } else {
       setNotification("Incorrect, Try Again");
       setTimeout(() => {
@@ -93,6 +118,8 @@ const SpecificRiddle = ({ id }) => {
         isSolved: isCorrect,
         incorrectAnswers: isCorrect ? [] : [userAnswer],
         attempted: true,
+        givenUp: false,
+        usedHint: hintShown,
       },
     });
   };
@@ -102,7 +129,10 @@ const SpecificRiddle = ({ id }) => {
     setNotification(null);
     setHintShown(false);
     setGivenUp(false);
-    setIsSolved(false); 
+    setIsSolved(false);
+    setUIGivenUp(false);
+    setUIHintShown(false);
+    setUIIsSolved(false);
   };
 
   const goToPreviousRiddle = () => {
@@ -142,32 +172,35 @@ const SpecificRiddle = ({ id }) => {
   const displayHint = () => {
     setNotification(data.getRiddle.hint);
     setShowHintConfirmation(false);
-    setHintShown(true);
-
-    hintMutation({
-      variables: {
-        userId: loggedInUserId,
-        riddleId: id,
-        hintNumber: 1,
-      },
-    });
+    setUIHintShown(true);
+    if (!hintShown) {
+      hintMutation({
+        variables: {
+          userId: loggedInUserId,
+          riddleId: id,
+          hintNumber: 1,
+        },
+      });
+    }
   };
-  
+
   const handleGivenUpClick = () => {
-    setGivenUp(true);
-    // setNotification(`Answer: ${data.getRiddle.solutions.join(", ")}`);
-
-    attemptRiddle({
-      variables: {
-        userId: loggedInUserId,
-        riddleId: id,
-        isSolved: false,
-        incorrectAnswers: [],
-        attempted: true,
-      },
-    });
+    setUIGivenUp(true);
+    if (!userGivenUp) {
+      attemptRiddle({
+        variables: {
+          userId: loggedInUserId,
+          riddleId: id,
+          isSolved: false,
+          incorrectAnswers: [],
+          attempted: true,
+          givenUp: true,
+          usedHint: hintShown,
+        },
+      });
+    }
   };
-  
+
   return (
     <>
       <div className="id-diff">
@@ -198,7 +231,7 @@ const SpecificRiddle = ({ id }) => {
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   autoComplete="off"
-                  disabled={givenUp || isSolved}
+                  disabled={uiGivenUp || uiIsSolved}
                 />
                 {notification && (
                   <div>
@@ -208,12 +241,12 @@ const SpecificRiddle = ({ id }) => {
                     />
                   </div>
                 )}
-                {!hintShown && (
+                {!uiHintShown && (
                   <Button
                     className="hint-btn"
                     variant="success"
                     onClick={handleShowHintClick}
-                    disabled={givenUp || isSolved}
+                    disabled={uiGivenUp || uiIsSolved }
                   >
                     HINT
                   </Button>
@@ -238,22 +271,26 @@ const SpecificRiddle = ({ id }) => {
                   </Button>
                 </div>
               )}
-              {hintShown && !givenUp && (
+              {uiHintShown && !uiIsSolved && (
                 <Button
                   className="give-up-btn"
                   variant="danger"
                   onClick={handleGivenUpClick}
-                  disabled={isSolved}
+                  disabled={uiIsSolved}
                 >
                   I GIVE UP
                 </Button>
               )}
-              {givenUp && (
+              {uiGivenUp && (
                 <div className="answer-display">
                   Answer: {data.getRiddle.solutions[0]}
                 </div>
               )}
-              <Button className="btn-submit" type="submit" disabled={givenUp || isSolved || userAnswer.length === 0}>
+              <Button
+                className="btn-submit"
+                type="submit"
+                disabled={uiGivenUp || uiIsSolved || userAnswer.length === 0}
+              >
                 SUBMIT
               </Button>
             </Form>

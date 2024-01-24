@@ -14,7 +14,7 @@ const typeDefs = gql`
         createUser(email: String!, username: String!, password: String!): Auth
         updateProfile(userId: ID!, email: String, username: String, password: String): User
         startRiddle(userId: ID!, riddleId: String!): UserInteraction
-        attemptRiddle(userId: ID!, riddleId: String!, isSolved: Boolean!, incorrectAnswers: [String], attempted: Boolean!): UserInteraction
+        attemptRiddle(userId: ID!, riddleId: String!, isSolved: Boolean!, incorrectAnswers: [String], attempted: Boolean!, givenUp: Boolean!, usedHint: Boolean!): UserInteraction
         useHint(userId: ID!, riddleId: String!, hintNumber: Int!): UserInteraction
         forgotPassword(email: String!): ForgotPasswordResponse
     }
@@ -45,19 +45,18 @@ const typeDefs = gql`
     }
 
     type UserInteraction {
-        user_id: ID
-        riddle_id: ID
-        isSolved: Boolean
-        attempted: Boolean
-        usedHint: Boolean
-        timestamp: String
-        startTime: String
-        solveTime: String
+        userId: ID!
+        riddleId: ID!
+        isSolved: Boolean!
+        attempted: Boolean!
+        usedHint: Boolean!
+        givenUp: Boolean!
         incorrectAnswers: [String]
         hintsUsed: [Int]
-        hintUsageTime: String
         userFeedback: UserFeedback
         userEngagement: UserEngagement
+        createdAt: String
+        updatedAt: String
     }
 
     type UserFeedback {

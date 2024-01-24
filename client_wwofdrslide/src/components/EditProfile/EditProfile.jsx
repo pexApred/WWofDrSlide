@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_RIDDLES, QUERY_ME } from '../../utils/queries';
-import { UPDATE_PROFILE } from '../../utils/mutations';
-import './EditProfile.css';
+import React, { useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_RIDDLES, QUERY_ME } from "../../utils/queries";
+import { UPDATE_PROFILE } from "../../utils/mutations";
+import "./EditProfile.css";
 
 const EditProfile = () => {
   const { loading: riddlesLoading } = useQuery(QUERY_RIDDLES);
@@ -15,15 +15,23 @@ const EditProfile = () => {
   const [updateProfile] = useMutation(UPDATE_PROFILE, {
     refetchQueries: [{ query: QUERY_ME }],
   });
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [editMode, setEditMode] = useState({
     username: false,
     password: false,
   });
+
+  useEffect(() => {
+    if (userData && userData.me) {
+      setFormData({
+        username: userData?.me?.username || "",
+        password: "",
+      });
+    }
+  }, [userData]);
+
+  if (riddlesLoading || userLoading) return <p>'Loading...'</p>;
+  if (userError) return <p>`Error! ${userError.message}`</p>;
 
   const toggleEditMode = (field) => {
     setEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
@@ -48,18 +56,6 @@ const EditProfile = () => {
       console.error("Error updating profile:", err);
     }
   };
-
-  useEffect(() => {
-    if (userData && userData.me) {
-      setFormData({
-        username: userData?.me.username || "",
-        password: "",
-      });
-    }
-  }, [userData]);
-
-  if (riddlesLoading || userLoading) return <p>'Loading...'</p>;
-  if (userError) return <p>`Error! ${userError.message}`</p>;
 
   return (
     <Row className="edit-component-container justify-content-center">

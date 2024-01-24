@@ -6,17 +6,22 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../utils/Context";
 import { useApolloClient } from "@apollo/client";
 import "./LoginForm.css";
+import { QUERY_ME } from "../../utils/queries";
 
-const LoginForm = ({ setShowModal, onShowSignup }) => {
+const LoginForm = ({ setShowModal, onShowSignup }) => { 
+  const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({
     username: "",
     password: "",
   });
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [loginUser] = useMutation(LOGIN_USER);
-  const navigate = useNavigate();
-  const { setLoggedIn, setUser } = useContext(AuthContext);
+  const { setLoggedIn, setUser } = useContext(AuthContext);  
+  const [loginUser] = useMutation(LOGIN_USER, {
+    refetchQueries: [
+      { query: QUERY_ME}
+    ]
+  });
   const client = useApolloClient();
 
   const handleInputChange = (event) => {
@@ -42,8 +47,8 @@ const LoginForm = ({ setShowModal, onShowSignup }) => {
           setLoggedIn(true);
           setUser(data.login.user);
           await client.resetStore();
+          navigate("/profile");          
           setShowModal(false);
-          navigate("/profile");
         }
       } catch (err) {
         console.error(err);

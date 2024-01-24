@@ -16,8 +16,6 @@ const HomePage = () => {
   if (loading || !imageLoaded) return <p className="spinner"></p>;
   if (error) return <p>Error! {error.message}</p>;
 
-  // const images = data.getRiddles.map((riddle) => riddle.background_image);
-
   return (
     <>
       <div className="homeContent-wrapper">

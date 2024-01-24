@@ -4,37 +4,32 @@ import { useQuery } from '@apollo/client';
 import { QUERY_RIDDLES, QUERY_ME } from '../../utils/queries';
 import { faHatWizard, faPuzzlePiece, faDice } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import * as d3 from "d3";
 import './UserStatsComponent.css'
 
 const UserComponent = () => {
-    const { loading: riddlesLoading, error: riddlesError, data } = useQuery(QUERY_RIDDLES);
+    const { loading: riddlesLoading, error: riddlesError, data:riddlesData } = useQuery(QUERY_RIDDLES);
     const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME);
 
     if (riddlesLoading || userLoading) return <p>'Loading...'</p>;
     if (riddlesError) return <p>`Error! ${riddlesError.message}`</p>;
     if (userError) return <p>`Error! ${userError.message}`</p>;
 
-    const riddles = data.getRiddles;
+    const riddles = riddlesData.getRiddles;
 
-    const loggedInUser = userData?.me?._id;
+    const loggedInUser = userData?.me?._id;    
 
     const totalAttempted = riddles.filter(riddle =>
-        riddle.interactions && riddle.interactions.some(interaction => interaction.user_id === loggedInUser)
+        riddle.interactions && riddle.interactions.some(interaction => interaction.userId === loggedInUser)
     ).length;
 
     const totalSolved = riddles.filter(riddle =>
-        riddle.interactions && riddle.interactions.some(interaction => interaction.user_id === loggedInUser && interaction.isSolved)
+        riddle.interactions && riddle.interactions.some(interaction => interaction.userId === loggedInUser && interaction.isSolved)
     ).length;
 
     const totalHintsUsed = riddles.reduce((acc, riddle) => {
-        const userInteraction = riddle.interactions && riddle.interactions.find(interaction => interaction.user_id === loggedInUser);
+        const userInteraction = riddle.interactions && riddle.interactions.find(interaction => interaction.userId === loggedInUser);
         return acc + (userInteraction && userInteraction.hintsUsed ? userInteraction.hintsUsed.length : 0);
     }, 0);
-
-    // useEffect(() => {
-
-    // }, []);
 
     return (
         <Row className='user-component-container justify-content-center'>

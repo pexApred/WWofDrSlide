@@ -19,17 +19,14 @@ export const QUERY_RIDDLES = gql`
             id
             background_image
             interactions {
-                user_id
-                riddle_id
+                userId
+                riddleId
                 isSolved
                 attempted
                 usedHint
-                timestamp
-                startTime
-                solveTime
+                givenUp
                 incorrectAnswers
                 hintsUsed
-                hintUsageTime
                 userFeedback {
                     difficultyRating
                     enjoymentRating
@@ -39,6 +36,8 @@ export const QUERY_RIDDLES = gql`
                     riddlesAttempted
                     timeSpent
                 }   
+                createdAt
+                updatedAt
             }
         }
     }
@@ -54,17 +53,14 @@ export const QUERY_RIDDLE = gql`
             solutions
             background_image
             interactions {
-                user_id
-                riddle_id
+                userId
+                riddleId
                 isSolved
                 attempted
                 usedHint
-                timestamp
-                startTime
-                solveTime
+                givenUp
                 incorrectAnswers
                 hintsUsed
-                hintUsageTime
                 userFeedback {
                     difficultyRating
                     enjoymentRating
@@ -74,6 +70,8 @@ export const QUERY_RIDDLE = gql`
                     riddlesAttempted
                     timeSpent
                 }   
+                createdAt
+                updatedAt
             }
             difficulty
         }
@@ -83,17 +81,14 @@ export const QUERY_RIDDLE = gql`
 export const QUERY_USER_INTERACTION = gql`
     query getUserInteraction($userId: ID!, $riddleId: ID!) {
         getUserInteraction(userId: $userId, riddleId: $riddleId) {
-            user_id
-            riddle_id
+            userId
+            riddleId
             isSolved
             attempted
             usedHint
-            timestamp
-            startTime
-            solveTime
+            givenUp
             incorrectAnswers
             hintsUsed
-            hintUsageTime
             userFeedback {
                 difficultyRating
                 enjoymentRating
@@ -103,6 +98,8 @@ export const QUERY_USER_INTERACTION = gql`
                 riddlesAttempted
                 timeSpent
             }   
+            createdAt
+            updatedAt
         }
     }
 `;

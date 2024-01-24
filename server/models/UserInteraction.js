@@ -1,14 +1,12 @@
 const { Schema, model } = require('mongoose');
-const User = require('./User');
-const Riddle = require('./Riddle');
 
 const UserInteractionSchema = new Schema({
-    user_id: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, "User ID is required"],
     },
-    riddle_id: {
+    riddleId: {
         type: String,
         ref: 'Riddle',
         required: [true, "Riddle ID is required"],
@@ -27,17 +25,9 @@ const UserInteractionSchema = new Schema({
         default: false,
         required: [true, "UsedHint is required"],
     },
-    timestamp: {
-        type: Date,
-        required: [true, "Timestamp is required"],
-    },
-    startTime: {
-        type: Date,
-        required: [true, "Start time is required"],
-    },
-    solveTime: {
-        type: Date,
-        required: false,
+    givenUp: {
+        type: Boolean,
+        required: [true, "GivenUp is required"],
     },
     incorrectAnswers: [{
         type: String,
@@ -47,10 +37,6 @@ const UserInteractionSchema = new Schema({
         type: Number,
         required: false,
     }],
-    hintUsageTime: {
-        type: Date,
-        required: false,
-    },
     userFeedback: {
         difficultyRating: { type: Number },
         enjoymentRating: { type: Number },
@@ -58,9 +44,13 @@ const UserInteractionSchema = new Schema({
     userEngagement: {
         visits: { type: Number },
         riddlesAttempted: { type: Number },
-        timeSpent: { type: Number }, 
+        timeSpent: { type: Number },
     },
+}, {
+    timestamps: true
 });
+
+UserInteractionSchema.index({ userId: 1, riddleId: 1 }, { unique: true });
 
 const UserInteraction = model('UserInteraction', UserInteractionSchema);
 

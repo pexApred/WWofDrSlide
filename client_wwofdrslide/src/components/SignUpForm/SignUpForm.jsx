@@ -4,6 +4,7 @@ import { AuthContext } from "../../utils/Context";
 import { CREATE_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { QUERY_ME } from "../../utils/queries";
 
 const SignUpForm = ({ setShowModal }) => {
   const [userFormData, setUserFormData] = useState({
@@ -13,7 +14,11 @@ const SignUpForm = ({ setShowModal }) => {
   });
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [createUser, { error }] = useMutation(CREATE_USER);
+  const [createUser, { error }] = useMutation(CREATE_USER, {
+    refetchQueries: [
+      { query: QUERY_ME}
+    ]
+  });
 
   const { setLoggedIn, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -39,8 +44,8 @@ const SignUpForm = ({ setShowModal }) => {
       if (data && data.createUser) {
         setUser(data.createUser.user);
         setLoggedIn(true);
+        navigate("/profile");        
         setShowModal(false);
-        navigate("/profile");
       }
     } catch (err) {
       console.error(err);
