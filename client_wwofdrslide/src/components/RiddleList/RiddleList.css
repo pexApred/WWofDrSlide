@@ -4,7 +4,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    color: black;
+    color: rgba(62, 78, 66, 1);
+    font-size: 2rem;
 }
 
 .riddle-image-link {

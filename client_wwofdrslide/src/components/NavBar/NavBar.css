@@ -1,4 +1,7 @@
 .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: rgba(62, 78, 66, 1);
     padding: 1rem;
     color: white;
@@ -6,11 +9,13 @@
 }
 
 .navbar .navbar-brand {
-    color: rgb(255, 255, 255);
+    color: white;
     text-transform: uppercase;
     white-space: nowrap;
-    font-size: .9rem;
-    margin-right: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    /* margin-right: 0; */
     letter-spacing: .05rem;
 }
 
@@ -18,55 +23,40 @@
     font-size: 1.25rem;
 }
 
-#navbar {
-    justify-content: right;
-    font-size: .75rem;
-}
-
-.navbar .btn {
+.navbar .btn,
+.navbar .nav-link {
     background-color: transparent;
     border: none;
-    color: rgb(255, 255, 255);
-    padding: 8px 0;
+    color: white;
+    padding: 0.5rem 1rem;
     border-radius: 0;
-    font-size: .75rem;
+    font-size: 0.75rem;
+    padding-right: 0;
 }
 
-.navbar .btn:hover {
+.navbar .btn:hover,
+.navbar .nav-link:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 #dropdown-split-basic {
-    padding-left: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
-.navbar .nav-link {
-    color: white;
-}
-
-.navbar .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navbar .btnSplit .dropdown-menu {
-    max-height: 1rem;
+.dropdown-menu.show {
+    max-height: 10px;
     overflow-y: auto;
-    min-width: 3rem;
-    border-radius: 0;
-    margin: 0;
-    padding-bottom: 1.9rem;
-}
-
-.navbar .dropdown-menu .dropdown-item {
-    padding: 0 0 0 .75rem;
-    font-size: 1rem;
-}
-
-.navbar .navbar-nav {
+    min-width: auto;
     margin-top: 0;
-    margin-bottom: 0;
+    padding-bottom: 1.5rem;
+    border-radius: 0;
+}
+
+.navbar .dropdown-menu.show .dropdown-item {
+    padding: 0 1rem;
 }
 
 .navbar-toggler {
@@ -76,94 +66,70 @@
 
 .navbar-toggler-icon {
     filter: invert(100%);
-    color: white;
 }
 
-.navbar-expand-lg .navbar-nav .nav-link {
-    font-size: .75rem;
-}
-#dropdown-split-basic {
-    padding-right: 1rem;
-    font-size: 1rem;
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media screen and (min-width: 768px) {
     .navbar {
-        padding: 2rem;
-    }    
-    
+        padding: 1.25rem;
+    }
+
     .navbar .navbar-brand {
-        letter-spacing: .25rem;
-        padding-left: 2rem;
-        font-size: 2rem;
+        /* letter-spacing: .25rem; */
+        font-size: 1.5rem;
     }
 
     .navbar .navbar-brand .text-em {
-        font-size: 2.75rem;
-    }
-
-    .navbar-toggler {
-        padding: .5rem;
+        font-size: 2rem;
     }
 
     .navbar-toggler-icon {
-        font-size: 2.5rem;
-    }
-
-    #navbar {
-        padding-left: 2rem;
-        font-size: 1.25rem;
-    }
-
-    .navbar .btn {
-        font-size: 1.25rem;
-    }
-
-    #dropdown-split-basic {
-        padding-right: 2rem;
-        font-size: 1.25rem;
-    }
-
-    .navbar .btnSplit .dropdown-menu {
-        padding-bottom: 1.75rem;
-    }
-}
-
-@media screen and (min-width: 1025px) {
-    .navbar {
-        padding: 3rem;
-    }
-
-    .navbar .navbar-brand {
-        letter-spacing: .5rem;
-        font-size: 1.25rem;
-    }
-
-    .navbar .navbar-brand .text-em {
         font-size: 2rem;
     }
 
-    #navbar {
-        justify-content: right;
-        font-size: 1.2rem;
-    }
-
+    .navbar .nav-link,
+    .navbar .btn,
     #dropdown-split-basic {
-        font-size: 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
     }
 
-    .navbar .btn {
-        padding: 8px 0;
-        font-size: 1.2rem;
-        padding-left: 8px;
+    .navbar .navbar-brand {
+        flex-grow: 1;
+    }
 
+    .navbar .navigation-btns {
+        flex-grow: 2;
+        justify-content: right;
+    }
+
+    .navbar .nav-link,     
+    .navbar .btn,
+    #dropdown-split-basic  {
+        font-size: 1.25rem;
     }
 
     .navbar .btnSplit {
         margin: 0;
     }
 
-    .navbar .btnSplit .dropdown-menu {
+    .dropdown-menu.show {
         right: 0;
+        left: auto;
+        padding-bottom: 1.75rem;
     }
 }

@@ -7,6 +7,7 @@ const typeDefs = gql`
         getRiddles: [Riddle]
         getRiddle(id: String!): Riddle
         getUserInteraction(userId: ID!, riddleId: ID!): UserInteraction
+        leaderboard: [User]
     }
 
     type Mutation {
@@ -26,6 +27,7 @@ const typeDefs = gql`
         userAnalytics: [UserInteraction]
         resetPasswordToken: String
         resetPasswordExpires: String
+        points: Int
     }
 
     type Riddle {

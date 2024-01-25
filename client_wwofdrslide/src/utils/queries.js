@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
             username
             resetPasswordToken
             resetPasswordExpires
+            points
         }
     }
 `;
@@ -100,6 +101,16 @@ export const QUERY_USER_INTERACTION = gql`
             }   
             createdAt
             updatedAt
+        }
+    }
+`;
+
+export const QUERY_LEADERBOARD = gql `
+    query leaderboard {
+        leaderboard {
+            _id
+            username
+            points
         }
     }
 `;

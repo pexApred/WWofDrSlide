@@ -9,6 +9,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import RiddlePage from './pages/RiddlePage/RiddlePage';
 import StatsPage from './pages/StatsPage/StatsPage';
+import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage';
 import Footer from './components/Footer/Footer.jsx';
 import './App.css';
 
@@ -43,6 +44,10 @@ function App() {
               <Route
                 path='/statistics'
                 element={<StatsPage />}
+              />
+              <Route
+                path='/leaderboard'
+                element={<LeaderboardPage />}
               />
               <Route
                 path="*"

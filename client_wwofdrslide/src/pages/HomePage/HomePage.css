@@ -14,7 +14,7 @@
     height: auto;
     padding-top: 1rem;
     border-radius: 25% 0;
-    animation: zoomIn 2s ease-in-out;
+    /* animation: zoomIn 2s ease-in-out; */
     position: relative;
 }
 
@@ -33,7 +33,7 @@
     padding: 0.5rem; 
     margin: 1rem;
     border-radius: 8px;
-    animation: fadeIn 2s ease-in-out;
+    /* animation: fadeIn 2s ease-in-out; */
     box-shadow: 
     0 1px 3px rgba(0, 0, 0, 0.12), 
     0 3px 6px rgba(0, 0, 0, 0.16), 

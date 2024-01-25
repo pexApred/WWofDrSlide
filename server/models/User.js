@@ -31,6 +31,10 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'UserInteraction',
     }],
+    points: {
+        type: Number,
+        default: 0,
+    },
 },
     {
         toJSON: {

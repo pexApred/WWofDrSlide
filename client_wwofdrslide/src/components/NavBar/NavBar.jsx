@@ -84,7 +84,7 @@ const NavBar = () => {
           <span className='text-em'>T</span>he <span className='text-em'>W</span>onderful <span className='text-em'>W</span>orld of d<span className='text-em'>R</span> slide
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='navbar' onClick={() => setExpanded(expanded => !expanded)}/>
-        <Navbar.Collapse id='navbar'>
+        <Navbar.Collapse className='navigation-btns'>
           <Nav className='mr-auto'>
             {loggedIn ? (
               <>
@@ -103,6 +103,7 @@ const NavBar = () => {
                   </Dropdown>
                 </Dropdown>
                 <Nav.Link className='profile' as={Link} to='/statistics' onClick={collapseNavbar}>Riddle Insights</Nav.Link>
+                <Nav.Link className='profile' as={Link} to='/leaderboard' onClick={collapseNavbar}>Leaderboard</Nav.Link>
                 <Nav.Link className='profile' onClick={handleLogout}>Exit</Nav.Link>
               </>
             ) : (

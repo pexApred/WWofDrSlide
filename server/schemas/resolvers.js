@@ -60,9 +60,20 @@ module.exports = {
                 throw new ApolloError('Something went wrong fetching the User Interaction');
             }
         },
+        leaderboard: async () => {
+            try {
+                const users = await User.find({}).sort({ points: -1 });
+                return users;
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+                throw new ApolloError('Error fetching leaderboard');
+            }
+        }
     },
     Mutation: {
         login: async (parent, { username, password }, context) => {
+
+            username = username.toLowerCase();
             let user;
             if (username) {
                 user = await User.findOne({ username });
@@ -94,6 +105,9 @@ module.exports = {
         },
         createUser: async (parent, { email, username, password }, context) => {
             try {
+
+                username = username.toLowerCase();
+
                 const user = await User.create({
                     email,
                     username,
@@ -188,15 +202,29 @@ module.exports = {
                         userId, riddleId
                     }
                 );
+                const user = await User.findById(userId);
                 if (!userInteraction) {
                     throw new Error("User interaction not found");
                 }
                 userInteraction.attempted = attempted;
                 userInteraction.incorrectAnswers = incorrectAnswers;
+
+                let pointsEarned = 0;
                 if (!userInteraction.isSolved && !userInteraction.givenUp) {
                     userInteraction.isSolved = isSolved;
                     userInteraction.givenUp = givenUp;
                     userInteraction.usedHint = userInteraction.usedHint || usedHint;
+
+                    if (isSolved && !usedHint) {
+                        pointsEarned = 2;
+                    } else if (isSolved && usedHint) {
+                        pointsEarned = 1;
+                    } else if (givenUp) {
+                        pointsEarned = 0;
+                    }
+
+                    user.points += pointsEarned;
+                    await user.save();
                 }
                 await userInteraction.save();
                 return userInteraction;

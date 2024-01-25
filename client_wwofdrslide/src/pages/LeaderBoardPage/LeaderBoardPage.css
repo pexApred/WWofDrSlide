@@ -1,0 +1,68 @@
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(62, 78, 66, .1);
+    border-radius: 1rem;
+    margin: 2rem;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lb-title {
+    color: rgba(62, 78, 66, 1);
+    margin: 1rem;
+    /* background-color: rgba(62, 78, 66, .25); */
+    padding: 0.25rem;
+    border-radius: 1rem;
+    /* box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); */
+    font-size: 2rem;
+    text-align: center;
+
+}
+
+.lb-table {
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+}
+
+.lb-head {
+
+}
+
+.tr-content {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    color: rgba(62, 78, 66, 1);
+}
+
+.lb-body .lb-tr:nth-child(odd) {    
+    background-color: rgba(62, 78, 66, 0.75);
+    color: white;
+}
+
+.lb-body .lb-tr:nth-child(even) {    
+    background-color: white;
+    color: rgba(62, 78, 66, 1);
+}
+
+.lb-tr {    
+    background-color: #f4f4f8;
+    text-align: center;
+}
+
+/* .user-name {
+    background-color: white;
+    color: rgba(62, 78, 66, 1);
+    border: 1px solid rgba(62, 78, 66, 1);
+}
+
+.user-score {
+    color: white;
+    background-color: rgba(62, 78, 66, 1);
+    border: 1px solid white;
+} */
