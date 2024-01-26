@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_LEADERBOARD } from "../../utils/queries";
-import './LeaderboardPage.css';
+import './LeaderBoardPage.css';
 
 const LeaderboardPage = () => {
     const { loading, error, data } = useQuery(QUERY_LEADERBOARD);
