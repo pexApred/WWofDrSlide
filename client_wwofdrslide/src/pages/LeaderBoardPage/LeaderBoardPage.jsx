@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_LEADERBOARD } from "../../utils/queries";
 import "./LeaderboardPage.css";
