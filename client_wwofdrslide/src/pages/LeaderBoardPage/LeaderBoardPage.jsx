@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_LEADERBOARD } from "../../utils/queries";
 import "./LeaderboardPage.css";
 
-const Leaderboard = () => {
+const LeaderboardPage = () => {
     const { loading, error, data } = useQuery(QUERY_LEADERBOARD);
 
     if (loading) return 'Loading...';
@@ -34,4 +34,4 @@ const Leaderboard = () => {
     );
 };
 
-export default Leaderboard;
+export default LeaderboardPage;
