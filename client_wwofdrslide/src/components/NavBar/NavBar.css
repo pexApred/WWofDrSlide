@@ -14,8 +14,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1rem;
-    /* margin-right: 0; */
+    font-size: 0.9rem;
+    margin-right: 0;
     letter-spacing: .05rem;
 }
 
@@ -61,11 +61,13 @@
 
 .navbar-toggler {
     border-color: white;
-    padding: 0.25rem;
+    padding: 0.1rem;
 }
 
 .navbar-toggler-icon {
     filter: invert(100%);
+    width: 1.3em;
+    height: 1.3em;
 }
 
 .navbar-toggler:focus,
