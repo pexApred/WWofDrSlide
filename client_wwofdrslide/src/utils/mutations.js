@@ -92,3 +92,12 @@ export const FORGOT_PASSWORD = gql`
         }
     }
 `;
+
+export const RESET_PASSWORD = gql`
+    mutation resetPassword($resetToken: String!, $newPassword: String!) {
+        resetPassword(resetToken: $resetToken, newPassword: $newPassword) {
+            message
+            success
+        }
+    }
+`;

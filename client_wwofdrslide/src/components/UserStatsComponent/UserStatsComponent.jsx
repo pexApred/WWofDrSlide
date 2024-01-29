@@ -23,38 +23,38 @@ const UserComponent = () => {
     ).length;
 
     const totalSolved = riddles.filter(riddle =>
-        riddle.interactions && riddle.interactions.some(interaction => interaction.userId === loggedInUser && interaction.isSolved)
+        riddle.interactions && riddle.interactions.some(interaction => interaction.userId === loggedInUser && interaction.isSolved && !interaction.usedHint)
     ).length;
 
-    const totalHintsUsed = riddles.reduce((acc, riddle) => {
-        const userInteraction = riddle.interactions && riddle.interactions.find(interaction => interaction.userId === loggedInUser);
-        return acc + (userInteraction && userInteraction.hintsUsed ? userInteraction.hintsUsed.length : 0);
-    }, 0);
+    const totalHintsUsed = riddles.filter(riddle =>
+        riddle.interactions && riddle.interactions.some(interaction => interaction.userId === loggedInUser && interaction.isSolved && interaction.usedHint)
+    ).length;
 
     return (
         <Row className='user-component-container justify-content-center'>
             <Col sm={8}>
+            <Card.Title>Score: {userData?.me?.points}</Card.Title>
                 <Card className='mt-4 stats-card'>
                     <Card.Body>
                         <Row>
                             <Col>
                                 <div className='stat-item'>
                                     <FontAwesomeIcon icon={faDice} />
-                                    <p>Total Riddles Attempted</p>
+                                    <p>Riddles Attempted</p>
                                     <h5>{totalAttempted}</h5>
                                 </div>
                             </Col>
                             <Col>
                                 <div className='stat-item'>
                                     <FontAwesomeIcon icon={faHatWizard} />
-                                    <p>Total Riddles Solved</p>
+                                    <p>Riddles Solved without Hint</p>
                                     <h5>{totalSolved}</h5>
                                 </div>
                             </Col>
                             <Col>
                                 <div className='stat-item'>
                                     <FontAwesomeIcon icon={faPuzzlePiece} />
-                                    <p>Total Hints Used</p>
+                                    <p>Riddles Solved with Hint</p>
                                     <h5>{totalHintsUsed}</h5>
                                 </div>
                             </Col>

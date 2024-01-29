@@ -1,5 +1,6 @@
 const { User, Riddle, UserInteraction } = require('../models');
 const { signToken } = require('../utils/tokenManager');
+const { containsBadWords } = require('../utils/usernameFilter');
 const { AuthenticationError, ApolloError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
@@ -107,6 +108,12 @@ module.exports = {
             try {
 
                 username = username.toLowerCase();
+                email = email.toLowerCase();
+
+                if (containsBadWords(username)) {
+                    console.log('Throwing error:', 'The chosen username is not allowed due to inappropriate language');
+                    throw new ApolloError('The chosen username is not allowed due to inappropriate language');
+                }
 
                 const user = await User.create({
                     email,
@@ -114,7 +121,7 @@ module.exports = {
                     password
                 });
                 if (!user) {
-                    throw new Error("Failed to create a user");
+                    throw new ApolloError("Unable to create a user with the provided details. Please check your input.");
                 }
                 const { accessToken, refreshToken } = signToken(user);
                 if (context.res) {
@@ -134,8 +141,15 @@ module.exports = {
                 }
                 return { token: accessToken, user };
             } catch (err) {
-                console.error('Error in createUser:', err);
-                throw new ApolloError('Error creating user');
+                if (err.code === 11000) {
+                    if (err.keyPattern && err.keyPattern.email) {
+                        throw new ApolloError('An account with this email already exists.');
+                    }
+                    if (err.keyPattern && err.keyPattern.username) {
+                        throw new ApolloError('This username is already taken.');
+                    }
+                }
+                throw err;
             }
         },
         updateProfile: async (parent, args, context) => {
@@ -264,7 +278,7 @@ module.exports = {
             user.resetPasswordExpires = tokenExpiry;
             await user.save();
             const subject = 'Password Reset';
-            const resetLink = 'http://localhost:3001/reset-password';
+            const resetLink = `http://localhost:3001/reset-password?token=${resetToken}`;
             const text = `Please use the following link to reset your password: ${resetLink}`;
             try {
                 await sendEmail(email, subject, text);
@@ -276,6 +290,28 @@ module.exports = {
                 console.error('Failed to send email:', error);
                 throw new Error('Failed to send password reset email');
             }
+        },
+        resetPassword: async (_, { resetToken, newPassword }) => {
+            const user = await User.findOne({
+                resetPasswordToken: resetToken,
+                resetPasswordExpires: { $gt: Date.now() } 
+            });
+        
+            if (!user) {
+                throw new Error('Invalid or expired password reset token');
+            }
+        
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+        
+            user.password = hashedPassword;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+            await user.save();
+        
+            return {
+                message: 'Password has been reset successfully',
+                success: true
+            };
         }
     }
 };

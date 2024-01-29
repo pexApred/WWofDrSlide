@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_RIDDLES } from "../../utils/queries";
 import "./HomePage.css";
@@ -19,7 +19,7 @@ const HomePage = () => {
   return (
     <>
       <div className="homeContent-wrapper">
-      <img
+        <img
           src="../../cover-dr2.jpeg"
           alt="Book Cover"
           className="book-cover"
@@ -27,30 +27,30 @@ const HomePage = () => {
         <div className="book-line"></div>
         <div className="pHome">
           <p>
-            <span className="headings">Welcome to T<span className="text-b">HE </span>W<span className="text-b">ONDERFUL </span>W<span className="text-b">ORLD OF D</span>R <span className="text-b">SLIDE!</span></span>
-            <br /> To get started, please create a username and password in
-            order to access the site. From there, you will be able to solve the
-            riddles and see how well you do overall.
+            <span className="headings">
+              Welcome to T<span className="text-b">HE </span>W<span className="text-b">ONDERFUL </span>W<span className="text-b">ORLD OF D</span>R<span className="text-b"> SLIDE!</span>
+            </span>
+            <br /> To access the site, please create a username and
+            password.From there, embark on a riddle-solving journey and see how
+            well you do overall.
           </p>
-
           <p>
             <span className="headings">
               Need help? You can ask for a hint and then try again.
             </span>
-            <br /> Alas, some are quite difficult so if the answer still evades
-            you then click “I Give Up” to see the solution. It is highly
-            encouraged that you try for a while before giving up as some require
-            quite a lot of thought before the answer may become clear.
+            <br /> Some are quite difficult and may still evade you despite
+            getting a hint. After a hint has been requested, click "I Give Up"
+            to see the solution.
           </p>
-
-          <p id='last-p'>
-            <span className="headings">Are you amongst the best of the best?</span>
+          <p id="last-p">
+            <span className="headings">
+              Are you amongst the best of the best?
+            </span>
             <br />
-            On this site, you will also be able to see your own personal
-            statistics with regard to your success rate on the riddles. Your
-            username will proudly be displayed on the Leader Board for all to
-            see. Regardless of your success, please enjoy the process and
-            comfort in knowing you are exercising your brain!
+            The Leaderboard displays the top scores overall. Solving a riddle
+            without a hint awards 2 points. Solving a riddle with a hint awards
+            1 point. Regardless of success, please enjoy the process and comfort
+            in knowing you are exercising your brain!
           </p>
         </div>
       </div>

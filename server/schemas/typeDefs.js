@@ -18,6 +18,7 @@ const typeDefs = gql`
         attemptRiddle(userId: ID!, riddleId: String!, isSolved: Boolean!, incorrectAnswers: [String], attempted: Boolean!, givenUp: Boolean!, usedHint: Boolean!): UserInteraction
         useHint(userId: ID!, riddleId: String!, hintNumber: Int!): UserInteraction
         forgotPassword(email: String!): ForgotPasswordResponse
+        resetPassword(resetToken: String!, newPassword: String!): ResetPasswordResponse
     }
 
     type User {
@@ -78,6 +79,11 @@ const typeDefs = gql`
     }
 
     type ForgotPasswordResponse {
+        message: String!
+        success: Boolean!
+    }
+
+    type ResetPasswordResponse {
         message: String!
         success: Boolean!
     }

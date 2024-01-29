@@ -94,9 +94,8 @@
 
 @media screen and (min-width: 1025px) {
     .homeContent-wrapper {
-        margin-top: 5.5rem;
+        margin: 5rem;
         flex-direction: row;
-        justify-content: row;
     }
 
     .headings {
@@ -105,7 +104,7 @@
     }
 
     .pHome {
-        max-width: 600px;
+        max-width: 550px;
         font-size: 1.25rem;
         margin: 0;
         padding-left: 0.75rem;
@@ -113,7 +112,7 @@
         animation: fadeIn 4s ease-in-out;
     }
     .book-cover {
-        max-width: 550px;
+        max-width: 555px;
         padding-top: 0;
         border-radius: 8px;
         box-shadow: 

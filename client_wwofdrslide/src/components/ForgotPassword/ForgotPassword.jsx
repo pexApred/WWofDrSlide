@@ -11,8 +11,8 @@ function ForgotPassword() {
   const [forgotPassword, { loading, error }] = useMutation(FORGOT_PASSWORD, {
     onCompleted: (data) => {
       if (data.forgotPassword.success) {
-        setSuccessMessage("Email sent successfully. Please check your inbox.");
-        setTimeout(() => navigate("/login"), 3000); // Redirect after 3 seconds
+        setSuccessMessage("Email sent successfully. Please check your inbox or junk mailbox.");
+        setTimeout(() => navigate("/"), 3000); // Redirect after 3 seconds
       }
     },
   });
@@ -29,7 +29,7 @@ function ForgotPassword() {
 
   return (
     <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
-      <div className="bg-white p-3 rounded w-25">
+      <div className="bg-white p-3 rounded w-50">
         <h4>Forgot Password</h4>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

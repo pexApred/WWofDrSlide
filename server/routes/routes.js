@@ -20,6 +20,12 @@ router.post('/forgot-password', async (req, res) => {
     res.send({ message: "Password reset email sent." });
 });
 
+router.get('/reset-password', (req, res) => {
+    const { token } = req.query;
+    const frontendResetPasswordUrl = `http://localhost:3000/reset-password?token=${token}`; // Replace with your frontend URL
+    res.redirect(frontendResetPasswordUrl);
+});
+
 router.post('/logout', (req, res) => {
     console.log('Logout route hit');
     res.clearCookie('auth_token', { path: '/', secure: true });

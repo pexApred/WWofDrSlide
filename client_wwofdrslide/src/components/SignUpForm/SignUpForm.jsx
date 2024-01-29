@@ -14,7 +14,14 @@ const SignUpForm = ({ setShowModal }) => {
   });
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [createUser, { error }] = useMutation(CREATE_USER, {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [createUser, {error}] = useMutation(CREATE_USER, {
+    onError: (err) => {
+      console.error("Error on mutation", err);
+      const message = err.graphQLErrors?.[0]?.message || "An error occurred during the signup process.";
+      setErrorMessage(message);
+      setShowAlert(true);
+    },
     refetchQueries: [
       { query: QUERY_ME}
     ]
@@ -57,16 +64,11 @@ const SignUpForm = ({ setShowModal }) => {
     <>
       {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {error && (
-          <Alert
-            dismissible
-            onClose={() => setShowAlert(false)}
-            show={showAlert}
-            variant="danger"
-          >
-            Something went wrong with your signup!
-          </Alert>
-        )}
+      {showAlert && (
+        <Alert variant="danger">
+          {errorMessage}
+        </Alert>
+      )}
 
         <Form.Group className="mb-3">
           <Form.Label htmlFor="email">Email</Form.Label>

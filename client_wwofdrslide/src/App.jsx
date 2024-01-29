@@ -12,6 +12,7 @@ import StatsPage from "./pages/StatsPage/StatsPage";
 import LeaderboardPage from "./pages/LeaderBoardPage/LeaderBoardPage.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import "./App.css";
+import ResetPassword from "./components/ResetPasswordPage/ResetPasswordPage.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/riddles" element={<RiddlePage />} />
               <Route path="/riddles/:id" element={<RiddlePage />} />
