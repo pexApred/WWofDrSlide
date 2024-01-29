@@ -31,7 +31,7 @@ const HomePage = () => {
               Welcome to T<span className="text-b">HE </span>W<span className="text-b">ONDERFUL </span>W<span className="text-b">ORLD OF D</span>R<span className="text-b"> SLIDE!</span>
             </span>
             <br /> To access the site, please create a username and
-            password.From there, embark on a riddle-solving journey and see how
+            password. From there, embark on a riddle-solving journey and see how
             well you do overall.
           </p>
           <p>

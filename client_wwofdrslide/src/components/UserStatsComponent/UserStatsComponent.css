@@ -1,5 +1,4 @@
-.user-component-container {
-    /* margin-top: 50px; */
+/* .user-component-container {
 }
 
 .stats-card {
@@ -21,4 +20,70 @@
     font-size: 30px;
     margin-bottom: 10px;
     color: green;
+} */
+
+.user-component-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
+
+.stats-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.stats-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: space-around;
+    text-align: center;
+    padding: 25px 0;
+    transition: background-color 0.3s ease;
+    height: 100%; 
+}
+
+.stat-item p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+.stat-item h5 {
+    color: #4caf50;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.fa-dice, .fa-hat-wizard, .fa-puzzle-piece {
+    font-size: 35px;
+    margin-bottom: 15px;
+    color: #6abf69;
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover .fa-dice,
+.stat-item:hover .fa-hat-wizard,
+.stat-item:hover .fa-puzzle-piece {
+    transform: scale(1.1);
+}
+
+/* Grid layout for stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

@@ -33,7 +33,6 @@ const UserComponent = () => {
     return (
         <Row className='user-component-container justify-content-center'>
             <Col sm={8}>
-            <Card.Title>Score: {userData?.me?.points}</Card.Title>
                 <Card className='mt-4 stats-card'>
                     <Card.Body>
                         <Row>

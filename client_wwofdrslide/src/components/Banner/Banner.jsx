@@ -24,7 +24,7 @@ const Banner = () => {
           T<span className="text-b">HE </span>W
           <span className="text-b">ONDERFUL </span>W
           <span className="text-b">ORLD OF D</span>R
-          <span className="text-b"> SLIDE, A BOOK OF RIDDLES FOR ALL</span>
+          <span className="text-b"> SLIDE: A BOOK OF RIDDLES FOR ALL</span>
         </span>
       </p>
     </div>
