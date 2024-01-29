@@ -15,7 +15,7 @@ const Banner = () => {
         or{"  "}
         <a
           className="purchase-link-soft"
-          href="https://www.warrenpublishing.net/store/p502/PRE-ORDER_The_Wonderful_World_of_dR_slide%3A_A_Book_of_Riddles_for_All_%28hard_cover%29_by_Michael_Schecter%2C_MD.html"
+          href="https://www.warrenpublishing.net/store/p503/PRE-ORDER_The_Wonderful_World_of_dR_slide%3A_A_Book_of_Riddles_for_All_%28soft_cover%29_by_Michael_Schecter%2C_MD.html"
         >
           soft cover
         </a>{" "}
