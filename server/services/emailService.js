@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const config = require('../config/config');
-require('dotenv').config();
 
 const sendEmail = (to, subject, text) => {
     return new Promise((resolve, reject) => {

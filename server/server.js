@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(authMiddleware);
 
 app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+  if (config.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect('https://' + req.headers.host + req.url);
   }
   next();
@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-if (process.env.NODE_ENV === 'production') {
+if (config.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client_wwofdrslide/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));

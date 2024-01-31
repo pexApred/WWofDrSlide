@@ -12,7 +12,7 @@ function ForgotPassword() {
     onCompleted: (data) => {
       if (data.forgotPassword.success) {
         setSuccessMessage("Email sent successfully. Please check your inbox or junk mailbox.");
-        setTimeout(() => navigate("/"), 3000); // Redirect after 3 seconds
+        setTimeout(() => navigate("/"), 3000);
       }
     },
   });
