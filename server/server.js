@@ -14,6 +14,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cache: 'bounded',
   context: async ({ req, res }) => {
     return { user: req.user, res };
   },
@@ -42,7 +43,7 @@ app.use(express.json());
 app.use(authMiddleware);
 
 app.use((req, res, next) => {
-  if (config.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+  if (process.env.NODE_ENV.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect('https://' + req.headers.host + req.url);
   }
   next();
@@ -50,7 +51,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-if (config.NODE_ENV === 'production') {
+if (process.env.NODE_ENV.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client_wwofdrslide/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client_wwofdrslide/build/index.html'));
