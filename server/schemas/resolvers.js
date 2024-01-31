@@ -278,7 +278,7 @@ module.exports = {
             user.resetPasswordExpires = tokenExpiry;
             await user.save();
             const subject = 'Password Reset';
-            const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+            const resetLink = `http://www.thewonderfulworldofdrslide.com/reset-password?token=${resetToken}`;
             const text = `Please use the following link to reset your password: ${resetLink}`;
             try {
                 await sendEmail(email, subject, text);

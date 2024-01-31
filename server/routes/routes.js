@@ -3,7 +3,6 @@ const UserModel = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const router = express.Router();
-require('dotenv').config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 const backendBaseURL = isProduction
