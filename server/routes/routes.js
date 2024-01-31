@@ -26,11 +26,11 @@ const router = express.Router();
 //     res.send({ message: "Password reset email sent." });
 // });
 
-router.get('/reset-password', (req, res) => {
-    const { token } = req.query;
-    const frontendResetPasswordUrl = `https://www.thewonderfulworldofdrslide.com/reset-password?token=${token}`;
-    res.redirect(frontendResetPasswordUrl);
-});
+// router.get('/reset-password', (req, res) => {
+//     const { token } = req.query;
+//     const frontendResetPasswordUrl = `https://www.thewonderfulworldofdrslide.com/reset-password?token=${token}`;
+//     res.redirect(frontendResetPasswordUrl);
+// });
 
 router.post('/logout', (req, res) => {
     console.log('Logout route hit');
