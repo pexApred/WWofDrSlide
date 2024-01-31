@@ -301,9 +301,9 @@ module.exports = {
                 throw new Error('Invalid or expired password reset token');
             }
         
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
+
         
-            user.password = hashedPassword;
+            user.password = newPassword;
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
             await user.save();
