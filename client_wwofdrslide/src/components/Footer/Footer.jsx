@@ -6,14 +6,10 @@ const Footer = () => {
   return (
     <>
       <footer className="footer-container mt-auto">
-          {/* <div className="text-center text-md-right"> */}
-            <p className="mb-0 cr">
-              © 2023 <span className="text-sz">T</span>he{" "}
-              <span className="text-sz">W</span>onderful{" "}
-              <span className="text-sz">W</span>orld of d
-              <span className="text-sz">R</span> slide
-            </p>
-          {/* </div>           */}
+          <p className="mb-0 cr"><a className='f-contact' href="https://emmanuellakis.dev/">
+            © 2023 Emmanuel Lakis
+          </a></p>
+          <p className="c-r"><a className='f-contact' href="https://forms.gle/mi7uqhQUuc7crBtr7"> Contact Us </a></p>
       </footer>
     </>
   );
