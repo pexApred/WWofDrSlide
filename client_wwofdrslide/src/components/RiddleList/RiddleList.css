@@ -39,3 +39,36 @@
 .riddle-image-link:hover .riddle-id-overlay {
     font-size: 1.5rem;
 }
+
+.status-icon {
+    position: absolute;
+    top: 5px;  /* Adjust based on your layout */
+    right: 5px; /* Adjust based on your layout */
+    font-size: 15px; /* Adjust based on your preference */
+    z-index: 10; /* Ensure it's above the image */
+    color: #fff; /* Bright color for better visibility */
+    text-shadow: 0 0 6px rgba(0,0,0,0.8), /* Shadow effect */
+                 0 0 10px rgba(0,0,0,0.9), /* More depth */
+                 0 0 14px rgba(0,0,0,0.9); /* Additional depth for 3D effect */
+    transform: scale(1.1); /* Slightly larger size for emphasis */
+}
+
+/* Specific colors for different statuses for better visibility */
+.bs-check-circle {
+    color: limegreen; /* Brighter green */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bs-x-circle {
+    color: tomato; /* Brighter red */
+}
+
+.bs-hourglass {
+    color: gold; /* Brighter yellow */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bs-question-circle {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
