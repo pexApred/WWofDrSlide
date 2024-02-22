@@ -88,6 +88,7 @@ const NavBar = () => {
 
   return (
     <>
+      <Banner />
       <Navbar className="navbar" expand="xl" expanded={expanded}>
         <Navbar.Brand as={Link} to="/" onClick={collapseNavbar}>
           <span className="text-em">T</span>he{" "}
@@ -198,7 +199,6 @@ const NavBar = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-      <Banner />
     </>
   );
 };
