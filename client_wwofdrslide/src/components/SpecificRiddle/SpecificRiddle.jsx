@@ -238,9 +238,9 @@ const SpecificRiddle = ({ id }) => {
     );
     if (interaction) {
       if (interaction.isSolved) {
-        return 2;
-      } else if (interaction.usedHint) {
-        return 1;
+        return interaction.usedHint ? 1 : 2;
+      } else if (interaction.givenUp) {
+        return 0;
       }
     }
     return 0;
