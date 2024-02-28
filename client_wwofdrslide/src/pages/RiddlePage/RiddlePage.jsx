@@ -7,24 +7,30 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 
-const RiddlePage = () => {
-    const { id } = useParams();
-    const { data: userData, loading } = useQuery(QUERY_ME);
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-        if (!userData && !loading) {
-            navigate("/"); 
-        }
-    }, [userData, loading, navigate]);
+import "./RiddlePage.css";
 
-    return (
-        <div>
-        <Container className="mt-4 mb-4">
-                { id ? <SpecificRiddle id={id} /> : <RiddleList/>}
-        </Container>
-        </div>
-    );
+const RiddlePage = () => {
+  const { id } = useParams();
+  const { data: userData, loading } = useQuery(QUERY_ME);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userData && !loading) {
+      navigate("/");
     }
+  }, [userData, loading, navigate]);
+
+  return (
+    <div className="RiddlePage-Wrapper">
+      {/* <div className="rules">Scoring Rules:
+        <p>* Unlimited guesses, incorrect answers do not affect score</p>
+        <p></p>
+      </div> */}
+      <Container className="mt-4 mb-4">
+        {id ? <SpecificRiddle id={id} /> : <RiddleList />}
+      </Container>
+    </div>
+  );
+};
 
 export default RiddlePage;

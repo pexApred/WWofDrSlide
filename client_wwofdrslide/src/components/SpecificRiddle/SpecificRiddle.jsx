@@ -30,6 +30,7 @@ const Notification = ({ message, hint, onClose }) => {
 const SpecificRiddle = ({ id }) => {
   const navigate = useNavigate();
   const [showHintConfirmation, setShowHintConfirmation] = useState(false);
+  const [showGivenUpConfirmation, setShowGivenUpConfirmation] = useState(false);
   const [userAnswer, setUserAnswer] = useState("");
   const [hintShown, setHintShown] = useState(false);
   const [userGivenUp, setGivenUp] = useState(false);
@@ -38,6 +39,9 @@ const SpecificRiddle = ({ id }) => {
   const [uiHintShown, setUIHintShown] = useState(false);
   const [uiGivenUp, setUIGivenUp] = useState(false);
   const [uiIsSolved, setUIIsSolved] = useState(false);
+  const [nextRiddleId, setNextRiddleId] = useState("");
+  const [prevRiddleId, setPrevRiddleId] = useState("");
+  const [showScoringRules, setShowScoringRules] = useState(false);
 
   const { loading, error, data } = useQuery(QUERY_RIDDLE, {
     variables: { id: id },
@@ -87,6 +91,12 @@ const SpecificRiddle = ({ id }) => {
     }
   }, [data, loggedInUserId, id]);
 
+  useEffect(() => {
+    const currentId = parseInt(id, 10);
+    setNextRiddleId((currentId % TOTAL_RIDDLES) + 1);
+    setPrevRiddleId(((currentId - 2 + TOTAL_RIDDLES) % TOTAL_RIDDLES) + 1);
+  }, [id]);
+
   if (loading) return <p>'Loading...'</p>;
   if (error) return <p>`Error! ${error.message}`</p>;
 
@@ -135,31 +145,43 @@ const SpecificRiddle = ({ id }) => {
     setUIIsSolved(false);
   };
 
+  // const goToPreviousRiddle = () => {
+  //   if (!data || !data.getRiddle) {
+  //     return;
+  //   }
+  //   let prevRiddleId;
+  //   if (parseInt(data.getRiddle.id, 10) === 1) {
+  //     prevRiddleId = TOTAL_RIDDLES;
+  //   } else {
+  //     prevRiddleId = parseInt(data.getRiddle.id, 10) - 1;
+  //   }
+  //   resetRiddleState();
+  //   setShowHintConfirmation(false);
+  //   navigate(`/riddles/${prevRiddleId}`);
+  // };
+
+  // const goToNextRiddle = () => {
+  //   if (!data || !data.getRiddle) {
+  //     return;
+  //   }
+  //   let nextRiddleId;
+  //   if (parseInt(data.getRiddle.id, 10) === TOTAL_RIDDLES) {
+  //     nextRiddleId = 1;
+  //   } else {
+  //     nextRiddleId = parseInt(data.getRiddle.id, 10) + 1;
+  //   }
+  //   resetRiddleState();
+  //   setShowHintConfirmation(false);
+  //   navigate(`/riddles/${nextRiddleId}`);
+  // };
+
   const goToPreviousRiddle = () => {
-    if (!data || !data.getRiddle) {
-      return;
-    }
-    let prevRiddleId;
-    if (parseInt(data.getRiddle.id, 10) === 1) {
-      prevRiddleId = TOTAL_RIDDLES;
-    } else {
-      prevRiddleId = parseInt(data.getRiddle.id, 10) - 1;
-    }
     resetRiddleState();
     setShowHintConfirmation(false);
     navigate(`/riddles/${prevRiddleId}`);
   };
 
   const goToNextRiddle = () => {
-    if (!data || !data.getRiddle) {
-      return;
-    }
-    let nextRiddleId;
-    if (parseInt(data.getRiddle.id, 10) === TOTAL_RIDDLES) {
-      nextRiddleId = 1;
-    } else {
-      nextRiddleId = parseInt(data.getRiddle.id, 10) + 1;
-    }
     resetRiddleState();
     setShowHintConfirmation(false);
     navigate(`/riddles/${nextRiddleId}`);
@@ -184,7 +206,12 @@ const SpecificRiddle = ({ id }) => {
     }
   };
 
+  const handleGivenUpConfirmation = () => {
+    setShowGivenUpConfirmation(true);
+  };
+
   const handleGivenUpClick = () => {
+    setShowGivenUpConfirmation(false);
     setUIGivenUp(true);
     if (!userGivenUp) {
       attemptRiddle({
@@ -201,17 +228,61 @@ const SpecificRiddle = ({ id }) => {
     }
   };
 
+  const toggleScoringRules = () => {
+    setShowScoringRules(!showScoringRules);
+  };
+
+  const currentRiddlePoints = () => {
+    const interaction = data.getRiddle.interactions.find(
+      (interaction) => interaction.userId === loggedInUserId
+    );
+    if (interaction) {
+      if (interaction.isSolved) {
+        return 2;
+      } else if (interaction.usedHint) {
+        return 1;
+      }
+    }
+    return 0;
+  };
+
+  const points = currentRiddlePoints();
+
   return (
     <>
+      <Col className="text-center">
+        <button className="rules-btn" onClick={toggleScoringRules}>
+          Scoring Rules
+        </button>
+      </Col>
       <div className="id-diff">
         <h6 className="specific-riddle-id">Riddle: {data.getRiddle.id}</h6>
+        <h6 className="specific-riddle-points">Points: {points}</h6>
         <h6 className="specific-riddle-difficulty">
           Difficulty: {data.getRiddle.difficulty}
         </h6>
       </div>
+
+      {showScoringRules && (
+        <div
+          className={`rules-container ${
+            showScoringRules ? "rules-visible" : ""
+          }`}
+        >
+          {/* <h6 className="rules-title">Scoring Rules:</h6> */}
+          <div className="rules-p">
+            <p>Solve: 2 points</p>
+            <p>Solve using Hint: 1 point</p>
+            <p>Give Up: 0 points</p>
+          </div>
+          <p className="ast">
+            <span>&#42;</span> Incorrect answers do not affect score
+          </p>
+        </div>
+      )}
       <Container className="specific-riddle-container">
         <Row>
-          <Col xs={12} md={6}>
+          <Col>
             <Image
               className="specific-riddle-image"
               src={data.getRiddle.background_image}
@@ -246,7 +317,7 @@ const SpecificRiddle = ({ id }) => {
                     className="hint-btn"
                     variant="success"
                     onClick={handleShowHintClick}
-                    disabled={uiGivenUp || uiIsSolved }
+                    disabled={uiGivenUp || uiIsSolved}
                   >
                     HINT
                   </Button>
@@ -254,7 +325,7 @@ const SpecificRiddle = ({ id }) => {
               </Form.Group>
               {showHintConfirmation && (
                 <div className="hint-confirmation">
-                  Are you sure? Revealing may affect your score.
+                  Are you sure? Revealing will reduce your score.
                   <Button
                     size="sm"
                     variant="outline-primary"
@@ -275,11 +346,30 @@ const SpecificRiddle = ({ id }) => {
                 <Button
                   className="give-up-btn"
                   variant="danger"
-                  onClick={handleGivenUpClick}
-                  disabled={uiIsSolved}
+                  onClick={handleGivenUpConfirmation}
+                  disabled={uiIsSolved || uiGivenUp}
                 >
                   I GIVE UP
                 </Button>
+              )}
+              {showGivenUpConfirmation && (
+                <div className="hint-confirmation">
+                  Are you sure? Giving up will give you a score of 0.
+                  <Button
+                    size="sm"
+                    variant="outline-primary"
+                    onClick={handleGivenUpClick}
+                  >
+                    Yes
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline-secondary"
+                    onClick={() => setShowGivenUpConfirmation(false)}
+                  >
+                    No
+                  </Button>
+                </div>
               )}
               {uiGivenUp && (
                 <div className="answer-display">
@@ -298,15 +388,16 @@ const SpecificRiddle = ({ id }) => {
         </Row>
       </Container>
       <Row className="navigation-buttons">
-        <Col xs={6} md={6} className="text-left">
-          <Button className="btn-nav" onClick={goToPreviousRiddle}>
-            PREVIOUS RIDDLE
-          </Button>
+        <Col className="text-left">
+          <button className="btn-nav" onClick={goToPreviousRiddle}>
+            <span className="arrow-icons prev-arrow-icons"></span> Previous
+          </button>
         </Col>
-        <Col xs={6} md={6} className="text-right">
-          <Button className="btn-nav" onClick={goToNextRiddle}>
-            NEXT RIDDLE
-          </Button>
+
+        <Col className="text-right">
+          <button className="btn-nav" onClick={goToNextRiddle}>
+            Next <span className="arrow-icons next-arrow-icons"></span>
+          </button>
         </Col>
       </Row>
     </>
