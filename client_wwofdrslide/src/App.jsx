@@ -20,7 +20,7 @@ function App() {
       <ContextProvider>
         <div className="App">
           <Router>
-            <NavBar />
+            {/* <NavBar /> */}
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -35,7 +35,7 @@ function App() {
                 element={<h1 className="display-2">Wrong page!</h1>}
               />
             </Routes>
-            <Footer />
+            {/* <Footer /> */}
           </Router>
         </div>
       </ContextProvider>

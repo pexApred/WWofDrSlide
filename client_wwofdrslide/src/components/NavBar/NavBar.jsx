@@ -88,7 +88,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       <Navbar className="navbar" expand="xl" expanded={expanded}>
         <Navbar.Brand as={Link} to="/" onClick={collapseNavbar}>
           <span className="text-em">T</span>he{" "}
