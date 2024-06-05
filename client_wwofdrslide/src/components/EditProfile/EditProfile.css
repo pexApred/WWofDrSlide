@@ -21,7 +21,7 @@
 .profile-section {
     background-color: #f4f4f4;
     padding: 2rem;
-    border-radius: 15px;
+    border-radius: 8px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -33,7 +33,7 @@
 
 .un-profile .data-un {
     font-weight: 700;
-    color: #4caf50;
+    color: rgba(62, 78, 66, 1);
     font-size: 1.2em;
 }
 

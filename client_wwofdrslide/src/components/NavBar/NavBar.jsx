@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import LoginForm from "../LoginForm/LoginForm";
-import Banner from "../Banner/Banner";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../utils/Context";
 import { useQuery } from "@apollo/client";
@@ -88,7 +87,6 @@ const NavBar = () => {
 
   return (
     <>
-      <Banner />
       <Navbar className="navbar" expand="xl" expanded={expanded}>
         <Navbar.Brand as={Link} to="/" onClick={collapseNavbar}>
           <span className="text-em">T</span>he{" "}
