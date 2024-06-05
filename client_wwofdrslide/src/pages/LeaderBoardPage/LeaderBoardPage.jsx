@@ -17,6 +17,8 @@ const LeaderboardPage = () => {
           <a
             className="lb-review-link"
             href="https://www.goodreads.com/book/show/205433385-the-wonderful-world-of-dr-slide?from_search=true&from_srp=true"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Review on Goodreads
           </a>
