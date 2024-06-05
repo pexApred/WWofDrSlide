@@ -4,6 +4,7 @@ import { QUERY_ME } from '../../utils/queries';
 import { Container, Row, Col } from 'react-bootstrap';
 import UserStatsComponent from '../../components/UserStatsComponent/UserStatsComponent';
 import EditProfile from '../../components/EditProfile/EditProfile';
+import Banner from '../../components/Banner/Banner';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
@@ -18,6 +19,7 @@ const ProfilePage = () => {
 
     return (
         <div>
+            < Banner/>
             <Container>
                 <Row className='justify-content-center'>
                     <Col md={8}>

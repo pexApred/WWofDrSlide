@@ -30,7 +30,7 @@
 
 .stats-card {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
+    border-radius: 8px;
     overflow: hidden;
     transition: box-shadow 0.3s ease;
 }
@@ -56,7 +56,7 @@
 }
 
 .stat-item h5 {
-    color: #4caf50;
+    color: rgba(62, 78, 66, 1);
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -64,7 +64,7 @@
 .fa-dice, .fa-hat-wizard, .fa-puzzle-piece {
     font-size: 35px;
     margin-bottom: 15px;
-    color: #6abf69;
+    color: rgba(62, 78, 66, 1);
     transition: transform 0.3s ease;
 }
 
@@ -72,6 +72,7 @@
 .stat-item:hover .fa-hat-wizard,
 .stat-item:hover .fa-puzzle-piece {
     transform: scale(1.1);
+    color: green;
 }
 
 /* Grid layout for stats */

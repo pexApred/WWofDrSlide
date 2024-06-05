@@ -6,38 +6,50 @@
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0); }
-    to { transform: scale(1); }
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
 }
+
 .book-cover {
-    max-width: 90%;
+    max-width: 75%;
     height: auto;
     padding-top: 1rem;
-    border-radius: 25% 0;
+    border-radius: 8px;
     /* animation: zoomIn 2s ease-in-out; */
     position: relative;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
 .pHome {
-    font-size: 0.8rem;  
-    font-weight: 400;  
+    font-size: 0.8rem;
+    font-weight: 300;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 75%;
     height: auto;
-    text-align: left;  
-    color: rgba(101,101,68,1);
-    padding: 0.5rem; 
+    text-align: left;
+    color: rgba(101, 101, 68, 1);
+    padding: 0.5rem;
     margin: 1rem;
     border-radius: 8px;
     /* animation: fadeIn 2s ease-in-out; */
-    box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.12), 
-    0 3px 6px rgba(0, 0, 0, 0.16), 
-    0 5px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        0 5px 12px rgba(0, 0, 0, 0.2);
     /* transform: rotateX(5deg) rotateY(-3deg);
     transform-origin: center; */
     cursor: default;
@@ -48,7 +60,7 @@
 }
 
 .text-b {
-    font-size: .7rem;
+    font-size: 0.7rem;
 }
 
 #last-p {
@@ -60,7 +72,7 @@
     top: 50%;
     left: 50%;
     border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid #555; 
+    border-top: 4px solid #555;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -68,11 +80,16 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .homeContent-wrapper {
         margin-top: 2rem;
     }
@@ -94,7 +111,6 @@
 
 @media screen and (min-width: 1025px) {
     .homeContent-wrapper {
-        margin: 5rem;
         flex-direction: row;
     }
 
@@ -111,15 +127,16 @@
         border-right: 2mm ridge;
         animation: fadeIn 4s ease-in-out;
     }
+
     .book-cover {
         max-width: 555px;
         padding-top: 0;
         border-radius: 8px;
-        box-shadow: 
-        -5px 0 12px rgba(0, 0, 0, 0.12),
-        0 -5px 12px rgba(0, 0, 0, 0.16),
-        0 5px 12px rgba(0, 0, 0, 0.2),
-        inset 5px 0 2100px -3px rgba(0, 0, 0, 0.2);
+        box-shadow:
+            -5px 0 12px rgba(0, 0, 0, 0.12),
+            0 -5px 12px rgba(0, 0, 0, 0.16),
+            0 5px 12px rgba(0, 0, 0, 0.2),
+            inset 5px 0 2100px -3px rgba(0, 0, 0, 0.2);
         animation: fadeIn 4s ease-in-out;
         border-left: 2mm ridge;
     }
@@ -127,13 +144,11 @@
     .book-line {
         content: '';
         height: 540px;
-        width: 5px; /* Adjust the width as needed */
-        background: linear-gradient(
-            to bottom, 
-            rgba(0, 0, 0, 0.2) 0%, 
-            rgba(255, 255, 255, 0.8) 50%, 
-            rgba(0, 0, 0, 0.2) 100%
-        );
+        width: 5px;
+        background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(0, 0, 0, 0.2) 100%);
         /* margin: 0; Center the spine in the container */
         box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2), -5px 0 5px rgba(0, 0, 0, 0.2);
         animation: fadeIn 4s ease-in-out;

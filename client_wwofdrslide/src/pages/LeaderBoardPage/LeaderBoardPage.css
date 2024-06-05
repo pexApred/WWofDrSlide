@@ -1,11 +1,11 @@
 .leaderboard-container {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
     padding: 20px;
     background-color: rgba(62, 78, 66, .1);
-    border-radius: 1rem;
+    border-radius: 8px;
     margin: 2rem;
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -15,7 +15,7 @@
     margin: 1rem;
     /* background-color: rgba(62, 78, 66, .25); */
     padding: 0.25rem;
-    border-radius: 1rem;
+    border-radius: 8px;
     /* box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); */
     font-size: 2rem;
     text-align: center;
@@ -66,3 +66,53 @@
     background-color: rgba(62, 78, 66, 1);
     border: 1px solid white;
 } */
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta-button {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.lb-review-link {
+    background-color: rgba(62, 78, 66, 1);
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.16), 0 5px 12px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.lb-review-link:hover {
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 1024px) {
+    .leaderboard-container {
+        margin: 2rem 10rem;
+    }
+
+    .lb-title {
+        font-size: 3rem;
+    }
+
+    .lb-table {
+        width: 80%;
+    }
+
+    .tr-content {
+        padding: 2rem 5rem;
+    }
+}
+
+
+@media screen and (min-width: 1025px) {
+.lb-review-link {
+        font-size: 1.5rem;
+    }
+}
