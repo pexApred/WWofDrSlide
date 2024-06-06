@@ -33,8 +33,7 @@ const HomePage = () => {
             <span className="headings">
               Welcome, Riddlers!
             </span>
-            <br /> To access the site, please create a username and password.
-            From there, embark on a riddle-solving journey and see how well you
+            <br /> Create a username and password to embark on a riddle-solving journey and see how well you
             do overall.
           </p>
           <p>

@@ -18,9 +18,7 @@
 .book-cover {
     max-width: 75%;
     height: auto;
-    padding-top: 1rem;
     border-radius: 8px;
-    /* animation: zoomIn 2s ease-in-out; */
     position: relative;
 }
 
@@ -90,10 +88,6 @@
 }
 
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    .homeContent-wrapper {
-        margin-top: 2rem;
-    }
-
     .pHome {
         max-width: 600px;
         font-size: 1rem;
@@ -101,7 +95,6 @@
 
     .book-cover {
         max-width: 600px;
-        padding-top: 0;
     }
 
     .text-b {
@@ -120,7 +113,8 @@
     }
 
     .pHome {
-        max-width: 550px;
+        max-width: 600px;
+        height: 600px;
         font-size: 1.25rem;
         margin: 0;
         padding-left: 0.75rem;
@@ -128,9 +122,17 @@
         animation: fadeIn 4s ease-in-out;
     }
 
+    .pHome p {
+        margin: 2rem;
+    }
+
+    #last-p {
+        margin-bottom: 2rem;
+    }
+
     .book-cover {
-        max-width: 555px;
-        padding-top: 0;
+        max-width: 600px;
+        height: 600px;
         border-radius: 8px;
         box-shadow:
             -5px 0 12px rgba(0, 0, 0, 0.12),
@@ -143,7 +145,7 @@
 
     .book-line {
         content: '';
-        height: 540px;
+        height: 590px;
         width: 5px;
         background: linear-gradient(to bottom,
                 rgba(0, 0, 0, 0.2) 0%,

@@ -66,7 +66,7 @@
 }
 
 .navbar-toggler-icon {
-    filter: invert(100%);
+    /* filter: invert(100%); */
     width: 1.3em;
     height: 1.3em;
 }
