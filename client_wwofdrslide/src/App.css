@@ -3,17 +3,3 @@
   flex-direction: column;
   min-height: 100vh;
 }
-
-/* header {
-  flex-shrink: 0;
-}
-
-main {
-  flex-grow: 1;
-  flex-shrink: 0;
-  padding: 20px;
-}
-
-footer {
-  flex-shrink: 0;
-} */

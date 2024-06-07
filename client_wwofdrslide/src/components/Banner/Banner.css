@@ -15,9 +15,9 @@
     background-color: rgba(62, 78, 66, 1);
     color: white;
     font-size: 0.75rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.16), 0 5px 12px rgba(0, 0, 0, 0.2);
-    padding: 5px 10px;
-    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(62, 78, 66, .12), 0 3px 6px rgba(62, 78, 66, .16), 0 5px 12px rgba(62, 78, 66, .2);
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.5rem;
     font-weight: 400;
     text-decoration: none;
 }
@@ -30,7 +30,7 @@
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .cta-buttons {
         margin: 2rem;
-        gap: 50px;
+        gap: 3.125rem;
     }
 
     .purchase-link,
@@ -43,7 +43,7 @@
     .cta-buttons {
         justify-content: space-around;
         margin: 2rem;
-        gap: 350px;
+        gap: 21.875rem;
     }
 
     .purchase-link,

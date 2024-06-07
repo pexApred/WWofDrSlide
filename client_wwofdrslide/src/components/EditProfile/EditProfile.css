@@ -1,17 +1,4 @@
-/* .edit-component-container {
-    margin-top: 50px;
-}
-
-.profile-section {
-    padding: 1rem;
-}
-
-.un-profile .data-un {
-    font-weight: 700;
-} */
-
 .edit-component-container {
-    margin-top: 50px;
     text-align: center;
     display: flex;
     justify-content: center;

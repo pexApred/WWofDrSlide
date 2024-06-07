@@ -1,31 +1,7 @@
-/* .user-component-container {
-}
-
-.stats-card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.stat-item {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.stat-item p {
-    margin: 10px 0;
-}
-
-.stat-item .fa-dice,
-.stat-item .fa-hat-wizard,
-.stat-item .fa-puzzle-piece {
-    font-size: 30px;
-    margin-bottom: 10px;
-    color: green;
-} */
-
 .user-component-container {
-    margin-top: 30px;
     display: flex;
     justify-content: center;
+    margin-bottom: 68px;
 }
 
 .stats-card {

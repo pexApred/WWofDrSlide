@@ -4,3 +4,7 @@
     align-items: center;
     flex-direction: column;
 }
+
+.sr-container {
+    margin: 2rem;
+}

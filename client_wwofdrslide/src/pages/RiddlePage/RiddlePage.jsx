@@ -26,7 +26,7 @@ const RiddlePage = () => {
         <p>* Unlimited guesses, incorrect answers do not affect score</p>
         <p></p>
       </div> */}
-      <Container className="mt-4 mb-4">
+      <Container className="sr-container">
         {id ? <SpecificRiddle id={id} /> : <RiddleList />}
       </Container>
     </div>

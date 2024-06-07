@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_LEADERBOARD } from "../../utils/queries";
 import "./LeaderBoardPage.css";
-import Banner from "../../components/Banner/Banner";
 
 const LeaderboardPage = () => {
   const { loading, error, data } = useQuery(QUERY_LEADERBOARD);
@@ -13,6 +12,7 @@ const LeaderboardPage = () => {
   return (
     <>
       <div className="leaderboard-container">
+      <h1 className="lb-title">Leaderboard</h1>
         <div className="cta-button">
           <a
             className="lb-review-link"
@@ -23,7 +23,7 @@ const LeaderboardPage = () => {
             Review on Goodreads
           </a>
         </div>
-        <h1 className="lb-title">Leaderboard</h1>
+        {/* <h1 className="lb-title">Leaderboard</h1> */}
         <table className="lb-table">
           <thead className="lb-head">
             <tr className="tr-content">

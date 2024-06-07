@@ -3,16 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
+    padding-bottom: 2rem;
 }
 
 .book-cover {
@@ -20,45 +11,27 @@
     height: auto;
     border-radius: 8px;
     position: relative;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 5px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pHome {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 300;
     line-height: 1.6;
     max-width: 75%;
     height: auto;
     text-align: left;
     color: rgba(101, 101, 68, 1);
-    padding: 0.5rem;
     margin: 1rem;
     border-radius: 8px;
-    /* animation: fadeIn 2s ease-in-out; */
-    box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.12),
-        0 3px 6px rgba(0, 0, 0, 0.16),
-        0 5px 12px rgba(0, 0, 0, 0.2);
-    /* transform: rotateX(5deg) rotateY(-3deg);
-    transform-origin: center; */
     cursor: default;
 }
 
 .headings {
     font-weight: 600;
-}
-
-.text-b {
-    font-size: 0.7rem;
 }
 
 #last-p {
@@ -90,44 +63,23 @@
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .pHome {
         max-width: 600px;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .book-cover {
         max-width: 600px;
-    }
-
-    .text-b {
-        font-size: .9rem;
     }
 }
 
 @media screen and (min-width: 1025px) {
     .homeContent-wrapper {
         flex-direction: row;
+        padding-bottom: 4rem;
     }
 
     .headings {
         font-weight: 500;
         font-size: 1.5rem;
-    }
-
-    .pHome {
-        max-width: 600px;
-        height: 600px;
-        font-size: 1.25rem;
-        margin: 0;
-        padding-left: 0.75rem;
-        border-right: 2mm ridge;
-        animation: fadeIn 4s ease-in-out;
-    }
-
-    .pHome p {
-        margin: 2rem;
-    }
-
-    #last-p {
-        margin-bottom: 2rem;
     }
 
     .book-cover {
@@ -139,10 +91,9 @@
             0 -5px 12px rgba(0, 0, 0, 0.16),
             0 5px 12px rgba(0, 0, 0, 0.2),
             inset 5px 0 2100px -3px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 4s ease-in-out;
         border-left: 2mm ridge;
     }
-
+    
     .book-line {
         content: '';
         height: 590px;
@@ -153,10 +104,25 @@
                 rgba(0, 0, 0, 0.2) 100%);
         /* margin: 0; Center the spine in the container */
         box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2), -5px 0 5px rgba(0, 0, 0, 0.2);
-        animation: fadeIn 4s ease-in-out;
+    }
+    .pHome {
+        max-width: 600px;
+        height: 600px;
+        font-size: 1.5rem;
+        margin: 0;
+        padding: 0.25rem;
+        border-right: 2mm ridge;
+        box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.12),
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        0 5px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .text-b {
-        font-size: 1.2rem;
+    .pHome p {
+        margin: 1rem;
+    }
+
+    #last-p {
+        margin: 1rem;
     }
 }
