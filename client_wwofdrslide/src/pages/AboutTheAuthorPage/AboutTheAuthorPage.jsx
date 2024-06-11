@@ -46,7 +46,7 @@ const AboutTheAuthorPage = () => {
   return (
     <div className="aboutAuthor">
       <div className="carousel-container">
-        <div onClick={previousSlide} className="btn prev">
+        <div onClick={previousSlide} className="btn-slide prev">
           &#10094;
         </div>
         <div className="slides">
@@ -61,7 +61,7 @@ const AboutTheAuthorPage = () => {
             />
           ))}
         </div>
-        <div onClick={nextSlide} className="btn next">
+        <div onClick={nextSlide} className="btn-slide next">
           &#10095;
         </div>
       </div>
