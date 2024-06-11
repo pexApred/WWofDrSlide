@@ -21,12 +21,11 @@ const HomePage = () => {
     <>
       <Banner />
       <div className="homeContent-wrapper">
-          <img
-            src="../../book_cover.jpeg"
-            alt="Book Cover"
-            className="book-cover"
-          ></img>
-        <div className="book-line"></div>
+        <img
+          src="../../book_cover.jpeg"
+          alt="Book Cover"
+          className="book-cover"
+        ></img>
         <div className="pHome">
           <div className="pHome-text">
             <p>
@@ -42,7 +41,7 @@ const HomePage = () => {
               getting a hint. After a hint has been requested, click "I Give Up"
               to see the solution.
             </p>
-            <p id="last-p">
+            <p>
               <span className="headings">
                 Are you amongst the best of the best?
               </span>
